@@ -1,0 +1,34 @@
+<!--
+  Generated template for the ListaTreinoPage page.
+
+  See http://ionicframework.com/docs/components/#navigation for more info on
+  Ionic pages and navigation.
+-->
+<ion-header>
+
+  <ion-navbar>
+    <ion-title>Meus treinos</ion-title>
+  </ion-navbar>
+
+</ion-header>
+
+<ion-content padding>
+    <ion-list>
+      <ion-list-header>
+        <ion-grid no-padding>
+          <ion-row>
+            <ion-col col-3 col-sm>{{ 'LISTAGEM.SERIE' | translate }}</ion-col>
+            <ion-col col-9 col-sm>{{ 'LISTAGEM.TREINO' | translate }}</ion-col>
+          </ion-row>
+        </ion-grid>
+      </ion-list-header>
+      <ion-item *ngFor="let treino of treinos">
+        <ion-grid no-padding>
+          <ion-row>
+            <ion-col col-3 col-sm>{{ treino.sigla }}</ion-col>
+            <ion-col col-9 col-sm>{{ treino.nome }}</ion-col>
+          </ion-row>
+        </ion-grid>   
+      </ion-item>
+    </ion-list>
+</ion-content>
