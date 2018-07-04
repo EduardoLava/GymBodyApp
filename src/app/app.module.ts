@@ -11,7 +11,7 @@ import { StatusBar } from '@ionic-native/status-bar';
 // fim ionic imports
 
 // ng imports
-import { TranslateModule, TranslateLoader, TranslateService, TranslatePipe } from '@ngx-translate/core';
+import { TranslateModule, TranslateLoader } from '@ngx-translate/core';
 import { TranslateHttpLoader } from '@ngx-translate/http-loader';
 
 // fim ng imports
@@ -21,15 +21,13 @@ import { TranslateHttpLoader } from '@ngx-translate/http-loader';
 import { MyApp } from './app.component';
 import { HomePage } from '../pages/home/home';
 import { TreinoServiceProvider } from '../providers/treino-service/treino-service';
-import { ListaTreinoPage } from '../pages/lista-treino/lista-treino';
 // fim meus imports 
 
 
 @NgModule({
   declarations: [
     MyApp,
-    HomePage,
-    ListaTreinoPage
+    HomePage
   ],
   imports: [
     BrowserModule,
@@ -46,8 +44,7 @@ import { ListaTreinoPage } from '../pages/lista-treino/lista-treino';
   bootstrap: [IonicApp],
   entryComponents: [
     MyApp,
-    HomePage,
-    ListaTreinoPage
+    HomePage
   ],
   providers: [
     StatusBar,

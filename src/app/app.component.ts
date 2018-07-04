@@ -1,5 +1,5 @@
-import { Component } from '@angular/core';
-import { Platform } from 'ionic-angular';
+import { Component, ViewChild } from '@angular/core';
+import { Platform, Nav } from 'ionic-angular';
 import { StatusBar } from '@ionic-native/status-bar';
 import { SplashScreen } from '@ionic-native/splash-screen';
 
@@ -12,6 +12,10 @@ import { TranslateService } from '@ngx-translate/core';
 export class MyApp {
   //aqui troca a pagina de inico do app
   rootPage:any = HomePage;
+
+  /*para recuperar um componente da view */
+  @ViewChild(Nav)
+  public nav: Nav;
 
   public paginas = [
     { titulo: 'MENU.HISTORICO', componente: ListaTreinoPage.name, icone: 'ai-history' },
@@ -47,5 +51,10 @@ export class MyApp {
     translate.use("pt-BR");
 
   }
+
+  irParaPagina(componente) {
+    this.nav.push(componente);
+  }
+
 }
 
