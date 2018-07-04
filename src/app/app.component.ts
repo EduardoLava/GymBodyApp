@@ -11,7 +11,17 @@ import { TranslateService } from '@ngx-translate/core';
 })
 export class MyApp {
   //aqui troca a pagina de inico do app
-  rootPage:any = ListaTreinoPage;
+  rootPage:any = HomePage;
+
+  public paginas = [
+    { titulo: 'MENU.HISTORICO', componente: ListaTreinoPage.name, icone: 'ai-history' },
+    { titulo: 'MENU.TREINOS', componente: ListaTreinoPage.name, icone: 'ai-fitness' },
+    { titulo: 'MENU.CONTA', componente: ListaTreinoPage.name, icone: 'person' },
+    { titulo: 'MENU.ALUNOS', componente: ListaTreinoPage.name, icone: 'people' },
+    { titulo: 'MENU.AGENDA', componente: ListaTreinoPage.name, icone: 'calendar' },
+    { titulo: 'MENU.AVALIACAO.FISICA', componente: ListaTreinoPage.name, icone: 'pulse' },
+    { titulo: 'MENU.NOTIFICACOES', componente: ListaTreinoPage.name, icone: 'notifications' }
+  ];
 
   constructor(
     platform: Platform,

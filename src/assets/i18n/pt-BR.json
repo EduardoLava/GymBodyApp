@@ -1,6 +1,18 @@
 {
+    "APP" : {
+        "NAME": "Gym Body System"
+    },
     "LISTAGEM" : {
         "SERIE": "Séries",
         "TREINO" : "Nome treino"
+    },
+    "MENU" : {
+        "HISTORICO" : "Histórico",
+        "TREINOS" : "Meus treinos",
+        "CONTA" : "Minha conta",
+        "ALUNOS" : "Meus alunos",
+        "AGENDA" : "Agenda",
+        "AVALIACAO.FISICA" : "Avaliação física",
+        "NOTIFICACOES" : "Notificações"
     }
 }

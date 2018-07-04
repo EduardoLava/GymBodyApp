@@ -1,1 +1,23 @@
-<ion-nav [root]="rootPage"></ion-nav>
+<ion-split-pane>
+    <ion-menu [content]="menu">
+        <ion-content>
+            <ion-item>
+                <div>
+                    <ion-thumbnail item-start>
+                        <img src="./assets/imgs/logo.png"/>
+                    </ion-thumbnail>
+                    <h1>{{ 'APP.NAME' | translate }}</h1> 
+                </div>
+            </ion-item>
+            <ion-list>
+                    <button ion-item menuClose
+                    *ngFor="let pagina of paginas"
+                    (click)="irParaPagina(pagina.componente)">
+                        <ion-icon [name]="pagina.icone" item-left ></ion-icon>
+                        {{ pagina.titulo | translate }}
+                    </button>
+                </ion-list>
+        </ion-content>
+    </ion-menu>
+    <ion-nav main #menu [root]="rootPage" swipeBackEnabled="false"></ion-nav>
+</ion-split-pane>
