@@ -1,0 +1,45 @@
+<!--
+  Generated template for the AlterarDadosPage page.
+
+  See http://ionicframework.com/docs/components/#navigation for more info on
+  Ionic pages and navigation.
+-->
+<ion-header>
+
+  <ion-navbar>
+    <ion-title>{{ "ALTERAR.DADOS.TITLE" | translate }}</ion-title>
+  </ion-navbar>
+
+
+</ion-header>
+
+<ion-content padding>
+  <form (ngSubmit)="salvar()" #formulario="ngForm" >
+    <ion-list>
+      <ion-item>
+        <ion-label stacked>{{'ALTERAR.DADOS.NOME' | translate}}</ion-label>
+        <ion-input type="text" [(ngModel)]="pessoa.nome"  name="pessoa.nome"></ion-input>
+      </ion-item>
+      <ion-item (click)="selecionaData()"> 
+        <ion-label stacked>{{'ALTERAR.DADOS.NASCIMENTO' | translate}}</ion-label>
+        <ion-datetime disabled="true" displayFormat="DD/MM/YYYY" [(ngModel)]="pessoa.dataNascimento" name="pessoa.dataNascimento"></ion-datetime>
+      </ion-item>
+      <ion-item>
+        <ion-label stacked>{{'ALTERAR.DADOS.GENERO' | translate}}</ion-label>
+        <ion-input type="text" [(ngModel)]="pessoa.genero"  name="pessoa.genero"></ion-input>
+      </ion-item>
+      <ion-item>
+        <ion-label stacked>{{'ALTERAR.DADOS.LOGIN' | translate}}</ion-label>
+        <ion-input type="text" [(ngModel)]="pessoa.login"  name="pessoa.login"></ion-input>
+      </ion-item>
+      <ion-item>
+        <button ion-button item-start default color="confirm"  type="submit">
+          {{ 'BOTAO.CONFIRMAR' | translate }}
+        </button>
+        <button  ion-button item-end default color="cancel"  type="button" (click)="cancelar()">
+          {{ 'BOTAO.CANCELAR' | translate }}
+          </button>
+      </ion-item>
+    </ion-list>
+  </form>
+</ion-content>

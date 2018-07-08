@@ -1,8 +1,9 @@
 import { Component } from '@angular/core';
-import { IonicPage, NavController, NavParams } from 'ionic-angular';
+import { IonicPage, NavController, NavParams, AlertController } from 'ionic-angular';
 import { NavLifecycles } from '../../utils/nav-lifecycles';
-import { Treino } from '../../model/treino';
-import { TreinoServiceProvider } from '../../providers/treino-service/treino-service';
+import { TreinoData } from '../../model/treino/treino-data';
+import { TreinoPage } from './treino/treino';
+import { TreinoDataServiceProvider } from '../../providers/services/treino-data-service/treino-data-service';
 
 /**
  * Generated class for the ListaTreinoPage page.
@@ -17,24 +18,40 @@ import { TreinoServiceProvider } from '../../providers/treino-service/treino-ser
   templateUrl: 'lista-treino.html',
 })
 export class ListaTreinoPage implements NavLifecycles {
+// listagem de treino
 
-  treinos: Treino[];
+  public treinosData: TreinoData[];
+  public dataAtual: string = new Date().toISOString();
 
   constructor(
     public navCtrl: NavController, 
     public navParams: NavParams,
-    private treinoService: TreinoServiceProvider
+    private treinoService: TreinoDataServiceProvider,
+    private alertControler: AlertController,
   ) {
 
   }
 
   ionViewDidLoad() {
 
-    this.treinos = this.treinoService.listarTreinos();
+    this.treinosData = this.treinoService.listarTreinos();
 
-    // this.translate.get("LISTAGEM.TREINO").subscribe((res:string) => {
-      // console.log(res);
-    // });
+  }
+
+  iniciarTreino(treinoData: TreinoData){
+    this.alertControler.create({
+      title: 'Iniciar Treino',
+      subTitle: 'Deseja iniciar o treino?',
+      buttons: [
+        {text: 'Não'},
+        {text: 'Sim', handler: () => {
+          console.log('Abrir tela');
+          this.navCtrl.push(TreinoPage.name,{
+            treinoData: treinoData 
+          });
+        }}
+      ]
+    }).present();
   }
 
 }

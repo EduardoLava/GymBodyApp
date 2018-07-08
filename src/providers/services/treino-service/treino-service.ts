@@ -1,7 +1,7 @@
 import { HttpClient } from '@angular/common/http';
 import { Injectable} from '@angular/core';
-import { Treino } from '../../model/treino';
 import { Time } from '@angular/common';
+import { Treino } from '../../../model/treino/treino';
 
 /*
   Generated class for the TreinoServiceProvider provider.
@@ -13,7 +13,6 @@ import { Time } from '@angular/common';
 export class TreinoServiceProvider {
 
   constructor(public http: HttpClient) {
-    console.log('Hello TreinoServiceProvider Provider');
   }
 
   listarTreinos(){

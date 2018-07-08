@@ -6,6 +6,8 @@ import { SplashScreen } from '@ionic-native/splash-screen';
 import { HomePage } from '../pages/home/home';
 import { ListaTreinoPage } from '../pages/lista-treino/lista-treino';
 import { TranslateService } from '@ngx-translate/core';
+import { MinhaContaPage } from '../pages/minha-conta/minha-conta';
+import { PessoaServiceProvider } from '../providers/services/pessoa-service/pessoa-service';
 @Component({
   templateUrl: 'app.html'
 })
@@ -20,7 +22,7 @@ export class MyApp {
   public paginas = [
     { titulo: 'MENU.HISTORICO', componente: ListaTreinoPage.name, icone: 'ai-history' },
     { titulo: 'MENU.TREINOS', componente: ListaTreinoPage.name, icone: 'ai-fitness' },
-    { titulo: 'MENU.CONTA', componente: ListaTreinoPage.name, icone: 'person' },
+    { titulo: 'MENU.CONTA', componente: MinhaContaPage.name, icone: 'person' },
     { titulo: 'MENU.ALUNOS', componente: ListaTreinoPage.name, icone: 'people' },
     { titulo: 'MENU.AGENDA', componente: ListaTreinoPage.name, icone: 'calendar' },
     { titulo: 'MENU.AVALIACAO.FISICA', componente: ListaTreinoPage.name, icone: 'pulse' },
@@ -31,7 +33,8 @@ export class MyApp {
     platform: Platform,
     statusBar: StatusBar, 
     splashScreen: SplashScreen,
-    translate: TranslateService
+    translate: TranslateService,
+    private pessoaService: PessoaServiceProvider,
   ) {
     platform.ready().then(() => {
       // Okay, so the platform is ready and our plugins are available.
@@ -53,8 +56,12 @@ export class MyApp {
   }
 
   irParaPagina(componente) {
-    this.nav.push(componente);
+    this.nav.setRoot(componente);
   }
+
+  get usuarioLogado(){ 
+    return this.pessoaService.obtemPessoaLogada();
+}
 
 }
 

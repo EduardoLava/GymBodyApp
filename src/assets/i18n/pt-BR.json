@@ -2,9 +2,36 @@
     "APP" : {
         "NAME": "Gym Body System"
     },
-    "LISTAGEM" : {
+    "ALTERAR.DADOS": {
+        "TITLE": "Editar Dados",
+        "NOME": "Nome:",
+        "NASCIMENTO": "Nascimento:",
+        "GENERO": "Genero:",
+        "LOGIN": "Login:"
+    },
+    "ALTERAR.SENHA": {
+        "TITLE": "Alterar Senha",
+        "ATUAL": "Senha Atual:",
+        "NOVA": "Nova Senha:",
+        "CONFIRMACAO": "Confirmação:"
+    },
+    "BOTAO": {
+        "CONFIRMAR": "Confirmar",
+        "CANCELAR": "Cancelar",
+        "SIM": "Sim",
+        "NAO": "Não"
+    },
+    "INICIAR.TREINO": {
+        "TITLE": "Iniciar Treino",
+        "TEXTO": "Deseja iniciar o treino?"
+    },
+    "LISTAGEM.TREINOS" : {
+        "TITLE": "Meus Treinos",
         "SERIE": "Séries",
-        "TREINO" : "Nome treino"
+        "TREINO" : "Nome treino",
+        "HOJE": "Hoje",
+        "PROXIMOS": "Próximos",
+        "ANTERIORES": "Anteriores"
     },
     "MENU" : {
         "HISTORICO" : "Histórico",
@@ -14,5 +41,17 @@
         "AGENDA" : "Agenda",
         "AVALIACAO.FISICA" : "Avaliação física",
         "NOTIFICACOES" : "Notificações"
+    },
+    "MEUS.DADOS" : {
+        "TITLE" : "Meus Dados",
+        "LOGIN" : "Login:",
+        "NASCIMENTO" : "Nascimento:",
+        "GENERO" : "Gênero:",
+        "SENHA" : "Senha:",
+        "OBJETIVO" : "Objetivo:"
+    },
+    "TREINO" : {
+        "TITLE": "Meu Treino",
+        "TEMPO.TOTAL": "Tempo total"
     }
 }

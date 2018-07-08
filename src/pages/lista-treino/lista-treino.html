@@ -5,28 +5,41 @@
   Ionic pages and navigation.
 -->
 <ion-header>
-
-  <ion-navbar>
-    <ion-title>Meus treinos</ion-title>
-  </ion-navbar>
-
-</ion-header>
+    <ion-navbar>
+      <button ion-button menuToggle >
+        <ion-icon name="menu"></ion-icon>
+      </button>
+      <ion-title>
+        {{ 'LISTAGEM.TREINOS.TITLE' | translate }}
+      </ion-title>
+    </ion-navbar>
+  </ion-header>
 
 <ion-content padding>
     <ion-list>
       <ion-list-header>
         <ion-grid no-padding>
           <ion-row>
-            <ion-col col-3 col-sm>{{ 'LISTAGEM.SERIE' | translate }}</ion-col>
-            <ion-col col-9 col-sm>{{ 'LISTAGEM.TREINO' | translate }}</ion-col>
+            <ion-col col-3 col-sm>{{ 'LISTAGEM.TREINOS.SERIE' | translate }}</ion-col>
+            <ion-col col-9 col-sm>{{ 'LISTAGEM.TREINOS.TREINO' | translate }}</ion-col>
           </ion-row>
         </ion-grid>
       </ion-list-header>
-      <ion-item *ngFor="let treino of treinos">
+      <ion-item *ngFor="let treinoData of treinosData">
         <ion-grid no-padding>
-          <ion-row>
-            <ion-col col-3 col-sm>{{ treino.sigla }}</ion-col>
-            <ion-col col-9 col-sm>{{ treino.nome }}</ion-col>
+          <ion-row (click)="iniciarTreino(treinoData)">
+            <ion-col col-3 col-sm>
+              {{ treinoData.treino.sigla }}
+            </ion-col>
+            <ion-col col-8 col-sm>
+              {{ treinoData.treino.nome }}
+              <!-- <button small ion-button (click)="iniciarTreino()">
+                <ion-icon small name="open"></ion-icon>
+              </button> -->
+            </ion-col>
+            <ion-col col-1 col-sm>
+              <ion-icon name="open"></ion-icon>
+            </ion-col>
           </ion-row>
         </ion-grid>   
       </ion-item>
