@@ -1,8 +1,8 @@
 {
-  "name": "GymBodyApp",
+  "name": "gym-body-app",
   "version": "0.0.1",
-  "author": "Ionic Framework",
-  "homepage": "http://ionicframework.com/",
+  "author": "Eduardo Lava, Susy Natsumi Aoki Takahashi",
+  "homepage": "https://github.com/EduardoLava;https://github.com/susynatsumi;",
   "private": true,
   "scripts": {
     "clean": "ionic-app-scripts clean",
@@ -42,7 +42,7 @@
     "@ionic/app-scripts": "3.1.10",
     "typescript": "~2.6.2"
   },
-  "description": "An Ionic project",
+  "description": "Sistema de controle de treinos e avaliacao fisica",
   "cordova": {
     "plugins": {
       "cordova-plugin-datepicker": {}
