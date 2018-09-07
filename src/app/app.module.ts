@@ -8,17 +8,16 @@ import { HttpClientModule, HttpClient } from '@angular/common/http';
 import { IonicApp, IonicErrorHandler, IonicModule } from 'ionic-angular';
 import { SplashScreen } from '@ionic-native/splash-screen';
 import { StatusBar } from '@ionic-native/status-bar';
-// fim ionic imports
-
-// cordova imports
 import { DatePicker } from '@ionic-native/date-picker';
-// Fim cordova imports
+import { SQLite } from '@ionic-native/sqlite';
+// fim ionic imports
 
 // ng imports
 import { TranslateModule, TranslateLoader } from '@ngx-translate/core';
 import { TranslateHttpLoader } from '@ngx-translate/http-loader';
 // fim ng imports
 
+import 'rxjs/add/operator/do';
 
 // meus imports 
 import { MyApp } from './app.component';
@@ -26,7 +25,12 @@ import { HomePage } from '../pages/home/home';
 import { TreinoServiceProvider } from '../providers/services/treino-service/treino-service';
 import { PessoaServiceProvider } from '../providers/services/pessoa-service/pessoa-service';
 import { TreinoDataServiceProvider } from '../providers/services/treino-data-service/treino-data-service';
+import { TreinoExercicioServiceProvider } from '../providers/services/treino-exercicio-service/treino-exercicio-service';
+import { TreinoDaoProvider } from '../providers/daos/treino-dao/treino-dao';
+import { RestSecureServiceProvider } from '../providers/rest-secure-service/rest-secure-service';
 // fim meus imports 
+
+
 
 @NgModule({
   declarations: [
@@ -57,7 +61,11 @@ import { TreinoDataServiceProvider } from '../providers/services/treino-data-ser
     TreinoServiceProvider,
     PessoaServiceProvider,
     DatePicker,
-    TreinoDataServiceProvider
+    TreinoDataServiceProvider,
+    TreinoExercicioServiceProvider,
+    SQLite,
+    TreinoDaoProvider,
+    RestSecureServiceProvider
   ],
 })
 export class AppModule {

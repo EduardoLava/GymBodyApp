@@ -1,6 +1,7 @@
-import { HttpClient } from '@angular/common/http';
+import { HttpClient, HttpHeaders, HttpParams } from '@angular/common/http';
 import { Injectable } from '@angular/core';
 import { Pessoa } from '../../../model/pessoa/pessoa';
+
 
 /*
   Generated class for the PessoaServiceProvider provider.
@@ -15,6 +16,32 @@ export class PessoaServiceProvider {
   private pessoaLogada: Pessoa;
 
   constructor(public http: HttpClient) {}
+
+
+  login(){
+    
+    let email: string = "admin@admin.com";
+    let senha: string = "testeteste";
+
+    const httpOptions = {
+      headers: new HttpHeaders({
+        'Content-Type':  'application/json'
+        // 'Authorization': 'my-auth-token'
+      })
+    };
+
+    let formData = new FormData();
+    formData.append('email',email);
+    formData.append('senha',senha);
+
+    return this.http.post(
+      'http://192.168.0.15:8080/authenticate',
+      formData
+    ).do(
+      (pessoa:Pessoa) => console.log(pessoa)
+    );
+
+  }
 
   // obtem pessoa logada no sistema caso exista
   obtemPessoaLogada(){

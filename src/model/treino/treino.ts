@@ -2,6 +2,7 @@ import { Time } from "@angular/common";
 
 export class Treino {
 
+    id:                     Number;
     nome:                   string; // nome do treino
     sigla:                  string; // sigla do treino
     dataInicio:             Date;   // data de inicio
