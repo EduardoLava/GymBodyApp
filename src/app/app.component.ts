@@ -8,12 +8,14 @@ import { ListaTreinoPage } from '../pages/lista-treino/lista-treino';
 import { TranslateService } from '@ngx-translate/core';
 import { MinhaContaPage } from '../pages/minha-conta/minha-conta';
 import { PessoaServiceProvider } from '../providers/services/pessoa-service/pessoa-service';
+import { LoginServiceProvider } from '../providers/services/login-service/login-service';
+import { LoginPage } from '../pages/login/login';
 @Component({
   templateUrl: 'app.html'
 })
 export class MyApp {
   //aqui troca a pagina de inico do app
-  rootPage:any = HomePage;
+  rootPage:any = LoginPage;
 
   /*para recuperar um componente da view */
   @ViewChild(Nav)
@@ -35,6 +37,7 @@ export class MyApp {
     splashScreen: SplashScreen,
     translate: TranslateService,
     private pessoaService: PessoaServiceProvider,
+    private loginService: LoginServiceProvider
   ) {
     platform.ready().then(() => {
       // Okay, so the platform is ready and our plugins are available.
@@ -42,7 +45,6 @@ export class MyApp {
       statusBar.styleDefault();
       splashScreen.hide();
     });
-
 
     // como usar o i18n https://github.com/ngx-translate/core#usage
 
@@ -53,6 +55,8 @@ export class MyApp {
     // defina para utitlizar o pt-br
     translate.use("pt-BR");
 
+    this.verificarLogin();
+
   }
 
   irParaPagina(componente) {
@@ -61,7 +65,27 @@ export class MyApp {
 
   get usuarioLogado(){ 
     return this.pessoaService.obtemPessoaLogada();
-}
+  }
+
+  /**
+   * Fica ouvindo user auth, quando o método next é chamado
+   * caso seja null volta para a pagina de login 
+   * 
+   * caso contrario vai para a página principal
+   * 
+   */
+  verificarLogin(){
+    this.loginService.authUser.subscribe(token=>{
+      if(token){
+        this.rootPage = HomePage;
+      } else {
+        this.rootPage = LoginPage
+      }
+    });
+
+    this.loginService.verificaLogin();
+
+  }
 
 }
 

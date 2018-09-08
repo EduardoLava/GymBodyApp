@@ -1,4 +1,4 @@
-import { HttpClient, HttpHeaders, HttpParams } from '@angular/common/http';
+import { HttpClient } from '@angular/common/http';
 import { Injectable } from '@angular/core';
 import { Pessoa } from '../../../model/pessoa/pessoa';
 
@@ -23,12 +23,12 @@ export class PessoaServiceProvider {
     let email: string = "admin@admin.com";
     let senha: string = "testeteste";
 
-    const httpOptions = {
-      headers: new HttpHeaders({
-        'Content-Type':  'application/json'
-        // 'Authorization': 'my-auth-token'
-      })
-    };
+    // const httpOptions = {
+    //   headers: new HttpHeaders({
+    //     'Content-Type':  'application/json'
+    //     // 'Authorization': 'my-auth-token'
+    //   })
+    // };
 
     let formData = new FormData();
     formData.append('email',email);

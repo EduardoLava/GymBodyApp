@@ -4,7 +4,7 @@ import { TreinoData } from '../../../model/treino/treino-data';
 import { TimerComponent } from '../../../components/timer/timer';
 import { PauseModalPage } from '../treino/pause-modal/pause-modal';
 import { TreinoExercicio } from '../../../model/treino/treino-exercicio';
-import { TreinoExercicioServiceProvider } from '../../../providers/services/treino-exercicio-service/treino-exercicio-service';
+// import { TreinoExercicioServiceProvider } from '../../../providers/services/treino-exercicio-service/treino-exercicio-service';
 
 /**
  * Generated class for the TreinoPage page.
@@ -32,7 +32,7 @@ export class TreinoPage {
     public navCtrl: NavController,
     public navParams: NavParams, 
     private modalControler: ModalController,
-    private treinoExercicioService: TreinoExercicioServiceProvider
+    // private treinoExercicioService: TreinoExercicioServiceProvider
   ) {
     this.treinoData = navParams.get('treinoData');
     console.log(this.treinoData);

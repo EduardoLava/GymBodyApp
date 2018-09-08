@@ -11,11 +11,11 @@ import { SQLite, SQLiteObject } from '@ionic-native/sqlite';
 @Injectable()
 export class TreinoDaoProvider {
 
-  private createTable: string = 
-  ' CREATE TABLE IF NOT EXISTS pessoa ( '+
-  '   id INTEGER PRIMARY KEY, '+
-  '   nome '
-  ' ) ';
+  // private createTable: string = 
+  // ' CREATE TABLE IF NOT EXISTS pessoa ( '+
+  // '   id INTEGER PRIMARY KEY, '+
+  // '   nome '
+  // ' ) ';
 
   constructor(public http: HttpClient, private sqlite: SQLite) {
   }

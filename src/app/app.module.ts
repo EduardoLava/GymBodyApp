@@ -9,7 +9,7 @@ import { IonicApp, IonicErrorHandler, IonicModule } from 'ionic-angular';
 import { SplashScreen } from '@ionic-native/splash-screen';
 import { StatusBar } from '@ionic-native/status-bar';
 import { DatePicker } from '@ionic-native/date-picker';
-import { SQLite } from '@ionic-native/sqlite';
+// import { SQLite } from '@ionic-native/sqlite';
 // fim ionic imports
 
 // ng imports
@@ -28,18 +28,39 @@ import { TreinoDataServiceProvider } from '../providers/services/treino-data-ser
 import { TreinoExercicioServiceProvider } from '../providers/services/treino-exercicio-service/treino-exercicio-service';
 import { TreinoDaoProvider } from '../providers/daos/treino-dao/treino-dao';
 import { RestSecureServiceProvider } from '../providers/rest-secure-service/rest-secure-service';
+import { LoginPage } from '../pages/login/login';
+
+
+import {Storage, IonicStorageModule} from "@ionic/storage";
+
+import {SERVER_URL} from '../config/configServer';
+
 // fim meus imports 
 
+// JWT 
+import {JWT_OPTIONS, JwtModule} from '@auth0/angular-jwt';
+import { LoginServiceProvider } from '../providers/services/login-service/login-service';
+// import {} from 
+// FIM JWT
 
+export function jwtOptionsFactory(storage: Storage) {
+  return {
+    tokenGetter: () => storage.get('jwt_token'),
+    // diz que somente solicitacoes enviadas para localhost conterao Authorization no cabeçalho
+    whitelistedDomains: [`${SERVER_URL}`]
+  }
+}
 
 @NgModule({
   declarations: [
     MyApp,
     HomePage,
+    LoginPage
   ],
   imports: [
     BrowserModule,
     HttpClientModule,
+    IonicStorageModule.forRoot(),
     TranslateModule.forRoot({
       loader: {
         provide: TranslateLoader,
@@ -47,12 +68,20 @@ import { RestSecureServiceProvider } from '../providers/rest-secure-service/rest
         deps: [HttpClient]
       }
     }),
+    JwtModule.forRoot({
+      jwtOptionsProvider: {
+        provide: JWT_OPTIONS,
+        useFactory: jwtOptionsFactory,
+        deps: [Storage]
+      }
+    }),
     IonicModule.forRoot(MyApp)
   ],
   bootstrap: [IonicApp],
   entryComponents: [
     MyApp,
-    HomePage
+    HomePage,
+    LoginPage
   ],
   providers: [
     StatusBar,
@@ -63,9 +92,10 @@ import { RestSecureServiceProvider } from '../providers/rest-secure-service/rest
     DatePicker,
     TreinoDataServiceProvider,
     TreinoExercicioServiceProvider,
-    SQLite,
+    // SQLite,
     TreinoDaoProvider,
-    RestSecureServiceProvider
+    RestSecureServiceProvider,
+    LoginServiceProvider,
   ],
 })
 export class AppModule {
