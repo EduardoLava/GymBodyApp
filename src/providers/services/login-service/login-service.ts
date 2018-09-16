@@ -73,6 +73,7 @@ export class LoginServiceProvider {
     )
     .pipe(tap(token => this.sessionManagment.saveLogin(token)));
 
+    
   }
 
   /**
