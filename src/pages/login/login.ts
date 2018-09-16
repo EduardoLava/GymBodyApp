@@ -2,9 +2,6 @@ import { Component } from '@angular/core';
 import { IonicPage, NavController, NavParams, LoadingController, ToastController } from 'ionic-angular';
 import { LoginServiceProvider } from '../../providers/services/login-service/login-service';
 import { finalize } from 'rxjs/operators';
-import { Pessoa } from '../../model/pessoa/pessoa';
-import { FormGroup, FormBuilder, Validators } from '@angular/forms';
-
 /**
  * Generated class for the LoginPage page.
  *
@@ -40,7 +37,7 @@ export class LoginPage {
       .login(value)
       .pipe(finalize(() => loading.dismiss()))
       .subscribe(
-        () => {},
+        () => {console.log('sucesso')},
         err => this.handleError(err));
   }
 

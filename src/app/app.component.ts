@@ -7,9 +7,9 @@ import { HomePage } from '../pages/home/home';
 import { ListaTreinoPage } from '../pages/lista-treino/lista-treino';
 import { TranslateService } from '@ngx-translate/core';
 import { MinhaContaPage } from '../pages/minha-conta/minha-conta';
-import { PessoaServiceProvider } from '../providers/services/pessoa-service/pessoa-service';
 import { LoginServiceProvider } from '../providers/services/login-service/login-service';
 import { LoginPage } from '../pages/login/login';
+import { SessionServiceProvider } from '../providers/services/login-service/session-service';
 @Component({
   templateUrl: 'app.html'
 })
@@ -36,7 +36,7 @@ export class MyApp {
     statusBar: StatusBar, 
     splashScreen: SplashScreen,
     translate: TranslateService,
-    private pessoaService: PessoaServiceProvider,
+    private sessionService: SessionServiceProvider,
     private loginService: LoginServiceProvider
   ) {
     platform.ready().then(() => {
@@ -63,9 +63,9 @@ export class MyApp {
     this.nav.setRoot(componente);
   }
 
-  get usuarioLogado(){ 
-    return this.pessoaService.obtemPessoaLogada();
-  }
+  // get usuarioLogado(){ 
+  //   return this.pessoaService.obtemPessoaLogada();
+  // }
 
   /**
    * Fica ouvindo user auth, quando o método next é chamado
@@ -75,7 +75,7 @@ export class MyApp {
    * 
    */
   verificarLogin(){
-    this.loginService.authUser.subscribe(token=>{
+    this.sessionService.authUser.subscribe(token=>{
       if(token){
         this.rootPage = HomePage;
       } else {

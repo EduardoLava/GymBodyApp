@@ -27,19 +27,19 @@ import { PessoaServiceProvider } from '../providers/services/pessoa-service/pess
 import { TreinoDataServiceProvider } from '../providers/services/treino-data-service/treino-data-service';
 import { TreinoExercicioServiceProvider } from '../providers/services/treino-exercicio-service/treino-exercicio-service';
 import { TreinoDaoProvider } from '../providers/daos/treino-dao/treino-dao';
-import { RestSecureServiceProvider } from '../providers/rest-secure-service/rest-secure-service';
 import { LoginPage } from '../pages/login/login';
 
 
 import {Storage, IonicStorageModule} from "@ionic/storage";
-
-import {SERVER_URL} from '../config/configServer';
 
 // fim meus imports 
 
 // JWT 
 import {JWT_OPTIONS, JwtModule} from '@auth0/angular-jwt';
 import { LoginServiceProvider } from '../providers/services/login-service/login-service';
+import { HttpServiceProvider } from '../providers/services/http-service/http-service';
+import { SessionServiceProvider } from '../providers/services/login-service/session-service';
+
 // import {} from 
 // FIM JWT
 
@@ -47,7 +47,7 @@ export function jwtOptionsFactory(storage: Storage) {
   return {
     tokenGetter: () => storage.get('jwt_token'),
     // diz que somente solicitacoes enviadas para localhost conterao Authorization no cabeçalho
-    whitelistedDomains: [`${SERVER_URL}`]
+    whitelistedDomains: ['192.168.0.15:8080'],
   }
 }
 
@@ -94,8 +94,9 @@ export function jwtOptionsFactory(storage: Storage) {
     TreinoExercicioServiceProvider,
     // SQLite,
     TreinoDaoProvider,
-    RestSecureServiceProvider,
     LoginServiceProvider,
+    HttpServiceProvider,
+    SessionServiceProvider
   ],
 })
 export class AppModule {

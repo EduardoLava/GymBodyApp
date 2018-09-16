@@ -28,7 +28,7 @@
     <ion-grid>
       <ion-row text-center>
         <ion-col>
-          <h2>{{pessoa.nome}}</h2>
+          <h2>{{pessoa?.nome}}</h2>
         </ion-col>
       </ion-row>
       <ion-row>
@@ -36,7 +36,7 @@
           {{"MEUS.DADOS.LOGIN" | translate}}
         </ion-col>
         <ion-col>
-          {{pessoa.login}}
+          {{pessoa?.login}}
         </ion-col>
       </ion-row>
       <ion-row>
@@ -44,7 +44,7 @@
           {{"MEUS.DADOS.NASCIMENTO" | translate}}
         </ion-col>
         <ion-col>
-          {{pessoa.dataNascimento | date: 'dd/MM/yyyy'}}
+          {{pessoa?.dataNascimento | date: 'dd/MM/yyyy'}}
         </ion-col>
       </ion-row>
       <ion-row>
@@ -52,7 +52,7 @@
           {{"MEUS.DADOS.GENERO" | translate}}
         </ion-col>
         <ion-col>
-          {{pessoa.genero}}
+          {{pessoa?.genero}}
         </ion-col>
       </ion-row>
       <ion-row> 
@@ -72,7 +72,7 @@
       </ion-row>
       <ion-row>
         <ion-col>
-          {{pessoa.objetivo}}
+          {{pessoa?.objetivo}}
         </ion-col>
       </ion-row>
     </ion-grid>

@@ -1,8 +1,8 @@
 import { Component } from '@angular/core';
 import { IonicPage, NavController, NavParams, ToastController } from 'ionic-angular';
 import { DatePicker } from '@ionic-native/date-picker';
-import { Pessoa } from '../../../model/pessoa/pessoa';
 import { PessoaServiceProvider } from '../../../providers/services/pessoa-service/pessoa-service';
+import { Pessoa } from '../../../model/entities';
 
 /**
  * Generated class for the AlterarDadosPage page.
@@ -19,7 +19,7 @@ import { PessoaServiceProvider } from '../../../providers/services/pessoa-servic
 export class AlterarDadosPage {
 
   // pessoa logada no sistema
-  pessoa: Pessoa;
+  private pessoa: Pessoa;
 
   constructor(
     public navCtrl: NavController,
@@ -28,7 +28,8 @@ export class AlterarDadosPage {
     private dataPicker: DatePicker,
     private toastControler: ToastController
   ) {
-    this.pessoa = this.pessoaService.obtemPessoaLogada();
+    this.pessoa = {};
+    // this.pessoa = this.pessoaService.obtemPessoaLogada();
   }
 
   // fecha a tela
@@ -57,7 +58,7 @@ export class AlterarDadosPage {
       date: new Date(),
       mode: 'date' 
     }).then(
-      data => this.pessoa.dataNascimento = data.toISOString()
+      data => this.pessoa.dataNascimento = data
     );
   }
 

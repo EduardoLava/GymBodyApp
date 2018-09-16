@@ -1,7 +1,7 @@
 import { Component } from '@angular/core';
 import { IonicPage, NavController, NavParams, AlertController, ToastController } from 'ionic-angular';
-import { Pessoa } from '../../../model/pessoa/pessoa';
 import { FormGroup, FormBuilder, Validators } from '@angular/forms';
+import { Pessoa } from '../../../model/entities';
 
 /**
  * Generated class for the AlterarSenhaPage page.

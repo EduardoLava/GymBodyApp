@@ -1,8 +1,12 @@
-import { Component } from '@angular/core';
+import { Component, OnInit } from '@angular/core';
 import { IonicPage, NavController, NavParams, ModalController } from 'ionic-angular';
 import { AlterarSenhaPage } from './alterar-senha/alterar-senha';
 import { AlterarDadosPage } from './alterar-dados/alterar-dados';
 import { PessoaServiceProvider } from '../../providers/services/pessoa-service/pessoa-service';
+import { LoginServiceProvider } from '../../providers/services/login-service/login-service';
+import { JwtHelperService } from '@auth0/angular-jwt';
+import { Pessoa } from '../../model/entities';
+import { SessionServiceProvider } from '../../providers/services/login-service/session-service';
 
 /**
  * Generated class for the MinhaContaPage page.
@@ -16,18 +20,40 @@ import { PessoaServiceProvider } from '../../providers/services/pessoa-service/p
   selector: 'page-minha-conta',
   templateUrl: 'minha-conta.html',
 })
-export class MinhaContaPage {
+export class MinhaContaPage implements OnInit{
+
+  private pessoa: Pessoa;
+  public user: string;
 
   constructor(
     public navCtrl: NavController,
     public navParams: NavParams,
     private modalControler: ModalController,
-    private pessoaService: PessoaServiceProvider
+    private pessoaService: PessoaServiceProvider,
+    private sessionService: SessionServiceProvider,
+    private jwtHelper: JwtHelperService
   ) {
+    console.log('Passou no constructor da minha conta');
+
+    this.sessionService.authUser.subscribe(jwt => {
+      if (jwt) {
+        const decoded = jwtHelper.decodeToken(jwt);
+        this.user = decoded.sub
+        console.log(this.user);
+      }
+      else {
+        this.user = null;
+      }
+    });
+
   }
 
-  get pessoa(){
-    return this.pessoaService.obtemPessoaLogada();
+  ngOnInit(){
+    this.pessoaService.obtemPessoaLogada().subscribe((pessoa:Pessoa) => {
+      this.pessoa = pessoa;
+    }, (erro: Error)=>{
+      console.log(erro);
+    });
   }
 
   // abre modal para alteração de senha

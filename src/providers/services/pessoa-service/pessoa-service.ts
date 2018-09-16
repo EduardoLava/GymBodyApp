@@ -1,6 +1,11 @@
-import { HttpClient } from '@angular/common/http';
 import { Injectable } from '@angular/core';
-import { Pessoa } from '../../../model/pessoa/pessoa';
+import { Pessoa } from '../../../model/entities';
+import { HttpServiceProvider } from '../http-service/http-service';
+import 'rxjs/add/operator/mergeMap';
+import { LoginServiceProvider } from '../login-service/login-service';
+import { HttpParams } from '@angular/common/http';
+import { Observable } from 'rxjs';
+import { SessionServiceProvider } from '../login-service/session-service';
 
 
 /*
@@ -15,52 +20,27 @@ export class PessoaServiceProvider {
   // pessoa logada no aplicativo
   private pessoaLogada: Pessoa;
 
-  constructor(public http: HttpClient) {}
-
-
-  login(){
-    
-    let email: string = "admin@admin.com";
-    let senha: string = "testeteste";
-
-    // const httpOptions = {
-    //   headers: new HttpHeaders({
-    //     'Content-Type':  'application/json'
-    //     // 'Authorization': 'my-auth-token'
-    //   })
-    // };
-
-    let formData = new FormData();
-    formData.append('email',email);
-    formData.append('senha',senha);
-
-    return this.http.post(
-      'http://192.168.0.15:8080/authenticate',
-      formData
-    ).do(
-      (pessoa:Pessoa) => console.log(pessoa)
-    );
-
-  }
+  constructor(
+    public http: HttpServiceProvider,
+    public loginService: LoginServiceProvider,
+    private sessionaManagment: SessionServiceProvider
+  ) {}
 
   // obtem pessoa logada no sistema caso exista
-  obtemPessoaLogada(){
-
-    if(this.pessoaLogada == null){
-      let pessoa = new Pessoa();
-      pessoa.dataNascimento = new Date('2018-01-01').toISOString();
-      pessoa.email="teste@email.com";
-      pessoa.isAtivo = true;
-      pessoa.login = "pessoa.teste";
-      pessoa.nome= "personal teste";
-      pessoa.objetivo = "Ganhar mass,a muscular, teste teste teste teste teste teste teste teste ";
-      pessoa.senha = "senhasenha";
-      pessoa.genero = "Feminino";
+  obtemPessoaLogada() : Observable<any> {
     
-      this.pessoaLogada = pessoa;
-    }
+    console.log('obtem pessoa logada');
 
-    return this.pessoaLogada;
+      // flat map para encadear a chamada de observables
+      return this.sessionaManagment.getToken().flatMap(token => {
+
+        let params = new HttpParams();
+        params = params.append('token', token);
+
+        return this.http.get('/api/pessoa-token', params);
+
+      });
+
   }
 
   // salva pessoa no bd e remotamente
