@@ -5,7 +5,7 @@ import { Storage } from '@ionic/storage';
 @Injectable()
 export class SessionServiceProvider {
 
-
+    private token: string;
     private jwtTokenName = 'jwt_token';
 
     /**
@@ -36,6 +36,10 @@ export class SessionServiceProvider {
         console.log('chamou get token');
         return Observable.fromPromise(
             this.storage.get(this.jwtTokenName)
+        ).do(
+            (token: string) => {
+                this.setTokenTokenAtivo(token);
+            }
         );
     }
 
@@ -43,7 +47,9 @@ export class SessionServiceProvider {
       * Faz logout, setando o token para null no dispositivo
    */
     logout() {
+        console.log('Fez Logout');
         this.storage.remove(this.jwtTokenName).then(() => this.authUser.next(null));
+        this.setTokenTokenAtivo(null);
     }
 
      /**
@@ -51,12 +57,20 @@ export class SessionServiceProvider {
    * @param token 
    */
   public saveLogin(token: string) {
+    this.setTokenTokenAtivo(token);
     console.log('salvou o token '+token);
-
     return this.storage.set(this.jwtTokenName, token)
       .then(() => this.authUser.next(token))
-      .then(() => token);
+      .then(() => token)
+    ;
+  }
+
+  public get tokenTokenAtivo(){
+    return this.token;
   }
   
+  public setTokenTokenAtivo(token: string){
+      this.token = token;
+  }
 
 }    

@@ -43,10 +43,20 @@ export class PessoaServiceProvider {
 
   }
 
-  // salva pessoa no bd e remotamente
-  salvar(pessoa: Pessoa){
-    console.log(pessoa);
-    ///
+  alteraSenha(idPessoa: number, novaSenha: string, senhaAntiga: string): Observable<any>{
+
+    let parametros = {'senha' : novaSenha, 'id': idPessoa.toString(), 'senhaAntiga': senhaAntiga};
+
+    return this.http.postResponseText('/api/pessoas/alterar-senha', parametros);
   }
+
+  // salva pessoa no bd e remotamente
+  salvar(pessoa: Pessoa): Observable<any>{
+    
+    console.log(pessoa+'\n\n');
+    console.log( JSON.stringify(pessoa));
+
+    return this.http.put('/api/pessoas', JSON.stringify(pessoa));
+  } 
 
 }

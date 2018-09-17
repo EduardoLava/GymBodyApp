@@ -26,6 +26,11 @@ export class HttpServiceProvider {
     //let options = new RequestOptions({ headers: headers });
   }
 
+  // -----------------------------------------------
+  // --------------- post --------------------------
+  // -----------------------------------------------
+
+
     /**
    * Faz uma requisicao do tipo POST no servidor 
    * e captura a response com ContentType = Json
@@ -57,12 +62,19 @@ export class HttpServiceProvider {
 
     url = `${SERVER_URL}`+url;
 
+    console.log(url);
+    console.log(data);
+
     return this.http.post(url, data, { 
       headers: this.headers, 
       responseType: 'text'
     }) ;
 
   }
+
+  // ---------------------------------------------
+  // -----------------  GET ----------------------
+  // ---------------------------------------------
 
   /**
    * Faz uma requisição do tipo GET no servidor
@@ -74,7 +86,6 @@ export class HttpServiceProvider {
   //   console.log(url);
   //   return this.http.get(url, {headers: this.headers});
   // }
-
   get(url: string, params?: HttpParams){
     url = `${SERVER_URL}`+url;
 
@@ -85,6 +96,27 @@ export class HttpServiceProvider {
       headers: this.headers,
       params: params
     });
+  }
+
+  // -----------------------------------------------
+  // -----------------   PUT -----------------------
+  // -----------------------------------------------
+
+  /**
+   * Realiza uma requisição do tipo PUT, 
+   * @param url url para realização
+   * @param data objeto json
+   */
+  put(url: string, data: string): Observable<any>{
+
+    url = `${SERVER_URL}`+url;
+
+    return this.http.put(url, data, {
+      headers: this.headers,
+      responseType: 'json'
+    });
+
+
   }
 
 
