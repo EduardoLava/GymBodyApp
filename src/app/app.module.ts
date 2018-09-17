@@ -39,6 +39,8 @@ import {JWT_OPTIONS, JwtModule} from '@auth0/angular-jwt';
 import { LoginServiceProvider } from '../providers/services/login-service/login-service';
 import { HttpServiceProvider } from '../providers/services/http-service/http-service';
 import { SessionServiceProvider } from '../providers/services/login-service/session-service';
+import { LoadingDefaultController } from '../utils/loading-default-controller';
+import { ToastDefautController } from '../utils/toast-default-contoller';
 
 // import {} from 
 // FIM JWT
@@ -96,7 +98,9 @@ export function jwtOptionsFactory(storage: Storage) {
     TreinoDaoProvider,
     LoginServiceProvider,
     HttpServiceProvider,
-    SessionServiceProvider
+    SessionServiceProvider,
+    LoadingDefaultController,
+    ToastDefautController,
   ],
 })
 export class AppModule {

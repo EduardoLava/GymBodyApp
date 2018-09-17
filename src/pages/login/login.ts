@@ -2,6 +2,7 @@ import { Component } from '@angular/core';
 import { IonicPage, NavController, NavParams, LoadingController, ToastController } from 'ionic-angular';
 import { LoginServiceProvider } from '../../providers/services/login-service/login-service';
 import { finalize } from 'rxjs/operators';
+import { LoadingDefaultController } from '../../utils/loading-default-controller';
 /**
  * Generated class for the LoginPage page.
  *
@@ -17,7 +18,7 @@ import { finalize } from 'rxjs/operators';
 export class LoginPage {
 
   constructor(private readonly navCtrl: NavController,
-    private readonly loadingCtrl: LoadingController,
+    private readonly loading: LoadingDefaultController,
     private readonly authProvider: LoginServiceProvider,
     private readonly toastCtrl: ToastController,
   ) {
@@ -26,10 +27,7 @@ export class LoginPage {
 
 
   login(value: any) {
-    let loading = this.loadingCtrl.create({
-      spinner: 'bubbles',
-      content: 'Logging in ...'
-    });
+    let loading = this.loading.create('Fazendo Login..');
 
     loading.present();
 
@@ -44,10 +42,10 @@ export class LoginPage {
   handleError(error: any) {
     let message: string;
     if (error.status && error.status === 401) {
-      message = 'Login failed';
+      message = 'Falha ao fazer login';
     }
     else {
-      message = `Unexpected error: ${error.statusText}`;
+      message = `Ocorreu um erro ao tentar fazer login: ${error.statusText}`;
     }
 
     const toast = this.toastCtrl.create({

@@ -1,5 +1,5 @@
 import { Component, OnInit } from '@angular/core';
-import { IonicPage, NavController, NavParams, ModalController } from 'ionic-angular';
+import { IonicPage, NavController, NavParams, ModalController, LoadingController } from 'ionic-angular';
 import { AlterarSenhaPage } from './alterar-senha/alterar-senha';
 import { AlterarDadosPage } from './alterar-dados/alterar-dados';
 import { PessoaServiceProvider } from '../../providers/services/pessoa-service/pessoa-service';
@@ -7,6 +7,8 @@ import { LoginServiceProvider } from '../../providers/services/login-service/log
 import { JwtHelperService } from '@auth0/angular-jwt';
 import { Pessoa } from '../../model/entities';
 import { SessionServiceProvider } from '../../providers/services/login-service/session-service';
+import { LoadingDefaultController } from '../../utils/loading-default-controller';
+import { ToastDefautController } from '../../utils/toast-default-contoller';
 
 /**
  * Generated class for the MinhaContaPage page.
@@ -22,7 +24,9 @@ import { SessionServiceProvider } from '../../providers/services/login-service/s
 })
 export class MinhaContaPage implements OnInit{
 
+  // pessoa carregada na tela
   private pessoa: Pessoa;
+  // token
   public user: string;
 
   constructor(
@@ -31,7 +35,9 @@ export class MinhaContaPage implements OnInit{
     private modalControler: ModalController,
     private pessoaService: PessoaServiceProvider,
     private sessionService: SessionServiceProvider,
-    private jwtHelper: JwtHelperService
+    private jwtHelper: JwtHelperService,
+    private loading: LoadingDefaultController,
+    private toast: ToastDefautController,
   ) {
     console.log('Passou no constructor da minha conta');
 
@@ -49,10 +55,18 @@ export class MinhaContaPage implements OnInit{
   }
 
   ngOnInit(){
-    this.pessoaService.obtemPessoaLogada().subscribe((pessoa:Pessoa) => {
+
+    this.loading.create('Carregando dados...');
+
+    this.loading.loader.present();
+
+    this.pessoaService.obtemPessoaLogada()
+    .finally(()=> this.loading.loader.dismiss())
+    .subscribe((pessoa:Pessoa) => {
       this.pessoa = pessoa;
     }, (erro: Error)=>{
       console.log(erro);
+      this.toast.create(erro.message).present();
     });
   }
 
@@ -68,9 +82,11 @@ export class MinhaContaPage implements OnInit{
   // abre modal para edicao de dados do usuário
   alterarDados(){
 
-    this.modalControler.create(AlterarDadosPage.name,{
+    let modal =this.modalControler.create(AlterarDadosPage.name,{
       pessoa: this.pessoa
-    }).present();
+    });
+
+    modal.present();
 
   }
 

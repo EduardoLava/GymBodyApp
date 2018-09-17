@@ -15,7 +15,7 @@ import { SessionServiceProvider } from '../providers/services/login-service/sess
 })
 export class MyApp {
   //aqui troca a pagina de inico do app
-  rootPage:any = LoginPage;
+  public rootPage:any = LoginPage;
 
   /*para recuperar um componente da view */
   @ViewChild(Nav)
@@ -85,6 +85,10 @@ export class MyApp {
 
     this.loginService.verificaLogin();
 
+  }
+
+  get token(){
+    return this.sessionService.tokenTokenAtivo;
   }
 
 }

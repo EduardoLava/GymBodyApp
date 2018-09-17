@@ -33,6 +33,18 @@
         "PROXIMOS": "Próximos",
         "ANTERIORES": "Anteriores"
     },
+    "LOGIN" : {
+        "TITLE" : "Login",
+        "LOGIN" : "Login",
+        "SENHA" : "Senha",
+        "BOTAO" : {
+            "ENTRAR": "Entrar"
+        },
+        "INVALIDO" : {
+            "LOGIN" : "Informe um login",
+            "SENHA" : "Informe uma senha"
+        }
+    },
     "MENU" : {
         "HISTORICO" : "Histórico",
         "TREINOS" : "Meus treinos",

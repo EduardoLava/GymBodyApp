@@ -14,23 +14,23 @@
 </ion-header>
 
 <ion-content padding>
-  <form (ngSubmit)="salvar()" #formulario="ngForm" >
+  <form (ngSubmit)="salvar()" [formGroup]="formGroup" >
     <ion-list>
       <ion-item>
         <ion-label stacked>{{'ALTERAR.DADOS.NOME' | translate}}</ion-label>
-        <ion-input type="text" [(ngModel)]="pessoa.nome"  name="pessoa.nome"></ion-input>
+        <ion-input type="text" [(ngModel)]="pessoa.nome" formControlName="nome"  name="pessoa.nome"></ion-input>
       </ion-item>
       <ion-item (click)="selecionaData()"> 
         <ion-label stacked>{{'ALTERAR.DADOS.NASCIMENTO' | translate}}</ion-label>
-        <ion-datetime disabled="true" displayFormat="DD/MM/YYYY" [(ngModel)]="pessoa.dataNascimento" name="pessoa.dataNascimento"></ion-datetime>
+        <ion-datetime disabled="true" displayFormat="DD/MM/YYYY" [(ngModel)]="pessoa.dataNascimento" formControlName="dataNascimento" name="pessoa.dataNascimento"></ion-datetime>
       </ion-item>
       <ion-item>
         <ion-label stacked>{{'ALTERAR.DADOS.GENERO' | translate}}</ion-label>
-        <ion-input type="text" [(ngModel)]="pessoa.genero"  name="pessoa.genero"></ion-input>
+        <ion-input type="text" [(ngModel)]="pessoa.genero" formControlName="genero" name="pessoa.genero"></ion-input>
       </ion-item>
       <ion-item>
         <ion-label stacked>{{'ALTERAR.DADOS.LOGIN' | translate}}</ion-label>
-        <ion-input type="text" [(ngModel)]="pessoa.login"  name="pessoa.login"></ion-input>
+        <ion-input type="text" [(ngModel)]="pessoa.login"  formControlName="login" name="pessoa.login"></ion-input>
       </ion-item>
       <ion-item>
         <button ion-button item-start default color="confirm"  type="submit">

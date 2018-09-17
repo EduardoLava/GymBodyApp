@@ -1,7 +1,10 @@
 import { Component } from '@angular/core';
-import { IonicPage, NavController, NavParams, AlertController, ToastController } from 'ionic-angular';
+import { IonicPage, NavController, NavParams, AlertController } from 'ionic-angular';
 import { FormGroup, FormBuilder, Validators } from '@angular/forms';
 import { Pessoa } from '../../../model/entities';
+import { PessoaServiceProvider } from '../../../providers/services/pessoa-service/pessoa-service';
+import { ToastDefautController } from '../../../utils/toast-default-contoller';
+import { LoadingDefaultController } from '../../../utils/loading-default-controller';
 
 /**
  * Generated class for the AlterarSenhaPage page.
@@ -33,9 +36,14 @@ export class AlterarSenhaPage {
     public navParams: NavParams,
     public formBuilder: FormBuilder,
     private alertControler: AlertController,
-    private toast: ToastController
+    private loading: LoadingDefaultController,
+    private toast: ToastDefautController,
+    private pessoaService: PessoaServiceProvider,
   ) {
-    this.pessoa = this.navParams.get("pessoa");
+    
+    this.pessoa = this.navParams.get('pessoa');
+
+    console.log(this.pessoa);
     console.log(this.pessoa.senha);
 
 
@@ -49,16 +57,17 @@ export class AlterarSenhaPage {
 
   confirmar( camposFormulario ){
 
-    if(camposFormulario.senhaAtual != this.pessoa.senha) {
+    // senha está criptografada, validação é feita no servidor
+    // if(camposFormulario.senhaAtual != this.pessoa.senha) {
 
-      this.alertControler.create({
-        title: 'Erro',
-        subTitle: 'O campo senha atual não confere com a sua senha!',
-        buttons: ['OK']
-      }).present();
+    //   this.alertControler.create({
+    //     title: 'Erro',
+    //     subTitle: '',
+    //     buttons: ['OK']
+    //   }).present();
 
-      return;
-    }
+    //   return;
+    // }
 
     if(camposFormulario.confirmacaoSenha != camposFormulario.novaSenha){
 
@@ -73,18 +82,34 @@ export class AlterarSenhaPage {
     }
 
     if( this.formGroup.valid ){
-      console.log('is valid');
-      // manda salvar.....
-      this.pessoa.senha = camposFormulario.novaSenha;
-      this.navCtrl.pop();
 
-      this.toast.create({
-        message: 'Senha alterada com sucesso!',
-        duration: 2000,
-        position: 'middle'
-      }).present();
-    }
-    
+      this.loading.create('Aguarde...').present();
+
+      this.pessoaService.alteraSenha(
+        this.pessoa.id, 
+        camposFormulario.novaSenha, 
+        camposFormulario.senhaAtual
+      )
+      .finally(()=> this.loading.loader.dismiss())
+      .subscribe(
+        () =>{
+          // manda salvar.....
+          this.toast.create('Senha alterada com sucesso').present();
+          this.pessoa.senha = camposFormulario.novaSenha;
+          this.navCtrl.pop();
+        }, 
+        (erro) =>{
+
+          this.alertControler.create({
+              buttons: ['Ok'],
+              subTitle: erro.error,
+              title: 'Erro ao alterar senha',
+            }).present();
+
+          }
+        );
+
+      }
 
   }
 
