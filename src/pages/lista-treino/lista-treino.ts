@@ -1,9 +1,11 @@
 import { Component } from '@angular/core';
 import { IonicPage, NavController, NavParams, AlertController } from 'ionic-angular';
 import { NavLifecycles } from '../../utils/nav-lifecycles';
-import { TreinoData } from '../../model/treino/treino-data';
-import { TreinoPage } from './treino/treino';
 import { TreinoDataServiceProvider } from '../../providers/services/treino-data-service/treino-data-service';
+import { SessionServiceProvider } from '../../providers/services/login-service/session-service';
+import { LoadingDefaultController } from '../../utils/loading-default-controller';
+import { TreinoData, Page } from '../../model/entities';
+import { TreinoPage } from './treino/treino';
 
 /**
  * Generated class for the ListaTreinoPage page.
@@ -28,13 +30,31 @@ export class ListaTreinoPage implements NavLifecycles {
     public navParams: NavParams,
     private treinoService: TreinoDataServiceProvider,
     private alertControler: AlertController,
+    private sessionService: SessionServiceProvider,
+    private loading: LoadingDefaultController
   ) {
 
   }
 
   ionViewDidLoad() {
+    
+    this.loading.create('Carregando treinos').present();
 
-    this.treinosData = this.treinoService.listarTreinos();
+    this.treinoService.listarTreinos(this.sessionService.pessoalogada.id)
+    .finally(() => this.loading.loader.dismiss())
+    .subscribe((treinosData: Page<TreinoData> ) =>{
+      
+      this.treinosData = treinosData.content;
+
+      console.log(this.treinosData);
+
+      console.log(this.treinosData[0].treino);
+
+      console.log(this.treinosData[1].treino);
+      
+      console.log(this.treinosData[2].treino);
+
+    });
 
   }
 

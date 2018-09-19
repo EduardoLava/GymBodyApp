@@ -41,6 +41,7 @@ import { HttpServiceProvider } from '../providers/services/http-service/http-ser
 import { SessionServiceProvider } from '../providers/services/login-service/session-service';
 import { LoadingDefaultController } from '../utils/loading-default-controller';
 import { ToastDefautController } from '../utils/toast-default-contoller';
+import { DatePipe } from '@angular/common';
 
 // import {} from 
 // FIM JWT
@@ -101,6 +102,7 @@ export function jwtOptionsFactory(storage: Storage) {
     SessionServiceProvider,
     LoadingDefaultController,
     ToastDefautController,
+    DatePipe
   ],
 })
 export class AppModule {

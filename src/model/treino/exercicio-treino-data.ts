@@ -1,5 +1,5 @@
 import { TreinoExercicio } from "./treino-exercicio";
-import { TreinoData } from "./treino-data";
+import { TreinoData } from "../entities";
 
 export class ExercicioTreinoData {
 

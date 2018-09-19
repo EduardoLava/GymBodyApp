@@ -2,6 +2,9 @@
     "APP" : {
         "NAME": "Gym Body System"
     },
+    "AGENDA" : {
+        "TITLE" : "Agenda"
+    },
     "ALTERAR.DADOS": {
         "TITLE": "Editar Dados",
         "NOME": "Nome:",

@@ -26,5 +26,14 @@ export class HomePage {
     this.loginService.verificaLogin();
   }
 
+  data(){
+    let date = new Date();
+
+    console.log(date.toISOString());
+    console.log(date.getDate());
+    console.log(date.toString());
+    console.log(date.toLocaleDateString());
+  }
+
 
 }

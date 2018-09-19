@@ -1,12 +1,14 @@
 import { Injectable } from "@angular/core";
 import { ReplaySubject, Observable } from "rxjs";
 import { Storage } from '@ionic/storage';
+import { Pessoa } from "../../../model/entities";
 
 @Injectable()
 export class SessionServiceProvider {
-
+   
     private token: string;
     private jwtTokenName = 'jwt_token';
+    private pessoa;
 
     /**
      *  ReplaySubject fornecido pela biblioteca RxJs para notificar outras partes do aplicativo 
@@ -71,6 +73,15 @@ export class SessionServiceProvider {
   
   public setTokenTokenAtivo(token: string){
       this.token = token;
+  }
+
+  public get pessoalogada(): Pessoa {
+      return this.pessoa;
+  }
+
+  public setPessoaLogada(pessoa: Pessoa){
+      this.pessoa = pessoa;
+      console.log('PessoaLogada'+ pessoa.id + ' ', pessoa.nome);
   }
 
 }    

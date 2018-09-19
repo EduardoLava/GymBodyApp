@@ -86,17 +86,33 @@ export class HttpServiceProvider {
   //   console.log(url);
   //   return this.http.get(url, {headers: this.headers});
   // }
-  get(url: string, params?: HttpParams){
+  get<T>(url: string, params?: HttpParams): Observable<T>{
     url = `${SERVER_URL}`+url;
 
 
     console.log('Get in url '+url);
     console.log('http paramns '+ params);
-    return this.http.get(url, {
+    return this.http.get<T>(url, {
       headers: this.headers,
-      params: params
+      params: params,
+      responseType: 'json'
     });
   }
+
+  // getResponseString(url: string, params?: HttpParams) : Observable<string>{
+  //   url = `${SERVER_URL}`+url;
+
+
+  //   console.log('Get in url '+url);
+  //   console.log('http paramns '+ params);
+  //   return this.http.get(url, {
+  //     headers: this.headers,
+  //     params: params,
+  //     responseType: 'text'
+  //   });
+    
+    
+  // }
 
   // -----------------------------------------------
   // -----------------   PUT -----------------------

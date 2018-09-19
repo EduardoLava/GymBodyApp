@@ -26,7 +26,15 @@
       </ion-item>
       <ion-item>
         <ion-label stacked>{{'ALTERAR.DADOS.GENERO' | translate}}</ion-label>
-        <ion-input type="text" [(ngModel)]="pessoa.genero" formControlName="genero" name="pessoa.genero"></ion-input>
+        <ion-select 
+          [(ngModel)]="pessoa.genero"  
+          formControlName="genero" 
+          name="pessoa.genero" 
+          multiple="false"
+          okText="Ok"
+          cancelText="Cancelar">
+          <ion-option *ngFor="let genero of generoValues" [value]="genero">{{ genero }}</ion-option>
+        </ion-select>
       </ion-item>
       <ion-item>
         <ion-label stacked>{{'ALTERAR.DADOS.LOGIN' | translate}}</ion-label>

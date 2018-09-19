@@ -6,6 +6,7 @@ import { tap } from 'rxjs/operators';
 
 import { HttpServiceProvider } from '../http-service/http-service';
 import { SessionServiceProvider } from './session-service';
+import { Pessoa } from '../../../model/entities';
 
 /**
  * 
@@ -68,13 +69,16 @@ export class LoginServiceProvider {
     // observable.subscribe((token)=> this.saveLogin(token));
     // .pipe(tap(token => this.saveLogin(token.data)));
 
-    return this.http.postResponseText(
+    return this.http.post(
       '/api-login', 
       {'login': dadosLogin.username, 'senha': dadosLogin.password}
     )
-    .pipe(tap(token => this.sessionManagment.saveLogin(token)))
+    .pipe(tap(pessoa => this.sessionManagment.saveLogin(pessoa.tokenJwt)))
     .do(
-      (token: string) => this.sessionManagment.setTokenTokenAtivo(token)
+      (pessoa: Pessoa) => {
+        this.sessionManagment.setTokenTokenAtivo(pessoa.tokenJwt);
+        this.sessionManagment.setPessoaLogada(pessoa);
+      }
     );
 
     

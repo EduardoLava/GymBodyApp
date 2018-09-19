@@ -1,9 +1,9 @@
 import { Component, ViewChild } from '@angular/core';
 import { IonicPage, NavController, NavParams, ModalController } from 'ionic-angular';
-import { TreinoData } from '../../../model/treino/treino-data';
 import { TimerComponent } from '../../../components/timer/timer';
 import { PauseModalPage } from '../treino/pause-modal/pause-modal';
 import { TreinoExercicio } from '../../../model/treino/treino-exercicio';
+import { TreinoData } from '../../../model/entities';
 // import { TreinoExercicioServiceProvider } from '../../../providers/services/treino-exercicio-service/treino-exercicio-service';
 
 /**
