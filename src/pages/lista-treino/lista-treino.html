@@ -21,21 +21,28 @@
         <ion-grid no-padding>
           <ion-row>
             <!-- <ion-col col-3 col-sm>{{ 'LISTAGEM.TREINOS.SERIE' | translate }}</ion-col> -->
-            <ion-col col-sm>{{ 'LISTAGEM.TREINOS.TREINO' | translate }}</ion-col>
+            <ion-col col-7 col-sm>{{ 'LISTAGEM.TREINOS.TREINO' | translate }}</ion-col>
+            <ion-col col-3 col-sm>{{ 'LISTAGEM.TREINOS.DATA' | translate }}</ion-col>
+            <ion-col col-2 col-sm></ion-col>
           </ion-row>
         </ion-grid>
       </ion-list-header>
-      <ion-item *ngFor="let treinoData of treinosData">
+      <ion-item *ngFor="let treinoData of treinosData; let i = index">
         <ion-grid no-padding>
+          <ion-row *ngIf=" dataAtual == treinoData.data " class="sobrescrito">Hoje</ion-row>
+          <ion-row *ngIf=" i == 1 " class="sobrescrito" >Próximos</ion-row>
           <ion-row (click)="iniciarTreino(treinoData)">
             <!-- <ion-col col-3 col-sm>
               {{ treinoData.treino.sigla }}
             </ion-col> -->
-            <ion-col col-10 col-sm>
+            <ion-col col-7 col-sm>
               {{ treinoData.treino.nome }}
               <!-- <button small ion-button (click)="iniciarTreino()">
                 <ion-icon small name="open"></ion-icon>
               </button> -->
+            </ion-col>
+            <ion-col col-3 col-sm>
+              {{ treinoData.data | date: "dd/MM" }}
             </ion-col>
             <ion-col col-2 col-sm>
               <ion-icon name="open"></ion-icon>

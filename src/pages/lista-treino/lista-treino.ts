@@ -6,6 +6,7 @@ import { SessionServiceProvider } from '../../providers/services/login-service/s
 import { LoadingDefaultController } from '../../utils/loading-default-controller';
 import { TreinoData, Page } from '../../model/entities';
 import { TreinoPage } from './treino/treino';
+import { DatePipe } from '@angular/common';
 
 /**
  * Generated class for the ListaTreinoPage page.
@@ -23,7 +24,7 @@ export class ListaTreinoPage implements NavLifecycles {
 // listagem de treino
 
   public treinosData: TreinoData[];
-  public dataAtual: string = new Date().toISOString();
+  public dataAtual: string;
 
   constructor(
     public navCtrl: NavController, 
@@ -31,28 +32,35 @@ export class ListaTreinoPage implements NavLifecycles {
     private treinoService: TreinoDataServiceProvider,
     private alertControler: AlertController,
     private sessionService: SessionServiceProvider,
-    private loading: LoadingDefaultController
+    private loading: LoadingDefaultController,
+    private datePipe: DatePipe
   ) {
-
+    this.dataAtual = this.datePipe.transform(new Date(), "yyyy-MM-dd");
+    console.log(this.dataAtual);
   }
 
   ionViewDidLoad() {
     
     this.loading.create('Carregando treinos').present();
 
+    if(!this.sessionService.pessoalogada){
+      this.loading.loader.dismiss();
+      return;
+    } 
+
     this.treinoService.listarTreinos(this.sessionService.pessoalogada.id)
     .finally(() => this.loading.loader.dismiss())
-    .subscribe((treinosData: Page<TreinoData> ) =>{
+    .subscribe((treinosData: TreinoData[] ) =>{
       
-      this.treinosData = treinosData.content;
+      this.treinosData = treinosData;
 
       console.log(this.treinosData);
 
-      console.log(this.treinosData[0].treino);
+      // console.log(this.treinosData[0].treino);
 
-      console.log(this.treinosData[1].treino);
+      // console.log(this.treinosData[1].treino);
       
-      console.log(this.treinosData[2].treino);
+      // console.log(this.treinosData[2].treino);
 
     });
 

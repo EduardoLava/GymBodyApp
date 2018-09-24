@@ -35,6 +35,7 @@ export class LoginServiceProvider {
           // chama um metodo qualquer para que o jwtfilter verifique o token
           this.http.get('/api/teste')
           .subscribe(() => {
+            this.sessionManagment.carregaPessoaLogada();
             this.sessionManagment.setTokenTokenAtivo(token);
             this.sessionManagment.authUser.next(token),
               (erro) => this.logout();
@@ -73,11 +74,11 @@ export class LoginServiceProvider {
       '/api-login', 
       {'login': dadosLogin.username, 'senha': dadosLogin.password}
     )
-    .pipe(tap(pessoa => this.sessionManagment.saveLogin(pessoa.tokenJwt)))
+    .pipe(tap(pessoa => this.sessionManagment.salvaPessoaLogada(pessoa)))
     .do(
       (pessoa: Pessoa) => {
         this.sessionManagment.setTokenTokenAtivo(pessoa.tokenJwt);
-        this.sessionManagment.setPessoaLogada(pessoa);
+        // this.sessionManagment.setPessoaLogada(pessoa);
       }
     );
 

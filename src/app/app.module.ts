@@ -15,6 +15,9 @@ import { DatePicker } from '@ionic-native/date-picker';
 // ng imports
 import { TranslateModule, TranslateLoader } from '@ngx-translate/core';
 import { TranslateHttpLoader } from '@ngx-translate/http-loader';
+
+import { YoutubeVideoPlayer } from '@ionic-native/youtube-video-player';
+
 // fim ng imports
 
 import 'rxjs/add/operator/do';
@@ -42,6 +45,7 @@ import { SessionServiceProvider } from '../providers/services/login-service/sess
 import { LoadingDefaultController } from '../utils/loading-default-controller';
 import { ToastDefautController } from '../utils/toast-default-contoller';
 import { DatePipe } from '@angular/common';
+import { YoutubeUrlServiceProvider } from '../providers/youtube-url-service/youtube-url-service';
 
 // import {} from 
 // FIM JWT
@@ -102,7 +106,9 @@ export function jwtOptionsFactory(storage: Storage) {
     SessionServiceProvider,
     LoadingDefaultController,
     ToastDefautController,
-    DatePipe
+    DatePipe,
+    YoutubeUrlServiceProvider,
+    // YoutubeVideoPlayer
   ],
 })
 export class AppModule {

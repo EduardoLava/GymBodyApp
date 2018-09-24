@@ -91,5 +91,9 @@ export class MyApp {
     return this.sessionService.tokenTokenAtivo;
   }
 
+  logout(){
+    this.loginService.logout();
+  }
+
 }
 

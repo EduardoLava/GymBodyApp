@@ -123,6 +123,16 @@ export class ExercicioRealizado {
     id?: number;
     created?: string;
     updated?: string;
+
+    constructor(treinoExercicio: TreinoExercicio, treinoData: TreinoData){
+        this.completo = false;
+        this.treinoData = treinoData;
+        this.treinoExercicio = treinoExercicio;
+        this.id = null;
+        this.created = null;
+        this.updated = null;
+    }
+
 }
 
 

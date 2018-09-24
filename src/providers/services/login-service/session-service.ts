@@ -5,9 +5,10 @@ import { Pessoa } from "../../../model/entities";
 
 @Injectable()
 export class SessionServiceProvider {
-   
+
     private token: string;
     private jwtTokenName = 'jwt_token';
+    private pessoaLodadaName = 'pessoa_logada';
     private pessoa;
 
     /**
@@ -52,36 +53,52 @@ export class SessionServiceProvider {
         console.log('Fez Logout');
         this.storage.remove(this.jwtTokenName).then(() => this.authUser.next(null));
         this.setTokenTokenAtivo(null);
+        this.setPessoaLogada(null);
     }
 
-     /**
-   * 
-   * @param token 
-   */
-  public saveLogin(token: string) {
-    this.setTokenTokenAtivo(token);
-    console.log('salvou o token '+token);
-    return this.storage.set(this.jwtTokenName, token)
-      .then(() => this.authUser.next(token))
-      .then(() => token)
-    ;
-  }
+    /**
+  * 
+  * @param token 
+  */
+    public saveLogin(token: string) {
+        this.setTokenTokenAtivo(token);
+        console.log('salvou o token ' + token);
+        return this.storage.set(this.jwtTokenName, token)
+            .then(() => this.authUser.next(token))
+            .then(() => token)
+            ;
+    }
 
-  public get tokenTokenAtivo(){
-    return this.token;
-  }
-  
-  public setTokenTokenAtivo(token: string){
-      this.token = token;
-  }
+    public salvaPessoaLogada(pessoa: Pessoa){
+        this.storage.set(this.pessoaLodadaName, pessoa);
+        console.log(pessoa);
+        this.setPessoaLogada(pessoa);
+        this.saveLogin(pessoa.tokenJwt);
+    }
 
-  public get pessoalogada(): Pessoa {
-      return this.pessoa;
-  }
+    public carregaPessoaLogada(){
+        Observable.fromPromise(this.storage.get(this.pessoaLodadaName))
+        .subscribe((pessoa)=>{
+            this.setPessoaLogada(pessoa);
+        })
+        ;
+    }
 
-  public setPessoaLogada(pessoa: Pessoa){
-      this.pessoa = pessoa;
-      console.log('PessoaLogada'+ pessoa.id + ' ', pessoa.nome);
-  }
+    public get tokenTokenAtivo() {
+        return this.token;
+    }
+
+    public setTokenTokenAtivo(token: string) {
+        this.token = token;
+    }
+
+    public get pessoalogada(): Pessoa {
+        return this.pessoa;
+    }
+
+    public setPessoaLogada(pessoa: Pessoa) {
+        this.pessoa = pessoa;
+        // console.log('PessoaLogada' + pessoa.id + ' ', pessoa.nome);
+    }
 
 }    

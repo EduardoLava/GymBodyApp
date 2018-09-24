@@ -33,6 +33,7 @@
         "SERIE": "Séries",
         "TREINO" : "Nome treino",
         "HOJE": "Hoje",
+        "DATA": "Data",
         "PROXIMOS": "Próximos",
         "ANTERIORES": "Anteriores"
     },
@@ -67,6 +68,12 @@
     },
     "TREINO" : {
         "TITLE": "Meu Treino",
-        "TEMPO.TOTAL": "Tempo total"
+        "TEMPO.TOTAL": "Tempo total",
+        "BOTAO.FINALIZAR": "Finalizar Treino",
+        "SERIES" : "Séries: ",
+        "REPETICOES" : "Repeticoes: ",
+        "CARGA" : "Carga: ",
+        "TEMPO": "Tempo: ",
+        "COMPLETO": "Completo: "
     }
 }

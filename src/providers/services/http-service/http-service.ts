@@ -13,11 +13,11 @@ import { Observable } from 'rxjs';
 export class HttpServiceProvider {
 
   constructor(
-    public http: HttpClient,
+    private http: HttpClient,
   ) {
   }
 
-  get headers(){
+  private get headers(){
     let headers = new HttpHeaders();
     return headers = headers.set('Content-Type', 'application/json; charset=utf-8');
     // return headers = headers.set('Authorization', this.sessionService.getToken(). )

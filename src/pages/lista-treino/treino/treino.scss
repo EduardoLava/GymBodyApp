@@ -3,4 +3,47 @@ page-treino {
     ion-grid{
         margin-top: 15px;
     }
+
+    .borda-inferior {
+        border-bottom: 1px solid map-get($colors, primary);
+    }
+
+    .borda-superior {
+        border-top: 1px solid map-get($colors, primary);
+    }
+
+    .nome-exercicio {
+        font-size: 15pt;
+    }
+
+    .center {
+        text-align: center;
+    }
+
+    .video {
+        width: "100%"; 
+        height: "40%";
+        margin-top: 5px;
+    }
+
+    .tempo-text {
+        margin-top: 5px;
+    }
+
+    .cronometro-principal {
+        font-size: 30pt;
+        color: #000;
+    }
+
+    .dados-exercicio {
+        margin-top: 10px;
+        margin-bottom: 10px;
+    }
+
+    // .center-vertical {
+    //     display: flex!important;
+    //     align-content: center!important;
+    //     align-items: center!important;
+    // }
+
 }

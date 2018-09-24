@@ -1,7 +1,8 @@
 import { HttpClient } from '@angular/common/http';
 import { Injectable } from '@angular/core';
-// import { Time } from '@angular/common';
-// import { Treino } from '../../../model/treino/treino';
+import { HttpServiceProvider } from '../http-service/http-service';
+import { Observable } from 'rxjs';
+import { Page, TreinoExercicio } from '../../../model/entities';
 
 /*
   Generated class for the TreinoExercicioServiceProvider provider.
@@ -12,28 +13,19 @@ import { Injectable } from '@angular/core';
 @Injectable()
 export class TreinoExercicioServiceProvider {
 
-  listaExerciciosByTreinoId(id: Number){
-    
-    // let horaInicio: Time = {
-    //   hours: 10,
-    //   minutes: 0
-    // };
-    // let horaFim: Time = {
-    //   hours: 11,
-    //   minutes: 0
-    // };
+  constructor(private http: HttpServiceProvider) { }
 
-    // let treinos: Treino[] = [
-    //   {id: 1, nome:"Treino A",dataFim:new Date('2018-07-30'),dataInicio: new Date('2018-07-01'),horaPrevistaInicio: horaInicio ,  horaPrevistaTermino: horaFim ,sigla:"A"},
-    //   {id: 1, nome:"Treino A",dataFim:new Date('2018-07-30'),dataInicio: new Date('2018-07-01'),horaPrevistaInicio: horaInicio ,  horaPrevistaTermino: horaFim ,sigla:"A"},
-    //   {id: 1, nome:"Treino A",dataFim:new Date('2018-07-30'),dataInicio: new Date('2018-07-01'),horaPrevistaInicio: horaInicio ,  horaPrevistaTermino: horaFim ,sigla:"A"},
-    //   {id: 1, nome:"Treino A",dataFim:new Date('2018-07-30'),dataInicio: new Date('2018-07-01'),horaPrevistaInicio: horaInicio ,  horaPrevistaTermino: horaFim ,sigla:"A"},
-    // ];
+  /**
+   * 
+   * Realiza uma busca dos exercicios de um treino através de seu ID
+   * 
+   * @param idTreino 
+   * 
+  */
+  listaExerciciosByTreinoId(idTreino: Number) : Observable<Page<TreinoExercicio>>{
 
-  }
+    return this.http.get<Page<TreinoExercicio>>('/api/treinos-exercicios/treino-id/'+idTreino);
 
-  constructor(public http: HttpClient) {
-    console.log('Hello TreinoExercicioServiceProvider Provider');
   }
 
 }
