@@ -36,14 +36,12 @@ export class TreinoDataServiceProvider {
     
   }
 
-  salvarTreinoData(treino: TreinoData): Observable<TreinoData> {
+  salvarTreinoData(treinoDataRealizado: TreinoData): Observable<TreinoData> {
 
     // salvar localmente antes de enviar
-    console.log('salvado...'+ treino);
 
-    // this.http.post('endereco', TreinoData);
+    return this.http.post('/api/treino-datas/', treinoDataRealizado);
 
-    return null;
   }
 
 }

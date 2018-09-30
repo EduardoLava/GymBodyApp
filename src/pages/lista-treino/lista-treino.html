@@ -30,7 +30,8 @@
       <ion-item *ngFor="let treinoData of treinosData; let i = index">
         <ion-grid no-padding>
           <ion-row *ngIf=" dataAtual == treinoData.data " class="sobrescrito">Hoje</ion-row>
-          <ion-row *ngIf=" i == 1 " class="sobrescrito" >Próximos</ion-row>
+          <ion-row *ngIf=" i == 0 && dataAtual != treinosData[0].data " class="sobrescrito" >Próximos</ion-row>
+          <ion-row *ngIf=" i == 1 && dataAtual == treinosData[0].data " class="sobrescrito" >Próximos</ion-row>
           <ion-row (click)="iniciarTreino(treinoData)">
             <!-- <ion-col col-3 col-sm>
               {{ treinoData.treino.sigla }}

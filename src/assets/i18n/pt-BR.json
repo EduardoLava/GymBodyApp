@@ -24,6 +24,13 @@
         "SIM": "Sim",
         "NAO": "Não"
     },
+    "DETALHAR.EXERCICIO": {
+        "TITLE": "Detalhes do exercício",
+        "NOME": "Nome: ",
+        "DESCRICAO": "Descrição: ",
+        "EQUIPAMENTO": "Equipamento: ",
+        "IMAGEM": "Imagem: "
+    },
     "INICIAR.TREINO": {
         "TITLE": "Iniciar Treino",
         "TEXTO": "Deseja iniciar o treino?"

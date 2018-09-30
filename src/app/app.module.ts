@@ -46,6 +46,7 @@ import { LoadingDefaultController } from '../utils/loading-default-controller';
 import { ToastDefautController } from '../utils/toast-default-contoller';
 import { DatePipe } from '@angular/common';
 import { YoutubeUrlServiceProvider } from '../providers/youtube-url-service/youtube-url-service';
+import { TimeUtilProvider } from '../providers/time-util/time-util';
 
 // import {} from 
 // FIM JWT
@@ -54,7 +55,8 @@ export function jwtOptionsFactory(storage: Storage) {
   return {
     tokenGetter: () => storage.get('jwt_token'),
     // diz que somente solicitacoes enviadas para localhost conterao Authorization no cabeçalho
-    whitelistedDomains: ['192.168.0.15:8080'],
+    // nao é ncessário iniciar com http:// pois pode ocorrer de não enviar os headers
+    whitelistedDomains: ['localhost:8080'],
   }
 }
 
@@ -108,6 +110,7 @@ export function jwtOptionsFactory(storage: Storage) {
     ToastDefautController,
     DatePipe,
     YoutubeUrlServiceProvider,
+    TimeUtilProvider,
     // YoutubeVideoPlayer
   ],
 })

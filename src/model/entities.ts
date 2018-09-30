@@ -74,10 +74,11 @@ export class TreinoData {
     data?: Date;
     horaInicio?: Date;
     horaTermino?: Date;
+    tempoGasto?: Date;
     completo?: boolean;
     treino?: Treino;
     diaSemana?: DiaSemana;
-    exerciciosTreinoDatas?: ExercicioRealizado[];
+    exerciciosRealizados?: ExercicioRealizado[];
     id?: number;
     created?: string;
     updated?: string;

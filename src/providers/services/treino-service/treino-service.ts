@@ -4,6 +4,7 @@ import { Time } from '@angular/common';
 import { Treino } from '../../../model/treino/treino';
 import { Observable } from 'rxjs';
 import { HttpServiceProvider } from '../http-service/http-service';
+import { ExercicioRealizado } from '../../../model/entities';
 
 /*
   Generated class for the TreinoServiceProvider provider.
@@ -14,7 +15,16 @@ import { HttpServiceProvider } from '../http-service/http-service';
 @Injectable()
 export class TreinoServiceProvider {
 
-  constructor(public http: HttpServiceProvider) {
+  constructor(private http: HttpServiceProvider) {
   }
+
+
+  public salvar(exerciciosRealizados: ExercicioRealizado[]) {
+
+
+  }
+
+
+
 
 }

@@ -10,6 +10,11 @@ import { ToastDefautController } from '../../../utils/toast-default-contoller';
 import { DomSanitizer, SafeResourceUrl } from '@angular/platform-browser';
 import { NavLifecycles } from '../../../utils/nav-lifecycles';
 import { YoutubeUrlServiceProvider } from '../../../providers/youtube-url-service/youtube-url-service';
+import { Observable } from 'rxjs';
+import { ListaTreinoPage } from '../lista-treino';
+import { DetalharExercicioPage } from '../../detalhar-exercicio/detalhar-exercicio';
+import { dateDataSortValue } from 'ionic-angular/umd/util/datetime-util';
+import { TimeUtilProvider } from '../../../providers/time-util/time-util';
 // import { TreinoExercicioServiceProvider } from '../../../providers/services/treino-exercicio-service/treino-exercicio-service';
 
 
@@ -30,8 +35,8 @@ export class TreinoPage implements NavLifecycles{
   // treino da data escolhida
   public treinoData: TreinoData;
 
-  // exercicios do meu treino atual
-  public exercicioRealizacao: ExercicioRealizado[];
+  // // exercicios do meu treino atual
+  // public exercicioRealizacao: ExercicioRealizado[];
 
   // indice para apresentação na tela
   private indiceTreinoAtual: number;
@@ -43,7 +48,7 @@ export class TreinoPage implements NavLifecycles{
   idVideo: string;
   imagemSemVideo: string = '../../../../assets/imgs/sem_video.png';
 
-  percentualCompleto: number;
+  percentualCompleto;
   quantidadeExerciciosCompletos: number;
 
   constructor(
@@ -58,12 +63,21 @@ export class TreinoPage implements NavLifecycles{
     private domSanitizer: DomSanitizer,
     // private youtubePlayer: YoutubeVideoPlayer,
     // private platform: Platform,
-    private youtubeServiceProvider: YoutubeUrlServiceProvider
+    private youtubeServiceProvider: YoutubeUrlServiceProvider,
+    private timerUtil: TimeUtilProvider
   ) {
 
-    this.exercicioRealizacao = [];
-
     this.treinoData = navParams.get('treinoData');
+    // console.log(this.treinoData);
+    if(this.treinoData == null){
+      this.navCtrl.setRoot(ListaTreinoPage.name);
+    }
+
+    this.treinoData.horaInicio = new Date();
+
+    if(this.treinoData.exerciciosRealizados == null){
+      this.treinoData.exerciciosRealizados = [];
+    }
 
     this.quantidadeExerciciosCompletos = 0;
 
@@ -98,9 +112,12 @@ export class TreinoPage implements NavLifecycles{
 
           exerciciosTreino.content.forEach( (treinoExercicio: TreinoExercicio) =>{
             console.log('percorrendo lista');
-            let exercicioNovo = new ExercicioRealizado(treinoExercicio, this.treinoData);
+            
+            treinoExercicio.treino = null;
 
-            this.exercicioRealizacao.push(exercicioNovo);
+            let exercicioNovo = new ExercicioRealizado(treinoExercicio, null);
+
+            this.treinoData.exerciciosRealizados.push(exercicioNovo);
 
           });
 
@@ -110,7 +127,7 @@ export class TreinoPage implements NavLifecycles{
 
         }, 
         (erro) =>{
-
+          this.loading.loader.dismiss();
           // apresenta mensagem de erro
           this.alertController.create({
             buttons: [{text: 'Ok'}],
@@ -119,7 +136,7 @@ export class TreinoPage implements NavLifecycles{
           }).present();
 
           // depois fecha a tela de treinos
-          this.navCtrl.pop();
+          this.navCtrl.setRoot(ListaTreinoPage.name);
 
         }
       );
@@ -142,13 +159,14 @@ export class TreinoPage implements NavLifecycles{
   proximoExercicio(){
 
     console.log('proximo');
-    console.log(this.exercicioRealizacao.length == (this.indiceTreinoAtual + 2));
+    console.log(this.treinoData.exerciciosRealizados.length == (this.indiceTreinoAtual + 1));
     // verifica se a lista terá tamanho para pegar o proximo item
-    if(!(this.exercicioRealizacao.length == (this.indiceTreinoAtual + 2))){
-
-      this.indiceTreinoAtual = this.indiceTreinoAtual ++;
-
+    if(!(this.treinoData.exerciciosRealizados.length == (this.indiceTreinoAtual + 1))){
+      console.log('entrou no if')
+      this.indiceTreinoAtual = this.indiceTreinoAtual + 1;
+      
       this.setItemExercicioAtual(this.indiceTreinoAtual); 
+
       return;
       
     } 
@@ -164,7 +182,7 @@ export class TreinoPage implements NavLifecycles{
     
     if(this.indiceTreinoAtual != 0) {
 
-      this.indiceTreinoAtual = this.indiceTreinoAtual --;
+      this.indiceTreinoAtual = this.indiceTreinoAtual - 1;
 
       this.setItemExercicioAtual(this.indiceTreinoAtual);
 
@@ -178,7 +196,10 @@ export class TreinoPage implements NavLifecycles{
    */
   setItemExercicioAtual(indice: number){
 
-    this.exercicioAtual = this.exercicioRealizacao[indice];
+    this.exercicioAtual = this.treinoData.exerciciosRealizados[indice];
+
+    console.log('Indice> '+indice);
+    console.log(this.exercicioAtual);
 
     if(this.exercicioAtual == null){
       return;
@@ -196,14 +217,18 @@ export class TreinoPage implements NavLifecycles{
 
   calculaPercentualCompleto(){
 
-    this.percentualCompleto = (this.quantidadeExerciciosCompletos * 100)/this.exercicioRealizacao.length;
+    this.percentualCompleto = (this.quantidadeExerciciosCompletos * 100)/this.treinoData.exerciciosRealizados.length;
+    this.percentualCompleto = this.percentualCompleto.toFixed(1);
     console.log(this.percentualCompleto);
   }
   
   completarExercicio(){
 
     this.exercicioAtual.completo = true;
-    this.quantidadeExerciciosCompletos ++;
+    if(this.quantidadeExerciciosCompletos < this.treinoData.exerciciosRealizados.length){
+      this.quantidadeExerciciosCompletos ++;
+    }
+
     this.calculaPercentualCompleto();
     this.proximoExercicio();
 
@@ -221,62 +246,81 @@ export class TreinoPage implements NavLifecycles{
    * Abra modal para detalhar exercicio, para que o usuári possa ver mais detalhes
    */
   detalharExercicio(){
-    this.toast.create('Detalhando.......');
-    console.log('detalhando');
+    this.navCtrl.push(DetalharExercicioPage.name, {
+      exercicio: this.exercicioAtual.treinoExercicio.exercicio
+    });
   }
 
   /**
    * marca todos os exercícios do treino como completo e manda salvar no servidor
    */
   finalizar(){
-
+    console.log('entrou no finalizar');
     this.alertController.create({
       title: 'Finalizar treino',
       subTitle: 'Deseja finalizar o treino?',
       buttons: [
         {text: 'Não'},
         {text: 'Sim', handler: () => {
+          
+          this.loading.create('Salvando seu treino...').present();
 
-          console.log('Abrir tela');
+          this.treinoData.exerciciosRealizados.forEach((exercicioRealizado: ExercicioRealizado)=>{
+            exercicioRealizado.completo = true;
+          });
 
-          this.salvar();
+          this.treinoData.exerciciosRealizados = this.treinoData.exerciciosRealizados;
+          this.salvar(this.treinoData);
 
         }}
       ]
-    });
+    }).present();
 
   }
 
   /**
    * envia os dados para api
    */
-  salvar(){
+  salvar(treinoData: TreinoData){
+    this.timerPrincipal.pauseTimer();
 
-    this.treinoDataService.salvarTreinoData(this.treinoData).subscribe(
-      () =>{
+    let segundos = this.timerPrincipal.timer.timeRemaining;
+
+    this.treinoData.tempoGasto = this.timerUtil.getDateTime(segundos);
+
+    this.treinoData.horaTermino = new Date();
+    this.treinoDataService.salvarTreinoData(treinoData).subscribe(
+      (treinoData: TreinoData) =>{
+
+        this.treinoData = treinoData;
+    
+        // console.log(treinoData);
+        this.loading.loader.dismiss();
+        this.navCtrl.setRoot(ListaTreinoPage.name);
         this.toast.create('Treino salvo com sucesso!').present();
-        this.navCtrl.pop();
+
       }, 
       (erro) =>{
+        this.loading.loader.dismiss();
         this.alertController.create({
           buttons: [
             {
               text: 'Tentar novamente',
               handler: () => {
-                this.salvar();
+                this.salvar(treinoData);
               }
             },
             {
               text: 'Mais tarde',
               handler: () =>{
                 // TODO salvar localmente
-                this.navCtrl.pop(); 
+                this.navCtrl.setRoot(ListaTreinoPage.name); 
               }
             }
           ],
           title: 'Ocorreu ao finalizar',
           subTitle: 'Ocorreu um problema ao conectar-se com o servidor. Você pode verificar sua conexão com a internet e tentar novamente, ou deixar para mais tarde!'
-        });
+        }).present();
       }
     );
 

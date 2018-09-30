@@ -48,13 +48,13 @@ export class ListaTreinoPage implements NavLifecycles {
       return;
     } 
 
+    this.treinosData = null;
+
     this.treinoService.listarTreinos(this.sessionService.pessoalogada.id)
     .finally(() => this.loading.loader.dismiss())
     .subscribe((treinosData: TreinoData[] ) =>{
       
       this.treinosData = treinosData;
-
-      console.log(this.treinosData);
 
       // console.log(this.treinosData[0].treino);
 
@@ -74,7 +74,7 @@ export class ListaTreinoPage implements NavLifecycles {
         {text: 'Não'},
         {text: 'Sim', handler: () => {
           console.log('Abrir tela');
-          this.navCtrl.push(TreinoPage.name,{
+          this.navCtrl.setRoot(TreinoPage.name,{
             treinoData: treinoData 
           });
         }}
