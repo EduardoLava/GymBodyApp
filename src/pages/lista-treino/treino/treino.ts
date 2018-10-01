@@ -1,5 +1,5 @@
 import { Component, ViewChild } from '@angular/core';
-import { IonicPage, NavController, NavParams, ModalController, AlertController, Platform } from 'ionic-angular';
+import { IonicPage, NavController, NavParams, ModalController, AlertController } from 'ionic-angular';
 import { TimerComponent } from '../../../components/timer/timer';
 import { PauseModalPage } from '../treino/pause-modal/pause-modal';
 import { TreinoData, TreinoExercicio, Page, ExercicioRealizado } from '../../../model/entities';
@@ -10,10 +10,9 @@ import { ToastDefautController } from '../../../utils/toast-default-contoller';
 import { DomSanitizer, SafeResourceUrl } from '@angular/platform-browser';
 import { NavLifecycles } from '../../../utils/nav-lifecycles';
 import { YoutubeUrlServiceProvider } from '../../../providers/youtube-url-service/youtube-url-service';
-import { Observable } from 'rxjs';
+// import { Observable } from 'rxjs';
 import { ListaTreinoPage } from '../lista-treino';
 import { DetalharExercicioPage } from '../../detalhar-exercicio/detalhar-exercicio';
-import { dateDataSortValue } from 'ionic-angular/umd/util/datetime-util';
 import { TimeUtilProvider } from '../../../providers/time-util/time-util';
 // import { TreinoExercicioServiceProvider } from '../../../providers/services/treino-exercicio-service/treino-exercicio-service';
 
@@ -48,9 +47,25 @@ export class TreinoPage implements NavLifecycles{
   idVideo: string;
   imagemSemVideo: string = '../../../../assets/imgs/sem_video.png';
 
+  // percentual completo do treino, apresentado na tela
   percentualCompleto;
+  // numero de exercicios já realizados
   quantidadeExerciciosCompletos: number;
 
+  /**
+   * 
+   * @param navCtrl 
+   * @param navParams 
+   * @param modalControler 
+   * @param loading 
+   * @param treinoExercicioService 
+   * @param alertController 
+   * @param treinoDataService 
+   * @param toast 
+   * @param domSanitizer 
+   * @param youtubeServiceProvider 
+   * @param timerUtil 
+   */
   constructor(
     public navCtrl: NavController,
     public navParams: NavParams, 
@@ -71,6 +86,7 @@ export class TreinoPage implements NavLifecycles{
     // console.log(this.treinoData);
     if(this.treinoData == null){
       this.navCtrl.setRoot(ListaTreinoPage.name);
+      return;
     }
 
     this.treinoData.horaInicio = new Date();
@@ -83,6 +99,9 @@ export class TreinoPage implements NavLifecycles{
 
   }
   
+  /**
+   * 
+   */
   ionViewDidLoad(){
 
     this.carregaExercicios();
@@ -108,10 +127,9 @@ export class TreinoPage implements NavLifecycles{
         })
         .subscribe((exerciciosTreino: Page<TreinoExercicio>)=>{
           
-          console.log(exerciciosTreino);
+          // console.log(exerciciosTreino);
 
           exerciciosTreino.content.forEach( (treinoExercicio: TreinoExercicio) =>{
-            console.log('percorrendo lista');
             
             treinoExercicio.treino = null;
 
@@ -141,14 +159,20 @@ export class TreinoPage implements NavLifecycles{
         }
       );
     } else {
-      // loader.dismiss();
-      // this.alertController.create({
-      //   buttons: [{text: 'Ok'}],
-      //   title: 'Error',
-      //   subTitle: 'Ocorreu um erro ao carregar os exercícios do seu treino'
-      // }).present();
+      loader.dismiss();
+      this.alertController.create({
+        buttons: [
+          {
+            text: 'Ok',
+            handler: ()=>{ 
+              this.navCtrl.setRoot(ListaTreinoPage.name);
+            }
+          }
+        ],
+        title: 'Erro',
+        subTitle: 'Ocorreu um erro ao carregar os exercícios do seu treino.'
+      }).present();
 
-      // this.navCtrl.setRoot(ListaTreinoPage.name);
     }
 
   }
@@ -158,11 +182,10 @@ export class TreinoPage implements NavLifecycles{
    */
   proximoExercicio(){
 
-    console.log('proximo');
+    // console.log('proximo');
     console.log(this.treinoData.exerciciosRealizados.length == (this.indiceTreinoAtual + 1));
     // verifica se a lista terá tamanho para pegar o proximo item
     if(!(this.treinoData.exerciciosRealizados.length == (this.indiceTreinoAtual + 1))){
-      console.log('entrou no if')
       this.indiceTreinoAtual = this.indiceTreinoAtual + 1;
       
       this.setItemExercicioAtual(this.indiceTreinoAtual); 
@@ -198,16 +221,12 @@ export class TreinoPage implements NavLifecycles{
 
     this.exercicioAtual = this.treinoData.exerciciosRealizados[indice];
 
-    console.log('Indice> '+indice);
-    console.log(this.exercicioAtual);
-
     if(this.exercicioAtual == null){
       return;
     }
 
     this.calculaPercentualCompleto();
 
-    console.log('aaaaaa'+this.exercicioAtual.treinoExercicio.exercicio.linkVideo);
     if(this.exercicioAtual != null && this.exercicioAtual.treinoExercicio != null){
       this.idVideo = this.youtubeServiceProvider.urlVideioByUrl(this.exercicioAtual.treinoExercicio.exercicio.linkVideo+'');
       this.preparavideo(this.idVideo);
@@ -216,10 +235,14 @@ export class TreinoPage implements NavLifecycles{
   }
 
   calculaPercentualCompleto(){
-
-    this.percentualCompleto = (this.quantidadeExerciciosCompletos * 100)/this.treinoData.exerciciosRealizados.length;
+    
+    this.percentualCompleto = (
+      this.quantidadeExerciciosCompletos * 100
+    )/this.treinoData.exerciciosRealizados.length;
+    
+    // arredonda para uma casa decimal
     this.percentualCompleto = this.percentualCompleto.toFixed(1);
-    console.log(this.percentualCompleto);
+
   }
   
   completarExercicio(){

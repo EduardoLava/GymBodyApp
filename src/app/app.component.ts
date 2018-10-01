@@ -10,6 +10,9 @@ import { MinhaContaPage } from '../pages/minha-conta/minha-conta';
 import { LoginServiceProvider } from '../providers/services/login-service/login-service';
 import { LoginPage } from '../pages/login/login';
 import { SessionServiceProvider } from '../providers/services/login-service/session-service';
+
+import { ListaAvaliacaoFisicaPage } from '../pages/lista-avaliacao-fisica/lista-avaliacao-fisica';
+
 @Component({
   templateUrl: 'app.html'
 })
@@ -26,8 +29,8 @@ export class MyApp {
     { titulo: 'MENU.TREINOS', componente: ListaTreinoPage.name, icone: 'ai-fitness' },
     { titulo: 'MENU.CONTA', componente: MinhaContaPage.name, icone: 'person' },
     { titulo: 'MENU.ALUNOS', componente: ListaTreinoPage.name, icone: 'people' },
-    { titulo: 'MENU.AGENDA', componente: ListaTreinoPage.name, icone: 'calendar' },
-    { titulo: 'MENU.AVALIACAO.FISICA', componente: ListaTreinoPage.name, icone: 'pulse' },
+    // { titulo: 'MENU.AGENDA', componente: ListaTreinoPage.name, icone: 'calendar' },
+    { titulo: 'MENU.AVALIACAO.FISICA', componente: ListaAvaliacaoFisicaPage.name, icone: 'pulse' },
     { titulo: 'MENU.NOTIFICACOES', componente: ListaTreinoPage.name, icone: 'notifications' }
   ];
 

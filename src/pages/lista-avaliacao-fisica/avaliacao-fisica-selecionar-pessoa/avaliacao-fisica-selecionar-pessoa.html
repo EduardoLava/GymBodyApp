@@ -1,0 +1,28 @@
+<!--
+  Generated template for the AvaliacaoFisicaSelecionarPessoaPage page.
+
+  See http://ionicframework.com/docs/components/#navigation for more info on
+  Ionic pages and navigation.
+-->
+<ion-header>
+
+  <ion-navbar>
+    <ion-title>avaliacao-fisica-selecionar-pessoa</ion-title>
+  </ion-navbar>
+
+</ion-header>
+
+
+<ion-content padding>
+  <ion-searchbar
+    [(ngModel)]="pesquisaPessoa"
+    placeholder="Digite um nome"
+    [showCancelButton]="false"
+    (ionInput)="listByFilters($event.target.value)">
+  </ion-searchbar>
+  <ion-list>
+    <ion-item *ngFor="let pessoa of pessoas;">
+      {{ pessoa?.nome }}
+    </ion-item>
+  </ion-list>
+</ion-content>

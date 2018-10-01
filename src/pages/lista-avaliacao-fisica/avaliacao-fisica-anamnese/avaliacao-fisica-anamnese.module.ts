@@ -1,15 +1,15 @@
 import { NgModule } from '@angular/core';
 import { IonicPageModule } from 'ionic-angular';
-import { PauseModalPage } from './pause-modal';
+import { AvaliacaoFisicaAnamnesePage } from './avaliacao-fisica-anamnese';
 import { TranslateModule } from '@ngx-translate/core';
 
 @NgModule({
   declarations: [
-    PauseModalPage,
+    AvaliacaoFisicaAnamnesePage,
   ],
   imports: [
-    IonicPageModule.forChild(PauseModalPage),
+    IonicPageModule.forChild(AvaliacaoFisicaAnamnesePage),
     TranslateModule.forChild(),
   ],
 })
-export class PauseModalPageModule {}
+export class AvaliacaoFisicaAnamnesePageModule {}

@@ -1,15 +1,16 @@
 import { NgModule } from '@angular/core';
 import { IonicPageModule } from 'ionic-angular';
-import { PauseModalPage } from './pause-modal';
+import { ListaAvaliacaoFisicaPage } from './lista-avaliacao-fisica';
 import { TranslateModule } from '@ngx-translate/core';
+
 
 @NgModule({
   declarations: [
-    PauseModalPage,
+    ListaAvaliacaoFisicaPage,
   ],
   imports: [
-    IonicPageModule.forChild(PauseModalPage),
+    IonicPageModule.forChild(ListaAvaliacaoFisicaPage),
     TranslateModule.forChild(),
   ],
 })
-export class PauseModalPageModule {}
+export class ListaAvaliacaoFisicaPageModule {}

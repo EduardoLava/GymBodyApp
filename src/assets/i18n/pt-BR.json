@@ -18,6 +18,26 @@
         "NOVA": "Nova Senha:",
         "CONFIRMACAO": "Confirmação:"
     },
+    "ANAMNESE": {
+        "TITLE" : "Anamnese",
+        "PERGUNTA1" : "Objetivos com relação a atividade física?",
+        "PERGUNTA1.PLACEHOLDER" : "(Obrigatório) Informe os objetivos",
+        "PERGUNTA2" : "Pratica atividade atualmente?",
+        "PERGUNTA2.PLACEHOLDER" : "(Obritatório) Informa as atividades",
+        "PERGUNTA3" : "Utiliza algum tipo de medicamento?",
+        "PERGUNTA3.PLACEHOLDER" : "(Obrigatório)",
+        "PERGUNTA4" : "Já passou por alguma cirurgia?",
+        "PERGUNTA4.PLACEHOLDER" : "(Obrigatório)",
+        "PERGUNTA5" : "Doenças na família?",
+        "PERGUNTA5.PLACEHOLDER" : "(Obritatório)",
+        "PERGUNTA6" : "Observações",
+        "PERGUNTA6.PLACEHOLDER" : "(Opcional) Informe as observações"
+    },
+    "AVALIACAO.FISICA" : {
+        "ESCOLHA.PROTOCOLO.TITLE" : "Escolha um protocolo",
+        "POLLOCK" : "Protocolo de Pollock, 7 Dobras",
+        "GUEDES" :  "Protocolo de Guedes, 3 Dobras"
+    },
     "BOTAO": {
         "CONFIRMAR": "Confirmar",
         "CANCELAR": "Cancelar",
@@ -43,6 +63,9 @@
         "DATA": "Data",
         "PROXIMOS": "Próximos",
         "ANTERIORES": "Anteriores"
+    },
+    "LISTAGEM.AVALIACAO.FISICA" : {
+        "TITLE" : "Avaliação física"
     },
     "LOGIN" : {
         "TITLE" : "Login",
@@ -72,6 +95,14 @@
         "GENERO" : "Gênero:",
         "SENHA" : "Senha:",
         "OBJETIVO" : "Objetivo:"
+    },
+    "MODAL.PAUSE" :{
+        "TITLE" : "Pausa",
+        "BOTAO" : "Continuar"
+    },
+    "PROTOCOLO" : { 
+        "GUEDES" : "Guedes",
+        "POLLOCK": "Pollock"
     },
     "TREINO" : {
         "TITLE": "Meu Treino",

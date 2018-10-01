@@ -1,5 +1,5 @@
 import { Injectable } from '@angular/core';
-import { Pessoa } from '../../../model/entities';
+import { Pessoa, Page } from '../../../model/entities';
 import { HttpServiceProvider } from '../http-service/http-service';
 import 'rxjs/add/operator/mergeMap';
 import { LoginServiceProvider } from '../login-service/login-service';
@@ -58,5 +58,9 @@ export class PessoaServiceProvider {
 
     return this.http.put('/api/pessoas', JSON.stringify(pessoa));
   } 
+
+  listPessoasByFilters(filter: string): Observable<Page<Pessoa>>{
+    return this.http.get('/api/pessoas/'+filter.toString()+'/filters');
+  }
 
 }

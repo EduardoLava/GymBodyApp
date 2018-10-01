@@ -36,7 +36,6 @@ export class ListaTreinoPage implements NavLifecycles {
     private datePipe: DatePipe
   ) {
     this.dataAtual = this.datePipe.transform(new Date(), "yyyy-MM-dd");
-    console.log(this.dataAtual);
   }
 
   ionViewDidLoad() {
@@ -56,12 +55,13 @@ export class ListaTreinoPage implements NavLifecycles {
       
       this.treinosData = treinosData;
 
-      // console.log(this.treinosData[0].treino);
-
-      // console.log(this.treinosData[1].treino);
-      
-      // console.log(this.treinosData[2].treino);
-
+    }, (error)=>{
+      this.loading.loader.dismiss();
+      this.alertControler.create({
+        title: 'Erro',
+        subTitle: 'Ocorreu um erro ao consultar seus treinos!\nVerifique sua conexão!',
+        buttons: ['Ok']
+      }).present();
     });
 
   }
@@ -73,7 +73,6 @@ export class ListaTreinoPage implements NavLifecycles {
       buttons: [
         {text: 'Não'},
         {text: 'Sim', handler: () => {
-          console.log('Abrir tela');
           this.navCtrl.setRoot(TreinoPage.name,{
             treinoData: treinoData 
           });
