@@ -13,59 +13,87 @@
 </ion-header>
 
 <ion-content padding>
-  <ion-grid>
-    <ion-row>
-      <ion-col>
-        <h2> Aluno teste </h2>
-      </ion-col>
-    </ion-row>
-    <ion-row>
-      <ion-col>
-        {{ "ANAMNESE.PERGUNTA1" | translate }}
-        <ion-item>
-          <ion-textarea placeholder=" {{ 'ANAMNESE.PERGUNTA1.PLACEHOLDER' | translate }}"></ion-textarea>
-        </ion-item>
-      </ion-col>
-    </ion-row>
-    <ion-row>
-      <ion-col>
-        {{ "ANAMNESE.PERGUNTA2" | translate }}
-        <ion-item>
-          <ion-textarea placeholder=" {{ 'ANAMNESE.PERGUNTA2.PLACEHOLDER' | translate }}"></ion-textarea>
-        </ion-item>
-      </ion-col>
-    </ion-row>
-    <ion-row>
-      <ion-col>
-        {{ "ANAMNESE.PERGUNTA3" | translate }}
-        <ion-item>
-          <ion-textarea placeholder=" {{ 'ANAMNESE.PERGUNTA3.PLACEHOLDER' | translate }}"></ion-textarea>
-        </ion-item>
-      </ion-col>
-    </ion-row>
-    <ion-row>
-      <ion-col>
-        {{ "ANAMNESE.PERGUNTA4" | translate }}
-        <ion-item>
-          <ion-textarea placeholder=" {{ 'ANAMNESE.PERGUNTA4.PLACEHOLDER' | translate }}"></ion-textarea>
-        </ion-item>
-      </ion-col>
-    </ion-row>
-    <ion-row>
-      <ion-col>
-        {{ "ANAMNESE.PERGUNTA5" | translate }}
-        <ion-item>
-          <ion-textarea placeholder=" {{ 'ANAMNESE.PERGUNTA5.PLACEHOLDER' | translate }}"></ion-textarea>
-        </ion-item>
-      </ion-col>
-    </ion-row>
-    <ion-row>
-      <ion-col>
-        {{ "ANAMNESE.PERGUNTA6" | translate }}
-        <ion-item>
-          <ion-textarea placeholder="{{ 'ANAMNESE.PERGUNTA6.PLACEHOLDER' | translate }}"></ion-textarea>
-        </ion-item>
-      </ion-col>
-    </ion-row>
-  </ion-grid>
+  <form [formGroup]="formAnamnese">
+    <ion-grid>
+      <ion-row>
+        <ion-col>
+          <h3 class="titulo"> {{ avaliacaoFisica?.pessoa?.nome }} </h3>
+        </ion-col>
+      </ion-row>
+      <ion-row>
+        <ion-col>
+          {{ "ANAMNESE.PERGUNTA1" | translate }}
+          <ion-item>
+            <ion-textarea 
+              [(ngModel)]="avaliacaoFisica.resposta.objetivosAtividadeFisica"
+              formControlName="objetivosAtividadeFisica"
+              placeholder=" {{'ANAMNESE.PERGUNTA1.PLACEHOLDER' | translate }}"></ion-textarea>
+          </ion-item>
+        </ion-col>
+      </ion-row>
+      <ion-row>
+        <ion-col>
+          {{ "ANAMNESE.PERGUNTA2" | translate }}
+          <ion-item>
+            <ion-textarea 
+              [(ngModel)]="avaliacaoFisica.resposta.praticaAtividade"
+              formControlName="praticaAtividade"
+              placeholder=" {{'ANAMNESE.PERGUNTA2.PLACEHOLDER' | translate }}"></ion-textarea>
+          </ion-item>
+        </ion-col>
+      </ion-row>
+      <ion-row>
+        <ion-col>
+          {{ "ANAMNESE.PERGUNTA3" | translate }}
+          <ion-item>
+            <ion-textarea 
+              [(ngModel)]="avaliacaoFisica.resposta.medicamento"
+              formControlName="medicamento"
+              placeholder=" {{'ANAMNESE.PERGUNTA3.PLACEHOLDER' | translate }}"></ion-textarea>
+          </ion-item>
+        </ion-col>
+      </ion-row>
+      <ion-row>
+        <ion-col>
+          {{ "ANAMNESE.PERGUNTA4" | translate }}
+          <ion-item>
+            <ion-textarea 
+              [(ngModel)]="avaliacaoFisica.resposta.cirurgia"
+              formControlName="cirurgia"
+              placeholder=" {{'ANAMNESE.PERGUNTA4.PLACEHOLDER' | translate }}"></ion-textarea>
+          </ion-item>
+        </ion-col>
+      </ion-row>
+      <ion-row>
+        <ion-col>
+          {{ "ANAMNESE.PERGUNTA5" | translate }}
+          <ion-item>
+            <ion-textarea 
+              [(ngModel)]="avaliacaoFisica.resposta.doencaFamiliar"
+              formControlName="doencaFamiliar"
+              placeholder=" {{'ANAMNESE.PERGUNTA5.PLACEHOLDER' | translate }}"></ion-textarea>
+          </ion-item>
+        </ion-col>
+      </ion-row>
+      <ion-row>
+        <ion-col>
+          {{ "ANAMNESE.PERGUNTA6" | translate }}
+          <ion-item>
+            <ion-textarea 
+              [(ngModel)]="avaliacaoFisica.resposta.observacao"
+              formControlName="observacao"
+              placeholder="{{'ANAMNESE.PERGUNTA6.PLACEHOLDER' | translate }}"></ion-textarea>
+          </ion-item>
+        </ion-col>
+      </ion-row>
+    </ion-grid>
+  </form>
+  <ion-fab bottom right>
+    <button 
+      type="button" 
+      (click)="priximaEtapa()"
+      ion-fab color="primary">
+      <ion-icon name="arrow-round-forward"></ion-icon>
+    </button>
+  </ion-fab>
 </ion-content>

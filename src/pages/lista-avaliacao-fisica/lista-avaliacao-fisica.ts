@@ -2,6 +2,7 @@ import { Component } from '@angular/core';
 import { IonicPage, NavController, NavParams } from 'ionic-angular';
 
 import { AvaliacaoFisicaSelecionarPessoaPage } from './avaliacao-fisica-selecionar-pessoa/avaliacao-fisica-selecionar-pessoa';
+import { AvaliacaoFisicaServiceProvider } from '../../providers/services/avaliacao-fisica-service/avaliacao-fisica-service';
 
 /**
  * Generated class for the ListaAvaliacaoFisicaPage page.
@@ -17,7 +18,11 @@ import { AvaliacaoFisicaSelecionarPessoaPage } from './avaliacao-fisica-selecion
 })
 export class ListaAvaliacaoFisicaPage {
 
-  constructor(public navCtrl: NavController, public navParams: NavParams) {
+  constructor(
+    public navCtrl: NavController, 
+    public navParams: NavParams,
+    private avaliacaoFisicaService: AvaliacaoFisicaServiceProvider
+  ) {
   }
 
   ionViewDidLoad() {
@@ -25,9 +30,13 @@ export class ListaAvaliacaoFisicaPage {
 
 
   novaAvaliacaoFisica(protocoloSelecionado: string) {
-    console.log(protocoloSelecionado);
+
+    let avaliacaoFisica = this.avaliacaoFisicaService
+      .criaAvaliacaoFisica(protocoloSelecionado);
+
+      console.log(avaliacaoFisica);
     this.navCtrl.push(AvaliacaoFisicaSelecionarPessoaPage.name, { 
-      protocolo: protocoloSelecionado
+      avaliacaoFisica: avaliacaoFisica
     });
   }
 

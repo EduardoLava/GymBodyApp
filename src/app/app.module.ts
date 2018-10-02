@@ -47,6 +47,7 @@ import { ToastDefautController } from '../utils/toast-default-contoller';
 import { DatePipe } from '@angular/common';
 import { YoutubeUrlServiceProvider } from '../providers/youtube-url-service/youtube-url-service';
 import { TimeUtilProvider } from '../providers/time-util/time-util';
+import { AvaliacaoFisicaServiceProvider } from '../providers/services/avaliacao-fisica-service/avaliacao-fisica-service';
 
 // import {} from 
 // FIM JWT
@@ -111,6 +112,7 @@ export function jwtOptionsFactory(storage: Storage) {
     DatePipe,
     YoutubeUrlServiceProvider,
     TimeUtilProvider,
+    AvaliacaoFisicaServiceProvider,
     // YoutubeVideoPlayer
   ],
 })

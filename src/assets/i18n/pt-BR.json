@@ -33,10 +33,60 @@
         "PERGUNTA6" : "Observações",
         "PERGUNTA6.PLACEHOLDER" : "(Opcional) Informe as observações"
     },
+    "PERIMETRIA" : {
+        "TITLE": "Cadastro de perimetria",
+        "OMBRO" : "Ombro (cm):",
+        "PESCOCO" : "Pescoço (cm):",
+        "TORAX" : "Tórax (cm):",
+        "BRACO" : {
+            "DIREITO": {
+                "RELAXADO" : "Braço dir. relax. (cm):",
+                "CONTRAIDO" : "Braço dir. contr. (cm):"
+            },
+            "ESQUERDO" :{
+                "RELAXADO" : "Braço esq. relax. (cm):",
+                "CONTRAIDO" : "Braço esq. contr. (cm):"
+            }
+        },
+        "ANTEBRACO" : {
+            "DIREITO" : "Antebraço dir. (cm):",
+            "ESQUERDO" : "Antebraço esq. (cm):"
+        },
+        "CINTURA" : "Cintura (cm):",
+        "QUADRIL" : "Quadril (cm):",
+        "COXA" : {
+            "PROXIMAL" : {
+                "DIREITA" : "Coxa prox. dir. (cm):",
+                "ESQUERDA" : "Coxa prox. esq. (cm):"
+            },
+            "MEDIA" : {
+                "DIREITA" : "Coxa média dir.: (cm)",
+                "ESQUERDA" : "Coxa média esq. (cm):"
+            },
+            "DISTAL" : {
+                "DIREITA" : "Coxa distal dir. (cm):",
+                "ESQUERDA" : "Coxa distal esq. (cm):"
+            }
+        },
+        "PANTURRILHA" : {
+            "DIREITA" : "Panturrilha dir. (cm):",
+            "ESQUERDA" : "Panturrilha esq. (cm):"
+        },
+        "BICIPTAL" : "Biciptal (cm):",
+        "TRICIPTAL" : "Triciptal (cm):",
+        "AXILAR.MEDIA" : "Axilar média (cm):",
+        "SUPRA.ILIACA" : "Supra ilíaca (cm):",
+        "PEITORAL" : "Peitoral (cm):",
+        "ABDOMINAL" : "Abdominal (cm):"
+    },
     "AVALIACAO.FISICA" : {
         "ESCOLHA.PROTOCOLO.TITLE" : "Escolha um protocolo",
         "POLLOCK" : "Protocolo de Pollock, 7 Dobras",
-        "GUEDES" :  "Protocolo de Guedes, 3 Dobras"
+        "GUEDES" :  "Protocolo de Guedes, 3 Dobras",
+        "SELECIONAR.PESSOA" : {
+            "TITLE": "Selecione uma pessoa",
+            "DIGITE.NOME" : "Digite um nome"
+        }
     },
     "BOTAO": {
         "CONFIRMAR": "Confirmar",
@@ -50,6 +100,9 @@
         "DESCRICAO": "Descrição: ",
         "EQUIPAMENTO": "Equipamento: ",
         "IMAGEM": "Imagem: "
+    },
+    "DOBRAS.CUTANEAS" : {
+        "TITLE" : "Dobras cutâneas"
     },
     "INICIAR.TREINO": {
         "TITLE": "Iniciar Treino",
