@@ -1,6 +1,6 @@
 import { Injectable } from '@angular/core';
 import { HttpServiceProvider } from '../http-service/http-service';
-import { AvaliacaoFisica, ProtocoloGuedes, ProtocoloPollock } from '../../../model/entities';
+import { AvaliacaoFisica, ProtocoloGuedes, ProtocoloPollock, AvaliacaoAntropometrica } from '../../../model/entities';
 
 /*
   Generated class for the AvaliacaoFisicaServiceProvider provider.
@@ -24,6 +24,12 @@ export class AvaliacaoFisicaServiceProvider {
       :
         new ProtocoloPollock()
     );
+
+    protocolo.dobrasCutaneas = {updated: null};
+    protocolo.indiceMassaCorporal = {updated: null};
+    protocolo.predicaoGorduraSiri = {updated: null};
+
+    AvaliacaoAntropometrica
 
     let avaliacao: AvaliacaoFisica = {
       avaliacaoAntropometrica: protocolo,

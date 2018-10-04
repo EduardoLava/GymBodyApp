@@ -6,7 +6,7 @@
 </ion-header>
 
 
-<ion-content padding>
+<ion-content>
   <ion-searchbar
     [(ngModel)]="pesquisaPessoa"
     placeholder="{{ 'AVALIACAO.FISICA.SELECIONAR.PESSOA.DIGITE.NOME' | translate }}"
@@ -14,8 +14,8 @@
     (ionInput)="listByFilters($event.target.value)">
   </ion-searchbar>
   <ion-list>
-    <ion-item *ngFor="let pessoa of pessoas;" (click)="proximaEtapa(pessoa)">
+    <button ion-item *ngFor="let pessoa of pessoas;" (click)="proximaEtapa(pessoa)">
       {{ pessoa?.nome }}
-    </ion-item>
+    </button>
   </ion-list>
 </ion-content>

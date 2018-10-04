@@ -54,8 +54,8 @@ export class AvaliacaoFisicaPerimetriaPage {
 
   ngOnInit(){
     this.formPerimetria = this.formBuilder.group({
-      pescoco: [this.avaliacaoFisica.perimetria.pescoco, Validators.min(0)],
-      torax: [this.avaliacaoFisica.perimetria.torax, Validators.min(0)],
+      pescoco: [this.avaliacaoFisica.perimetria.pescoco, Validators.compose([Validators.min(0), Validators.pattern('/^\d+.\d{1}$/')])],
+      torax: [this.avaliacaoFisica.perimetria.torax, Validators.compose([Validators.min(0), Validators.pattern('[-+]?([0-9]*\.[0-9]+|[0-9]+)')])],
       bracoDireitoRelaxado: [this.avaliacaoFisica.perimetria.bracoDireitoRelaxado, Validators.min(0)],
       bracoEsquerdoRelaxado: [this.avaliacaoFisica.perimetria.bracoEsquerdoRelaxado, Validators.min(0)],
       bracoDireitoContraido: [this.avaliacaoFisica.perimetria.bracoDireitoContraido, Validators.min(0)],
@@ -67,7 +67,7 @@ export class AvaliacaoFisicaPerimetriaPage {
       quadril: [this.avaliacaoFisica.perimetria.quadril, Validators.min(0)],
       coxaProximalDireita: [this.avaliacaoFisica.perimetria.coxaProximalDireita, Validators.min(0)],
       coxaProximalEsquerda: [this.avaliacaoFisica.perimetria.coxaProximalEsquerda, Validators.min(0)],
-      coxaMediaDireita: [this.avaliacaoFisica.perimetria.coxaMediaDireita, Validators.min(0)],
+      coxaMediaDireita: [this.avaliacaoFisica.perimetria.coxaMediaDireita, Validators.compose([Validators.min(0), Validators.pattern('/^\d+.\d{1}$/')])],
       coxaMediaEsquerda: [this.avaliacaoFisica.perimetria.coxaMediaEsquerda, Validators.min(0)],
       coxaDistalDireita: [this.avaliacaoFisica.perimetria.coxaDistalDireita, Validators.min(0)],
       coxaDistalEsquerda: [this.avaliacaoFisica.perimetria.coxaDistalEsquerda, Validators.min(0)],

@@ -25,6 +25,7 @@ export class AvaliacaoFisicaAnamnesePage {
   // ---------------------------------
 
   public avaliacaoFisica: AvaliacaoFisica;
+  public resposta: Resposta;
   public formAnamnese: FormGroup;
 
 
@@ -42,6 +43,8 @@ export class AvaliacaoFisicaAnamnesePage {
     private toast: ToastDefautController
   ) {
     
+    this.resposta = {};
+
     this.avaliacaoFisica = this.navParams.get('avaliacaoFisica');
     console.log('paramentros');
 
@@ -53,35 +56,47 @@ export class AvaliacaoFisicaAnamnesePage {
       return;
     }
 
+    this.resposta = this.avaliacaoFisica.resposta;
+
+    this.formAnamnese = this.formBuilder.group({  
+      objetivosAtividadeFisica: [
+        this.resposta.objetivosAtividadeFisica, 
+        Validators.compose([Validators.required, Validators.minLength(1)])
+      ],
+      praticaAtividade: [
+        this.resposta.praticaAtividade, 
+        Validators.compose([Validators.required, Validators.minLength(1)])
+      ],
+      medicamento: [
+        this.resposta.medicamento, 
+        Validators.compose([Validators.required, Validators.minLength(1)])
+      ],
+      cirurgia: [
+        this.resposta.cirurgia, 
+        Validators.compose([Validators.required, Validators.minLength(1)])
+      ],
+      doencaFamiliar: [
+        this.resposta.doencaFamiliar, 
+        Validators.compose([Validators.required, Validators.minLength(1)])
+      ],
+      observacao: [this.resposta.observacao]
+    });
+
   }
 
   /**
    * Inicializa form
    */
-  ngOnInit(){
-    let resposta: Resposta = this.avaliacaoFisica.resposta;
-
-    this.formAnamnese = this.formBuilder.group({  
-      objetivosAtividadeFisica: [resposta.objetivosAtividadeFisica, Validators.required],
-      praticaAtividade: [resposta.praticaAtividade, Validators.required],
-      medicamento: [resposta.medicamento, Validators.required],
-      cirurgia: [resposta.cirurgia, Validators.required],
-      doencaFamiliar: [resposta.doencaFamiliar, Validators.required],
-      observacao: [resposta.observacao]
-    });
-  }
-
-  /**
-   * Inicializa view
-   */
-  ionViewDidLoad() {
+  ionViewDidLoad(){
+    
   }
   
   /**
    * Avança etapa
    */
   priximaEtapa(){
-    console.log(this.avaliacaoFisica.resposta);
+    this.avaliacaoFisica.resposta = this.resposta;
+    console.log(this.formAnamnese);
     this.navCtrl.push(AvaliacaoFisicaPerimetriaPage.name, {
       avaliacaoFisica: this.avaliacaoFisica
     });

@@ -1,7 +1,7 @@
 import { Component } from '@angular/core';
 import { IonicPage, NavController, NavParams } from 'ionic-angular';
-import { FormBuilder, FormGroup } from '@angular/forms';
-import { AvaliacaoFisica } from '../../../model/entities';
+import { FormBuilder, FormGroup, Validators } from '@angular/forms';
+import { AvaliacaoFisica, ProtocoloGuedes } from '../../../model/entities';
 import { ToastDefautController } from '../../../utils/toast-default-contoller';
 
 /**
@@ -23,6 +23,7 @@ export class AvaliacaoFisicaDobrasCutaneasPage {
   // ------------------------------------
   public avaliacaoFisica: AvaliacaoFisica;
   public formDobras: FormGroup;
+  private isProtocoloGuedes: boolean = false;
 
 
   constructor(
@@ -38,16 +39,77 @@ export class AvaliacaoFisicaDobrasCutaneasPage {
       return null;
     }
 
+    if(this.avaliacaoFisica.avaliacaoAntropometrica instanceof ProtocoloGuedes){
+      this.isProtocoloGuedes = true;
+    }
+
   }
 
   ionViewDidLoad() {
   }
 
-
   ngOnInit(){
+    // assumindo como padrão o protocolo do Pollock
+    let dobrasCutaneas = this.avaliacaoFisica.avaliacaoAntropometrica.dobrasCutaneas;
+
+    console.log("dobras cutaneas "+dobrasCutaneas);
+
     this.formDobras = this.formBuilder.group({
-      
+      // abdominal, utilizado em ambos os protocolos
+      abdominal: [
+        dobrasCutaneas.abdominal,
+        Validators.compose([Validators.required, Validators.min(0)])
+      ],
+      axilarMedia: [
+        dobrasCutaneas.axilarMedia, 
+        (!this.isProtocoloGuedes?
+          Validators.compose([Validators.required, Validators.min(0)])
+        :
+          Validators.nullValidator
+        )
+      ],
+      bicital: [dobrasCutaneas.bicital],
+      coxa: [
+        dobrasCutaneas.coxa,
+        (!this.isProtocoloGuedes?
+          Validators.compose([Validators.required, Validators.min(0)])
+        :
+          Validators.nullValidator
+        )
+      ],
+      panturrilha: [dobrasCutaneas.panturrilha],
+      peitoral: [dobrasCutaneas.peitoral],
+      subescapular: [
+        dobrasCutaneas.subescapular, 
+        (!this.isProtocoloGuedes?
+          Validators.compose([Validators.required, Validators.min(0)])
+        :
+          Validators.nullValidator
+        )
+      ],
+      supraIliaca: [
+        dobrasCutaneas.supraIliaca,
+        (this.isProtocoloGuedes?
+          Validators.compose([Validators.required, Validators.min(0)])
+        :
+          Validators.nullValidator
+        )
+      ],
+      toracica: [
+        dobrasCutaneas.toracica, 
+        (!this.isProtocoloGuedes?
+            Validators.compose([Validators.required, Validators.min(0)])
+          :
+            Validators.nullValidator
+        )
+      ],
+      // triciptal utilizado em ambos os protocolos
+      tricipal: [
+        dobrasCutaneas.tricipal, 
+        Validators.compose([Validators.required, Validators.min(0)])
+      ],
     });
+
   }
 
 }

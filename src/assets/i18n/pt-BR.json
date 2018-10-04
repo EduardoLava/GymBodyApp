@@ -35,49 +35,50 @@
     },
     "PERIMETRIA" : {
         "TITLE": "Cadastro de perimetria",
-        "OMBRO" : "Ombro (cm):",
-        "PESCOCO" : "Pescoço (cm):",
-        "TORAX" : "Tórax (cm):",
+        "CM": "cm",
+        "OMBRO" : "Ombro:",
+        "PESCOCO" : "Pescoço:",
+        "TORAX" : "Tórax:",
         "BRACO" : {
             "DIREITO": {
-                "RELAXADO" : "Braço dir. relax. (cm):",
-                "CONTRAIDO" : "Braço dir. contr. (cm):"
+                "RELAXADO" : "Braço dir. relax.:",
+                "CONTRAIDO" : "Braço dir. contr.:"
             },
             "ESQUERDO" :{
-                "RELAXADO" : "Braço esq. relax. (cm):",
-                "CONTRAIDO" : "Braço esq. contr. (cm):"
+                "RELAXADO" : "Braço esq. relax.:",
+                "CONTRAIDO" : "Braço esq. contr.:"
             }
         },
         "ANTEBRACO" : {
-            "DIREITO" : "Antebraço dir. (cm):",
-            "ESQUERDO" : "Antebraço esq. (cm):"
+            "DIREITO" : "Antebraço dir.:",
+            "ESQUERDO" : "Antebraço esq.:"
         },
-        "CINTURA" : "Cintura (cm):",
-        "QUADRIL" : "Quadril (cm):",
+        "CINTURA" : "Cintura:",
+        "QUADRIL" : "Quadril:",
         "COXA" : {
             "PROXIMAL" : {
-                "DIREITA" : "Coxa prox. dir. (cm):",
-                "ESQUERDA" : "Coxa prox. esq. (cm):"
+                "DIREITA" : "Coxa prox. dir.:",
+                "ESQUERDA" : "Coxa prox. esq.:"
             },
             "MEDIA" : {
-                "DIREITA" : "Coxa média dir.: (cm)",
-                "ESQUERDA" : "Coxa média esq. (cm):"
+                "DIREITA" : "Coxa média dir.:",
+                "ESQUERDA" : "Coxa média esq.:"
             },
             "DISTAL" : {
-                "DIREITA" : "Coxa distal dir. (cm):",
-                "ESQUERDA" : "Coxa distal esq. (cm):"
+                "DIREITA" : "Coxa distal dir.:",
+                "ESQUERDA" : "Coxa distal esq.:"
             }
         },
         "PANTURRILHA" : {
-            "DIREITA" : "Panturrilha dir. (cm):",
-            "ESQUERDA" : "Panturrilha esq. (cm):"
+            "DIREITA" : "Panturrilha dir.:",
+            "ESQUERDA" : "Panturrilha esq.:"
         },
-        "BICIPTAL" : "Biciptal (cm):",
-        "TRICIPTAL" : "Triciptal (cm):",
-        "AXILAR.MEDIA" : "Axilar média (cm):",
-        "SUPRA.ILIACA" : "Supra ilíaca (cm):",
-        "PEITORAL" : "Peitoral (cm):",
-        "ABDOMINAL" : "Abdominal (cm):"
+        "BICIPTAL" : "Biciptal:",
+        "TRICIPTAL" : "Triciptal:",
+        "AXILAR.MEDIA" : "Axilar média:",
+        "SUPRA.ILIACA" : "Supra ilíaca:",
+        "PEITORAL" : "Peitoral:",
+        "ABDOMINAL" : "Abdominal:"
     },
     "AVALIACAO.FISICA" : {
         "ESCOLHA.PROTOCOLO.TITLE" : "Escolha um protocolo",
@@ -102,7 +103,20 @@
         "IMAGEM": "Imagem: "
     },
     "DOBRAS.CUTANEAS" : {
-        "TITLE" : "Dobras cutâneas"
+        "TITLE" : "Dobras cutâneas",
+        "ABDOMINAL" : "Abdominal (Obrig): ",
+        "AXILAR.MEDIA" : "Axilar média: ",
+        "BICITAL" : "Bicital: ",
+        "COXA" : "Coxa: ",
+        "PANTURRILHA" : "Pantirrilha: ",
+        "PEITORAL" : "Peitoral: ",
+        "SUBESCAPULAR" : "Subescapular: ",
+        "SUBESCAPULAR.OBRIG" : "Subescapular (Obrig): ",
+        "SUPRAILIACA": "Supra ilíaca: ",
+        "SUPRAILIACA.OBRIG": "Supra ilíaca (Obrig): ",
+        "TORACICA" : "Torácica: ",
+        "TORACICA.OBRIG" : "Torácica (Obrig): ",
+        "TRICIPAL" : "Trícipal (Obrig): "
     },
     "INICIAR.TREINO": {
         "TITLE": "Iniciar Treino",

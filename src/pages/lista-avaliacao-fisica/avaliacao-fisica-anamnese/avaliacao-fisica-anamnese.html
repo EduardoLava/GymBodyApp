@@ -7,91 +7,73 @@
 <ion-header>
 
   <ion-navbar>
+    <button ion-button menuToggle >
+      <ion-icon name="menu"></ion-icon>
+    </button>
     <ion-title>{{ "ANAMNESE.TITLE" | translate }}</ion-title>
   </ion-navbar>
 
 </ion-header>
 
-<ion-content padding>
-  <form [formGroup]="formAnamnese">
-    <ion-grid>
-      <ion-row>
-        <ion-col>
-          <h3 class="titulo"> {{ avaliacaoFisica?.pessoa?.nome }} </h3>
-        </ion-col>
-      </ion-row>
-      <ion-row>
-        <ion-col>
-          {{ "ANAMNESE.PERGUNTA1" | translate }}
-          <ion-item>
-            <ion-textarea 
-              [(ngModel)]="avaliacaoFisica.resposta.objetivosAtividadeFisica"
-              formControlName="objetivosAtividadeFisica"
-              placeholder=" {{'ANAMNESE.PERGUNTA1.PLACEHOLDER' | translate }}"></ion-textarea>
-          </ion-item>
-        </ion-col>
-      </ion-row>
-      <ion-row>
-        <ion-col>
-          {{ "ANAMNESE.PERGUNTA2" | translate }}
-          <ion-item>
-            <ion-textarea 
-              [(ngModel)]="avaliacaoFisica.resposta.praticaAtividade"
-              formControlName="praticaAtividade"
-              placeholder=" {{'ANAMNESE.PERGUNTA2.PLACEHOLDER' | translate }}"></ion-textarea>
-          </ion-item>
-        </ion-col>
-      </ion-row>
-      <ion-row>
-        <ion-col>
-          {{ "ANAMNESE.PERGUNTA3" | translate }}
-          <ion-item>
-            <ion-textarea 
-              [(ngModel)]="avaliacaoFisica.resposta.medicamento"
-              formControlName="medicamento"
-              placeholder=" {{'ANAMNESE.PERGUNTA3.PLACEHOLDER' | translate }}"></ion-textarea>
-          </ion-item>
-        </ion-col>
-      </ion-row>
-      <ion-row>
-        <ion-col>
-          {{ "ANAMNESE.PERGUNTA4" | translate }}
-          <ion-item>
-            <ion-textarea 
-              [(ngModel)]="avaliacaoFisica.resposta.cirurgia"
-              formControlName="cirurgia"
-              placeholder=" {{'ANAMNESE.PERGUNTA4.PLACEHOLDER' | translate }}"></ion-textarea>
-          </ion-item>
-        </ion-col>
-      </ion-row>
-      <ion-row>
-        <ion-col>
-          {{ "ANAMNESE.PERGUNTA5" | translate }}
-          <ion-item>
-            <ion-textarea 
-              [(ngModel)]="avaliacaoFisica.resposta.doencaFamiliar"
-              formControlName="doencaFamiliar"
-              placeholder=" {{'ANAMNESE.PERGUNTA5.PLACEHOLDER' | translate }}"></ion-textarea>
-          </ion-item>
-        </ion-col>
-      </ion-row>
-      <ion-row>
-        <ion-col>
-          {{ "ANAMNESE.PERGUNTA6" | translate }}
-          <ion-item>
-            <ion-textarea 
-              [(ngModel)]="avaliacaoFisica.resposta.observacao"
-              formControlName="observacao"
-              placeholder="{{'ANAMNESE.PERGUNTA6.PLACEHOLDER' | translate }}"></ion-textarea>
-          </ion-item>
-        </ion-col>
-      </ion-row>
-    </ion-grid>
+<ion-content>
+  <form [formGroup]="formAnamnese" (ngSubmit)="priximaEtapa()" #form="ngForm">
+    <ion-item>
+      <h3 class="titulo"> {{ avaliacaoFisica?.pessoa?.nome }} </h3>
+    </ion-item>
+    <ion-item>
+      <ion-label stacked>{{ "ANAMNESE.PERGUNTA1" | translate }}</ion-label>
+      <ion-textarea 
+        [ngModel]="resposta?.objetivosAtividadeFisica"
+        (ngModelChange)="resposta.objetivosAtividadeFisica = $event"
+        formControlName="objetivosAtividadeFisica"
+        placeholder=" {{'ANAMNESE.PERGUNTA1.PLACEHOLDER' | translate }}"></ion-textarea>
+    </ion-item>
+          
+    <ion-item>
+      <ion-label stacked>{{ "ANAMNESE.PERGUNTA2" | translate }}</ion-label>
+      <ion-textarea 
+        [ngModel]="resposta?.praticaAtividade"
+        (ngModelChange)="resposta.praticaAtividade = $event"
+        formControlName="praticaAtividade"
+        placeholder=" {{'ANAMNESE.PERGUNTA2.PLACEHOLDER' | translate }}"></ion-textarea>
+    </ion-item>
+    <ion-item>
+      <ion-label stacked>{{ "ANAMNESE.PERGUNTA3" | translate }}</ion-label>
+      <ion-textarea 
+        [ngModel]="resposta?.medicamento"
+        (ngModelChange)="resposta.medicamento = $event"
+        formControlName="medicamento"
+        placeholder=" {{'ANAMNESE.PERGUNTA3.PLACEHOLDER' | translate }}"></ion-textarea>
+    </ion-item>
+    <ion-item>
+      <ion-label stacked>{{ "ANAMNESE.PERGUNTA4" | translate }}</ion-label>
+      <ion-textarea 
+        [ngModel]="resposta?.cirurgia"
+        (ngModelChange)="resposta.cirurgia = $event"
+        formControlName="cirurgia"
+        placeholder=" {{'ANAMNESE.PERGUNTA4.PLACEHOLDER' | translate }}"></ion-textarea>
+    </ion-item>
+    <ion-item>
+      <ion-label stacked>{{ "ANAMNESE.PERGUNTA5" | translate }}</ion-label>
+      <ion-textarea 
+        [ngModel]="resposta?.doencaFamiliar"
+        (ngModelChange)="resposta.doencaFamiliar = $event"
+        formControlName="doencaFamiliar"
+        placeholder=" {{'ANAMNESE.PERGUNTA5.PLACEHOLDER' | translate }}"></ion-textarea>
+    </ion-item>
+    <ion-item>
+      <ion-label stacked>{{ "ANAMNESE.PERGUNTA6" | translate }}</ion-label>
+      <ion-textarea 
+        [ngModel]="resposta?.observacao"
+        (ngModelChange)="resposta.observacao = $event"
+        formControlName="observacao"
+        placeholder="{{'ANAMNESE.PERGUNTA6.PLACEHOLDER' | translate }}"></ion-textarea>
+    </ion-item>
   </form>
   <ion-fab bottom right>
     <button 
-      type="button" 
-      (click)="priximaEtapa()"
+      [disabled]="!formAnamnese.valid"
+      (click)="form.ngSubmit.emit()"
       ion-fab color="primary">
       <ion-icon name="arrow-round-forward"></ion-icon>
     </button>
