@@ -155,6 +155,7 @@ export class AvaliacaoAntropometrica {
     dobrasCutaneas?: DobrasCutaneas;
     indiceMassaCorporal?: IndiceMassaCorporal;
     predicaoGorduraSiri?: PredicaoGorduraSiri;
+    densidadeCorporal?: number;
     id?: number;
     created?: string;
     updated?: string;
@@ -274,6 +275,7 @@ export class DobrasCutaneas {
 export class IndiceMassaCorporal {
     altura?: number;
     peso?: number;
+    resultado?:number;
     id?: number;
     created?: string;
     updated?: string;

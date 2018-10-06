@@ -1,0 +1,41 @@
+page-avaliacao-fisica-imc {
+
+    .magreza-moderada {
+       color: map-get($colors, imc-magreza-moderada);
+    }
+
+    .magreza-grave {
+       color: map-get($colors, imc-magreza-grave);
+    }
+
+    .magreza-leve {
+       color: map-get($colors, imc-magreza-leve);
+    }
+
+    .saudavel {
+       color: map-get($colors, imc-saudavel);
+    }
+
+    .sobrepeso {
+       color: map-get($colors, imc-sobrepeso);
+    }
+
+    .obesidade-g1 {
+       color: map-get($colors, imc-obesidade-g1);
+    }
+
+    .obesidade-g2 {
+       color: map-get($colors, imc-obesidade-g2);
+    }
+
+    .obesidade-g3 {
+       color: map-get($colors, imc-obesidade-g3);
+    }
+
+    .texto-info {
+       color: map-get($colors, info);
+       padding-left: 10px;
+       padding-right: 10px;
+    }
+
+}

@@ -54,6 +54,7 @@ export class ListaTreinoPage implements NavLifecycles {
     .subscribe((treinosData: TreinoData[] ) =>{
       
       this.treinosData = treinosData;
+      console.log(this.treinosData);
 
     }, (error)=>{
       this.loading.loader.dismiss();

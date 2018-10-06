@@ -7,9 +7,9 @@
 <ion-header>
 
   <ion-navbar>
-    <button ion-button menuToggle >
+    <!-- <button ion-button menuToggle >
       <ion-icon name="menu"></ion-icon>
-    </button>
+    </button> -->
     <ion-title>{{ "ANAMNESE.TITLE" | translate }}</ion-title>
   </ion-navbar>
 
@@ -17,16 +17,18 @@
 
 <ion-content>
   <form [formGroup]="formAnamnese" (ngSubmit)="priximaEtapa()" #form="ngForm">
-    <ion-item>
+    <div>
+    <!-- <ion-item> -->
       <h3 class="titulo"> {{ avaliacaoFisica?.pessoa?.nome }} </h3>
-    </ion-item>
+    <!-- </ion-item> -->
+    </div>
     <ion-item>
       <ion-label stacked>{{ "ANAMNESE.PERGUNTA1" | translate }}</ion-label>
       <ion-textarea 
         [ngModel]="resposta?.objetivosAtividadeFisica"
         (ngModelChange)="resposta.objetivosAtividadeFisica = $event"
         formControlName="objetivosAtividadeFisica"
-        placeholder=" {{'ANAMNESE.PERGUNTA1.PLACEHOLDER' | translate }}"></ion-textarea>
+        placeholder="{{'ANAMNESE.PERGUNTA1.PLACEHOLDER' | translate }}"></ion-textarea>
     </ion-item>
           
     <ion-item>
@@ -35,7 +37,7 @@
         [ngModel]="resposta?.praticaAtividade"
         (ngModelChange)="resposta.praticaAtividade = $event"
         formControlName="praticaAtividade"
-        placeholder=" {{'ANAMNESE.PERGUNTA2.PLACEHOLDER' | translate }}"></ion-textarea>
+        placeholder="{{'ANAMNESE.PERGUNTA2.PLACEHOLDER' | translate }}"></ion-textarea>
     </ion-item>
     <ion-item>
       <ion-label stacked>{{ "ANAMNESE.PERGUNTA3" | translate }}</ion-label>
@@ -43,7 +45,7 @@
         [ngModel]="resposta?.medicamento"
         (ngModelChange)="resposta.medicamento = $event"
         formControlName="medicamento"
-        placeholder=" {{'ANAMNESE.PERGUNTA3.PLACEHOLDER' | translate }}"></ion-textarea>
+        placeholder="{{'ANAMNESE.PERGUNTA3.PLACEHOLDER' | translate }}"></ion-textarea>
     </ion-item>
     <ion-item>
       <ion-label stacked>{{ "ANAMNESE.PERGUNTA4" | translate }}</ion-label>
@@ -51,7 +53,7 @@
         [ngModel]="resposta?.cirurgia"
         (ngModelChange)="resposta.cirurgia = $event"
         formControlName="cirurgia"
-        placeholder=" {{'ANAMNESE.PERGUNTA4.PLACEHOLDER' | translate }}"></ion-textarea>
+        placeholder="{{'ANAMNESE.PERGUNTA4.PLACEHOLDER' | translate }}"></ion-textarea>
     </ion-item>
     <ion-item>
       <ion-label stacked>{{ "ANAMNESE.PERGUNTA5" | translate }}</ion-label>
@@ -59,7 +61,7 @@
         [ngModel]="resposta?.doencaFamiliar"
         (ngModelChange)="resposta.doencaFamiliar = $event"
         formControlName="doencaFamiliar"
-        placeholder=" {{'ANAMNESE.PERGUNTA5.PLACEHOLDER' | translate }}"></ion-textarea>
+        placeholder="{{'ANAMNESE.PERGUNTA5.PLACEHOLDER' | translate }}"></ion-textarea>
     </ion-item>
     <ion-item>
       <ion-label stacked>{{ "ANAMNESE.PERGUNTA6" | translate }}</ion-label>

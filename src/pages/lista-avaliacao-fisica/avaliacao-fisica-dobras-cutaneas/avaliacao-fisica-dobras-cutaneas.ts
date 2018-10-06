@@ -1,8 +1,9 @@
 import { Component } from '@angular/core';
 import { IonicPage, NavController, NavParams } from 'ionic-angular';
 import { FormBuilder, FormGroup, Validators } from '@angular/forms';
-import { AvaliacaoFisica, ProtocoloGuedes } from '../../../model/entities';
+import { AvaliacaoFisica, ProtocoloGuedes, DobrasCutaneas } from '../../../model/entities';
 import { ToastDefautController } from '../../../utils/toast-default-contoller';
+import { AvaliacaoFisicaImcPage } from '../avaliacao-fisica-imc/avaliacao-fisica-imc';
 
 /**
  * Generated class for the AvaliacaoFisicaDobrasCutaneasPage page.
@@ -24,6 +25,7 @@ export class AvaliacaoFisicaDobrasCutaneasPage {
   public avaliacaoFisica: AvaliacaoFisica;
   public formDobras: FormGroup;
   private isProtocoloGuedes: boolean = false;
+  private dobrasCutaneas: DobrasCutaneas;
 
 
   constructor(
@@ -34,7 +36,11 @@ export class AvaliacaoFisicaDobrasCutaneasPage {
   ) {
     this.avaliacaoFisica = this.navParams.get('avaliacaoFisica');
 
-    if(!this.avaliacaoFisica) {
+    if(
+        !this.avaliacaoFisica 
+        || !this.avaliacaoFisica.avaliacaoAntropometrica
+        || !this.avaliacaoFisica.avaliacaoAntropometrica.dobrasCutaneas
+    ) {
       this.toast.create('Ocorre um erro ao se comunicar com o servidor');
       return null;
     }
@@ -50,37 +56,37 @@ export class AvaliacaoFisicaDobrasCutaneasPage {
 
   ngOnInit(){
     // assumindo como padrão o protocolo do Pollock
-    let dobrasCutaneas = this.avaliacaoFisica.avaliacaoAntropometrica.dobrasCutaneas;
+    this.dobrasCutaneas = this.avaliacaoFisica.avaliacaoAntropometrica.dobrasCutaneas;
 
-    console.log("dobras cutaneas "+dobrasCutaneas);
+    console.log("dobras cutaneas "+this.dobrasCutaneas);
 
     this.formDobras = this.formBuilder.group({
       // abdominal, utilizado em ambos os protocolos
       abdominal: [
-        dobrasCutaneas.abdominal,
+        this.dobrasCutaneas.abdominal,
         Validators.compose([Validators.required, Validators.min(0)])
       ],
       axilarMedia: [
-        dobrasCutaneas.axilarMedia, 
+        this.dobrasCutaneas.axilarMedia, 
         (!this.isProtocoloGuedes?
           Validators.compose([Validators.required, Validators.min(0)])
         :
           Validators.nullValidator
         )
       ],
-      bicital: [dobrasCutaneas.bicital],
+      bicital: [this.dobrasCutaneas.bicital],
       coxa: [
-        dobrasCutaneas.coxa,
+        this.dobrasCutaneas.coxa,
         (!this.isProtocoloGuedes?
           Validators.compose([Validators.required, Validators.min(0)])
         :
           Validators.nullValidator
         )
       ],
-      panturrilha: [dobrasCutaneas.panturrilha],
-      peitoral: [dobrasCutaneas.peitoral],
+      panturrilha: [this.dobrasCutaneas.panturrilha],
+      peitoral: [this.dobrasCutaneas.peitoral],
       subescapular: [
-        dobrasCutaneas.subescapular, 
+        this.dobrasCutaneas.subescapular, 
         (!this.isProtocoloGuedes?
           Validators.compose([Validators.required, Validators.min(0)])
         :
@@ -88,7 +94,7 @@ export class AvaliacaoFisicaDobrasCutaneasPage {
         )
       ],
       supraIliaca: [
-        dobrasCutaneas.supraIliaca,
+        this.dobrasCutaneas.supraIliaca,
         (this.isProtocoloGuedes?
           Validators.compose([Validators.required, Validators.min(0)])
         :
@@ -96,7 +102,7 @@ export class AvaliacaoFisicaDobrasCutaneasPage {
         )
       ],
       toracica: [
-        dobrasCutaneas.toracica, 
+        this.dobrasCutaneas.toracica, 
         (!this.isProtocoloGuedes?
             Validators.compose([Validators.required, Validators.min(0)])
           :
@@ -105,11 +111,24 @@ export class AvaliacaoFisicaDobrasCutaneasPage {
       ],
       // triciptal utilizado em ambos os protocolos
       tricipal: [
-        dobrasCutaneas.tricipal, 
+        this.dobrasCutaneas.tricipal, 
         Validators.compose([Validators.required, Validators.min(0)])
       ],
     });
 
   }
+
+  /**
+   * Avança etapa
+   */
+  proximaEtapa(){
+    console.log('dobras proximo, ir pra imc');
+    this.avaliacaoFisica.avaliacaoAntropometrica.dobrasCutaneas = this.dobrasCutaneas;
+    console.log(this.formDobras);
+    this.navCtrl.push(AvaliacaoFisicaImcPage.name, {
+      avaliacaoFisica: this.avaliacaoFisica
+    });
+  }
+
 
 }

@@ -48,9 +48,7 @@ export class AvaliacaoFisicaAnamnesePage {
     this.avaliacaoFisica = this.navParams.get('avaliacaoFisica');
     console.log('paramentros');
 
-    console.log(this.avaliacaoFisica)
-
-    if(this.avaliacaoFisica == null) {
+    if(this.avaliacaoFisica == null || this.avaliacaoFisica.resposta == null) {
       this.toast.create('Ocorreu um erro ao iniciar a avaliação fisica');
       this.navCtrl.pop();
       return;

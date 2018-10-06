@@ -1,6 +1,7 @@
 import { Injectable } from '@angular/core';
 import { HttpServiceProvider } from '../http-service/http-service';
 import { AvaliacaoFisica, ProtocoloGuedes, ProtocoloPollock, AvaliacaoAntropometrica } from '../../../model/entities';
+import { Observable } from 'rxjs';
 
 /*
   Generated class for the AvaliacaoFisicaServiceProvider provider.
@@ -27,9 +28,8 @@ export class AvaliacaoFisicaServiceProvider {
 
     protocolo.dobrasCutaneas = {updated: null};
     protocolo.indiceMassaCorporal = {updated: null};
-    protocolo.predicaoGorduraSiri = {updated: null};
+    protocolo.predicaoGorduraSiri = {updated: null, densidadeCorporal: 1, gordura: 10};
 
-    AvaliacaoAntropometrica
 
     let avaliacao: AvaliacaoFisica = {
       avaliacaoAntropometrica: protocolo,
@@ -39,6 +39,21 @@ export class AvaliacaoFisicaServiceProvider {
     }
 
     return avaliacao;
+    
+  }
+
+  /**
+   * 
+   * Salva uma avaliacao fisica no servidor 
+   * 
+   * @param avaliacaoFisica 
+   */
+  salvarAvaliacaoFisica(avaliacaoFisica: AvaliacaoFisica) : Observable<AvaliacaoFisica>{
+    
+    return this.http.post(
+      '/api/avaliacao-fisica', 
+      avaliacaoFisica
+    );
     
   }
 

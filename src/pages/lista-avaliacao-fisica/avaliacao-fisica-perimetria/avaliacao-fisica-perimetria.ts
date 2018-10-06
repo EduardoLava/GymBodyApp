@@ -41,7 +41,7 @@ export class AvaliacaoFisicaPerimetriaPage {
   ) {
     this.avaliacaoFisica = navParams.get('avaliacaoFisica');
 
-    if(!this.avaliacaoFisica){
+    if(!this.avaliacaoFisica || !this.avaliacaoFisica.perimetria){
       this.toast.create('Ocorreu um erro ao ir para a etapa de permitria');
       this.navCtrl.setRoot(HomePage.name);
       return;
@@ -54,26 +54,141 @@ export class AvaliacaoFisicaPerimetriaPage {
 
   ngOnInit(){
     this.formPerimetria = this.formBuilder.group({
-      pescoco: [this.avaliacaoFisica.perimetria.pescoco, Validators.compose([Validators.min(0), Validators.pattern('/^\d+.\d{1}$/')])],
-      torax: [this.avaliacaoFisica.perimetria.torax, Validators.compose([Validators.min(0), Validators.pattern('[-+]?([0-9]*\.[0-9]+|[0-9]+)')])],
-      bracoDireitoRelaxado: [this.avaliacaoFisica.perimetria.bracoDireitoRelaxado, Validators.min(0)],
-      bracoEsquerdoRelaxado: [this.avaliacaoFisica.perimetria.bracoEsquerdoRelaxado, Validators.min(0)],
-      bracoDireitoContraido: [this.avaliacaoFisica.perimetria.bracoDireitoContraido, Validators.min(0)],
-      bracoEsquerdoContraido: [this.avaliacaoFisica.perimetria.bracoEsquerdoContraido, Validators.min(0)],
-      antebracoDireito: [this.avaliacaoFisica.perimetria.antebracoDireito, Validators.min(0)],
-      antebracoEsquerdo: [this.avaliacaoFisica.perimetria.antebracoEsquerdo, Validators.min(0)],
-      cintura: [this.avaliacaoFisica.perimetria.cintura, Validators.min(0)],
-      abdomen: [this.avaliacaoFisica.perimetria.abdomen, Validators.min(0)],
-      quadril: [this.avaliacaoFisica.perimetria.quadril, Validators.min(0)],
-      coxaProximalDireita: [this.avaliacaoFisica.perimetria.coxaProximalDireita, Validators.min(0)],
-      coxaProximalEsquerda: [this.avaliacaoFisica.perimetria.coxaProximalEsquerda, Validators.min(0)],
-      coxaMediaDireita: [this.avaliacaoFisica.perimetria.coxaMediaDireita, Validators.compose([Validators.min(0), Validators.pattern('/^\d+.\d{1}$/')])],
-      coxaMediaEsquerda: [this.avaliacaoFisica.perimetria.coxaMediaEsquerda, Validators.min(0)],
-      coxaDistalDireita: [this.avaliacaoFisica.perimetria.coxaDistalDireita, Validators.min(0)],
-      coxaDistalEsquerda: [this.avaliacaoFisica.perimetria.coxaDistalEsquerda, Validators.min(0)],
-      panturrilhaDireita: [this.avaliacaoFisica.perimetria.panturrilhaDireita, Validators.min(0)],
-      panturrilhaEsquerda: [this.avaliacaoFisica.perimetria.panturrilhaEsquerda, Validators.min(0)],
+      pescoco: [
+        this.avaliacaoFisica.perimetria.pescoco, 
+        Validators.compose([
+          Validators.min(0), 
+          Validators.pattern('[-+]?([0-9]*\.[0-9]+|[0-9]+)')
+        ])
+      ],
+      torax: [
+        this.avaliacaoFisica.perimetria.torax, 
+        Validators.compose([
+          Validators.min(0), 
+          Validators.pattern('[-+]?([0-9]*\.[0-9]+|[0-9]+)')
+        ])
+      ],
+      bracoDireitoRelaxado: [
+        this.avaliacaoFisica.perimetria.bracoDireitoRelaxado, 
+        Validators.compose([
+          Validators.min(0), 
+          Validators.pattern('[-+]?([0-9]*\.[0-9]+|[0-9]+)')
+        ])
+      ],
+      bracoEsquerdoRelaxado: [
+        this.avaliacaoFisica.perimetria.bracoEsquerdoRelaxado, 
+        Validators.compose([
+          Validators.min(0), 
+          Validators.pattern('[-+]?([0-9]*\.[0-9]+|[0-9]+)')
+        ])
+      ],
+      bracoDireitoContraido: [
+        this.avaliacaoFisica.perimetria.bracoDireitoContraido, 
+        Validators.compose([
+          Validators.min(0), 
+          Validators.pattern('[-+]?([0-9]*\.[0-9]+|[0-9]+)')
+        ])
+      ],
+      bracoEsquerdoContraido: [
+        this.avaliacaoFisica.perimetria.bracoEsquerdoContraido, 
+        Validators.compose([
+          Validators.min(0), 
+          Validators.pattern('[-+]?([0-9]*\.[0-9]+|[0-9]+)')
+        ])
+      ],
+      antebracoDireito: [
+        this.avaliacaoFisica.perimetria.antebracoDireito, 
+        Validators.compose([
+          Validators.min(0), 
+          Validators.pattern('[-+]?([0-9]*\.[0-9]+|[0-9]+)')
+        ])
+      ],
+      antebracoEsquerdo: [
+        this.avaliacaoFisica.perimetria.antebracoEsquerdo, 
+        Validators.compose([
+          Validators.min(0), 
+          Validators.pattern('[-+]?([0-9]*\.[0-9]+|[0-9]+)')
+        ])
+      ],
+      cintura: [
+        this.avaliacaoFisica.perimetria.cintura, 
+        Validators.compose([
+          Validators.min(0), 
+          Validators.pattern('[-+]?([0-9]*\.[0-9]+|[0-9]+)')
+        ])
+      ],
+      abdomen: [
+        this.avaliacaoFisica.perimetria.abdomen, 
+        Validators.compose([
+          Validators.min(0), 
+          Validators.pattern('[-+]?([0-9]*\.[0-9]+|[0-9]+)')
+        ])
+      ],
+      quadril: [
+        this.avaliacaoFisica.perimetria.quadril, 
+        Validators.compose([
+          Validators.min(0), 
+          Validators.pattern('[-+]?([0-9]*\.[0-9]+|[0-9]+)')
+        ])
+      ],
+      coxaProximalDireita: [
+        this.avaliacaoFisica.perimetria.coxaProximalDireita, 
+        Validators.compose([
+          Validators.min(0), 
+          Validators.pattern('[-+]?([0-9]*\.[0-9]+|[0-9]+)')
+        ])
+      ],
+      coxaProximalEsquerda: [
+        this.avaliacaoFisica.perimetria.coxaProximalEsquerda, 
+        Validators.compose([
+          Validators.min(0), 
+          Validators.pattern('[-+]?([0-9]*\.[0-9]+|[0-9]+)')
+        ])
+      ],
+      coxaMediaDireita: [
+        this.avaliacaoFisica.perimetria.coxaMediaDireita, 
+        Validators.compose([
+          Validators.min(0), 
+          Validators.pattern('[-+]?([0-9]*\.[0-9]+|[0-9]+)')
+        ])
+      ],
+      coxaMediaEsquerda: [
+        this.avaliacaoFisica.perimetria.coxaMediaEsquerda, 
+        Validators.compose([
+          Validators.min(0), 
+          Validators.pattern('[-+]?([0-9]*\.[0-9]+|[0-9]+)')
+        ])
+      ],
+      coxaDistalDireita: [
+        this.avaliacaoFisica.perimetria.coxaDistalDireita, 
+        Validators.compose([
+          Validators.min(0), 
+          Validators.pattern('[-+]?([0-9]*\.[0-9]+|[0-9]+)')
+        ])
+      ],
+      coxaDistalEsquerda: [
+        this.avaliacaoFisica.perimetria.coxaDistalEsquerda, 
+        Validators.compose([
+          Validators.min(0), 
+          Validators.pattern('[-+]?([0-9]*\.[0-9]+|[0-9]+)')
+        ])
+      ],
+      panturrilhaDireita: [
+        this.avaliacaoFisica.perimetria.panturrilhaDireita, 
+        Validators.compose([
+          Validators.min(0), 
+          Validators.pattern('[-+]?([0-9]*\.[0-9]+|[0-9]+)')
+        ])
+      ],
+      panturrilhaEsquerda: [
+        this.avaliacaoFisica.perimetria.panturrilhaEsquerda, 
+        Validators.compose([
+          Validators.min(0), 
+          Validators.pattern('[-+]?([0-9]*\.[0-9]+|[0-9]+)')
+        ])
+      ],
     });
+
   }
 
   priximaEtapa(){

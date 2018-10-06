@@ -1,0 +1,46 @@
+
+<ion-header>
+
+  <ion-navbar>
+    <ion-title>{{"IMC.TITLE" | translate}}</ion-title>
+  </ion-navbar>
+
+</ion-header>
+
+<ion-content no-padding>
+  <form  [formGroup]="formImc" (ngSubmit)="calcularImc()">
+    <ion-item>
+      <ion-label stacked >
+        {{"IMC.PESO" | translate}}
+      </ion-label>
+      <ion-input 
+        (keyup)="calcularImc()"
+        type="number"
+        [(ngModel)]="imc.peso" 
+        formControlName="peso"></ion-input>
+    </ion-item>
+    <ion-item>
+      <ion-label for="altura" stacked>
+        {{"IMC.ALTURA" | translate}}
+      </ion-label>
+      <ion-input 
+        id="altura"
+        (keyup)="calcularImc()"
+        type="number"
+        [(ngModel)]="imc.altura" 
+        formControlName="altura"></ion-input>
+    </ion-item>
+    <h3 text-center *ngIf="textoResultado" [ngClass]="corResultado">
+      {{"IMC.RESULTADO" | translate}}{{imc.resultado}}
+    </h3>
+    <h4 text-center *ngIf="!textoResultado" ngClass="texto-info">
+      Preencha os campos para gerar o resultado
+    </h4>
+    <h4 text-center [ngClass]="corResultado" *ngIf="textoResultado">
+      {{textoResultado}}!
+    </h4>
+  </form>
+  <div text-center>
+    <button ion-button type="button" large>Finalizar avaliação física</button>
+  </div>
+</ion-content>

@@ -35,7 +35,7 @@
     },
     "PERIMETRIA" : {
         "TITLE": "Cadastro de perimetria",
-        "CM": "cm",
+        "CM": "cm.",
         "OMBRO" : "Ombro:",
         "PESCOCO" : "Pescoço:",
         "TORAX" : "Tórax:",
@@ -116,7 +116,14 @@
         "SUPRAILIACA.OBRIG": "Supra ilíaca (Obrig): ",
         "TORACICA" : "Torácica: ",
         "TORACICA.OBRIG" : "Torácica (Obrig): ",
-        "TRICIPAL" : "Trícipal (Obrig): "
+        "TRICIPAL" : "Trícipal (Obrig): ",
+        "MM" : "mm."
+    },
+    "IMC" : {
+        "TITLE" : "Cálculo do IMC",
+        "PESO" : "Peso (Kg): ",
+        "ALTURA" : "Altura (cm): ",
+        "RESULTADO": "Resultado: "
     },
     "INICIAR.TREINO": {
         "TITLE": "Iniciar Treino",
