@@ -1,7 +1,8 @@
 import { Injectable } from '@angular/core';
 import { HttpServiceProvider } from '../http-service/http-service';
-import { AvaliacaoFisica, ProtocoloGuedes, ProtocoloPollock, AvaliacaoAntropometrica } from '../../../model/entities';
+import { AvaliacaoFisica, AvaliacaoAntropometrica, TipoProtocolo } from '../../../model/entities';
 import { Observable } from 'rxjs';
+import { DatePipe } from '@angular/common';
 
 /*
   Generated class for the AvaliacaoFisicaServiceProvider provider.
@@ -12,19 +13,18 @@ import { Observable } from 'rxjs';
 @Injectable()
 export class AvaliacaoFisicaServiceProvider {
 
-  constructor(public http: HttpServiceProvider) {
+  constructor(
+    public http: HttpServiceProvider,
+    private datePipe: DatePipe
+  ) {
   }
 
 
-  criaAvaliacaoFisica(protocoloSelecionado: string) : AvaliacaoFisica{
+  criaAvaliacaoFisica(protocoloSelecionado: TipoProtocolo) : AvaliacaoFisica{
 
 
-    let protocolo = (
-      protocoloSelecionado == 'GUEDES'?
-        new ProtocoloGuedes()
-      :
-        new ProtocoloPollock()
-    );
+    let protocolo: AvaliacaoAntropometrica = {};
+    protocolo.tipoProtocolo = protocoloSelecionado;
 
     protocolo.dobrasCutaneas = {updated: null};
     protocolo.indiceMassaCorporal = {updated: null};
@@ -35,7 +35,8 @@ export class AvaliacaoFisicaServiceProvider {
       avaliacaoAntropometrica: protocolo,
       pessoa: {nome:''},
       perimetria: {cintura: null},
-      resposta: {doencaFamiliar: ''}
+      resposta: {doencaFamiliar: ''},
+      data: new Date()
     }
 
     return avaliacao;
@@ -55,6 +56,39 @@ export class AvaliacaoFisicaServiceProvider {
       avaliacaoFisica
     );
     
+  }
+
+  listaAvaliacoesFisicasByPessoaId(idPessoa: number){
+    return this.http.get(idPessoa+"/pessoa-id");
+  }
+
+  listAvaliacaoFisicaByFilters(filters: string, dataInicio: Date, dataFim: Date){
+
+    
+
+    if(filters == null || filters == ''){
+      filters = ' ';
+    }else {
+      filters = '/'+filters;
+    }
+
+    let dataInicioFormatada = '';
+    if(dataInicio){
+      dataInicioFormatada = this.datePipe.transform(dataInicio, "yyyy-MM-dd");
+      console.log(dataInicioFormatada);
+      dataInicioFormatada = '/'+dataInicioFormatada+'/inicio';
+    }
+
+    let dataFimFormatada = '';
+    if(dataFim){
+      dataFimFormatada = this.datePipe.transform(dataFim, "yyyy-MM-dd");
+      dataFimFormatada  = '/'+dataFimFormatada+'/fim'
+    }
+
+    return this.http.get('/api/avaliacao-fisica/by-filters/ /inicio/'
+      +this.datePipe.transform(dataInicio, "yyyy-MM-dd")+
+      '/fim/'+this.datePipe.transform(dataFim, "yyyy-MM-dd")+'/')
+    // return this.http.get('/api/avaliacao-fisica/'+filters+'/by-filters'+dataInicioFormatada+dataFimFormatada);
   }
 
 }

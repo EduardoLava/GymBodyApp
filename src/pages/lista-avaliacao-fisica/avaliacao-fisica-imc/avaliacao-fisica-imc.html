@@ -8,7 +8,7 @@
 </ion-header>
 
 <ion-content no-padding>
-  <form  [formGroup]="formImc" (ngSubmit)="calcularImc()">
+  <form  [formGroup]="formImc" (ngSubmit)="calcularImc()" #form="ngForm">
     <ion-item>
       <ion-label stacked >
         {{"IMC.PESO" | translate}}
@@ -41,6 +41,10 @@
     </h4>
   </form>
   <div text-center>
-    <button ion-button type="button" large>Finalizar avaliação física</button>
+    <button 
+      [disabled]="!formImc.valid"
+      ion-button 
+      (click)="salvar()"
+      large>Finalizar avaliação física</button>
   </div>
 </ion-content>

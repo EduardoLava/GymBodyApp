@@ -77,7 +77,10 @@ export class AvaliacaoFisicaAnamnesePage {
         this.resposta.doencaFamiliar, 
         Validators.compose([Validators.required, Validators.minLength(1)])
       ],
-      observacao: [this.resposta.observacao]
+      observacao: [
+        this.resposta.observacao,
+        Validators.compose([Validators.required, Validators.minLength(1)])
+      ]
     });
 
   }

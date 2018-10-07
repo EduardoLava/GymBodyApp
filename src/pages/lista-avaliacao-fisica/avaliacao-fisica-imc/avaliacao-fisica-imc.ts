@@ -4,6 +4,8 @@ import { FormGroup, FormBuilder, Validators } from '@angular/forms';
 import { AvaliacaoFisica, IndiceMassaCorporal } from '../../../model/entities';
 import { ToastDefautController } from '../../../utils/toast-default-contoller';
 import { HomePage } from '../../home/home';
+import { AvaliacaoFisicaServiceProvider } from '../../../providers/services/avaliacao-fisica-service/avaliacao-fisica-service';
+import { ListaAvaliacaoFisicaPage } from '../lista-avaliacao-fisica';
 
 /**
  * Generated class for the AvaliacaoFisicaImcPage page.
@@ -33,7 +35,8 @@ export class AvaliacaoFisicaImcPage {
     public navCtrl: NavController,
     public navParams: NavParams,
     private formBuilder: FormBuilder,
-    private toast: ToastDefautController
+    private toast: ToastDefautController,
+    private avaliacaoFisicaService: AvaliacaoFisicaServiceProvider,
   ) {
     this.avaliacaoAvaiacaoFisica = this.navParams.get('avaliacaoFisica');
 
@@ -139,6 +142,23 @@ export class AvaliacaoFisicaImcPage {
       this.textoResultado = "Obesidade Grau III (mórbida)";
       this.corResultado = "obesidade-g3";
     }
+
+  }
+
+  salvar(){
+    this.avaliacaoAvaiacaoFisica.avaliacaoAntropometrica.indiceMassaCorporal = this.imc;
+
+    console.log(typeof this.avaliacaoAvaiacaoFisica.avaliacaoAntropometrica);
+
+    console.log('save');
+    this.avaliacaoFisicaService.salvarAvaliacaoFisica(this.avaliacaoAvaiacaoFisica)
+    .subscribe((avaliacao: AvaliacaoFisica) =>{
+      this.avaliacaoAvaiacaoFisica = avaliacao;
+      this.toast.create("Avaliacação física salva com sucesso!").present();
+      this.navCtrl.setRoot(ListaAvaliacaoFisicaPage.name);
+    }, (error) =>{
+      this.toast.create(error.message).present();
+    });
 
   }
 

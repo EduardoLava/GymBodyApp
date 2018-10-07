@@ -49,6 +49,8 @@ import { YoutubeUrlServiceProvider } from '../providers/youtube-url-service/yout
 import { TimeUtilProvider } from '../providers/time-util/time-util';
 import { AvaliacaoFisicaServiceProvider } from '../providers/services/avaliacao-fisica-service/avaliacao-fisica-service';
 
+import { CalendarModule } from "ion2-calendar";
+
 // import {} from 
 // FIM JWT
 
@@ -85,7 +87,8 @@ export function jwtOptionsFactory(storage: Storage) {
         deps: [Storage]
       }
     }),
-    IonicModule.forRoot(MyApp)
+    IonicModule.forRoot(MyApp),
+    CalendarModule
   ],
   bootstrap: [IonicApp],
   entryComponents: [

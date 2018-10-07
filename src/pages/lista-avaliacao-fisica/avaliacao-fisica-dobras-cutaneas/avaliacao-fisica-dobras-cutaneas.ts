@@ -1,7 +1,7 @@
 import { Component } from '@angular/core';
 import { IonicPage, NavController, NavParams } from 'ionic-angular';
 import { FormBuilder, FormGroup, Validators } from '@angular/forms';
-import { AvaliacaoFisica, ProtocoloGuedes, DobrasCutaneas } from '../../../model/entities';
+import { AvaliacaoFisica, DobrasCutaneas } from '../../../model/entities';
 import { ToastDefautController } from '../../../utils/toast-default-contoller';
 import { AvaliacaoFisicaImcPage } from '../avaliacao-fisica-imc/avaliacao-fisica-imc';
 
@@ -44,11 +44,6 @@ export class AvaliacaoFisicaDobrasCutaneasPage {
       this.toast.create('Ocorre um erro ao se comunicar com o servidor');
       return null;
     }
-
-    if(this.avaliacaoFisica.avaliacaoAntropometrica instanceof ProtocoloGuedes){
-      this.isProtocoloGuedes = true;
-    }
-
   }
 
   ionViewDidLoad() {

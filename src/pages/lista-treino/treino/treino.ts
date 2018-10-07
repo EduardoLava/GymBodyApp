@@ -133,7 +133,7 @@ export class TreinoPage implements NavLifecycles{
             
             treinoExercicio.treino = null;
 
-            let exercicioNovo = new ExercicioRealizado(treinoExercicio, null);
+            let exercicioNovo = {treinoExercicio: treinoExercicio }
 
             this.treinoData.exerciciosRealizados.push(exercicioNovo);
 

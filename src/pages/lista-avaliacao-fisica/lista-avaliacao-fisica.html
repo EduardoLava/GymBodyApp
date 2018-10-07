@@ -14,14 +14,14 @@
 
 </ion-header>
 
+<!-- https://github.com/HsuanXyz/ion2-calendar -->
+<ion-content no-padding>
 
-<ion-content padding>
+  <button ion-button (click)="openCalendar()">Calendario</button>
+
   <ion-list>
-    <ion-item>
-      aqui terá uma avaliação fisica já realizada
-    </ion-item>
-    <ion-item>
-      aqui terá outra
+    <ion-item *ngFor="let avaliacaoFisica of avaliacoesFisicas;">
+      {{ avaliacaoFisica.data }}
     </ion-item>
   </ion-list>
   <ion-fab bottom right >
