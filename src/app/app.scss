@@ -15,6 +15,25 @@
 // for the .md, .ios, or .wp mode classes. The mode class is
 // automatically applied to the <body> element in the app.
 
-@import "../theme/icons"
+@import "../theme/icons";
 
 
+.center{
+    position: absolute;
+    margin: auto;
+    top: 0;
+    right: 0;
+    bottom: 0;
+    left: 0;
+    width: 500px;
+    height: 200px;
+}
+
+.imagem img {
+    width: 100px !important;
+    height: 100px !important;
+}
+
+.app-title{
+    font-weight: bold !important;
+}

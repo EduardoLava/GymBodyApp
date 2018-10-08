@@ -6,14 +6,18 @@
 -->
 <ion-header>
 
-  <ion-navbar>
-    <ion-title>pause-modal</ion-title>
+  <ion-navbar color="primary">
+    <ion-title>
+      {{"MODAL.PAUSE.TITLE" | translate}}
+    </ion-title>
   </ion-navbar>
 
 </ion-header>
 
 <ion-content no-padding>
+  <div class="center">
     <ion-fab>
-      <button class="fab" ion-fab color="primary" (click)="continuar()">Continuar</button>
+      <button class="fab" ion-fab color="primary" (click)="continuar()">{{"MODAL.PAUSE.CONTINUAR" | translate}}</button>
     </ion-fab>
+  </div>
 </ion-content>

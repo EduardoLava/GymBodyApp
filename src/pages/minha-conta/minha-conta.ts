@@ -63,6 +63,7 @@ export class MinhaContaPage implements OnInit{
     this.pessoaService.obtemPessoaLogada()
     .finally(()=> this.loading.loader.dismiss())
     .subscribe((pessoa:Pessoa) => {
+      console.log(pessoa);
       this.pessoa = pessoa;
     }, (erro: Error)=>{
       console.log(erro);

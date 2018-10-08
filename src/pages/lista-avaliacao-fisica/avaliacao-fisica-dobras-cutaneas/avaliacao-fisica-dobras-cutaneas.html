@@ -1,0 +1,121 @@
+
+<ion-header>
+
+  <ion-navbar color="primary">
+    <ion-title>{{"DOBRAS.CUTANEAS.TITLE" | translate}}</ion-title>
+  </ion-navbar>
+
+</ion-header>
+
+<ion-content>
+  <form [formGroup]="formDobras" (ngSubmit)="proximaEtapa()" #form="ngForm">
+    <ion-item>
+      <ion-label>{{"DOBRAS.CUTANEAS.ABDOMINAL" | translate }}</ion-label>
+      <ion-input 
+        disabled="{{readOnly}}"
+        placeholder="{{'DOBRAS.CUTANEAS.OBRIGATORIO' | translate}}"
+        type="number" 
+        [(ngModel)]="avaliacaoFisica.avaliacaoAntropometrica.dobrasCutaneas.abdominal" 
+        formControlName="abdominal"></ion-input>
+      <span item-end>{{"DOBRAS.CUTANEAS.MM" | translate}}</span>
+    </ion-item>
+    <ion-item>
+      <ion-label>{{"DOBRAS.CUTANEAS.AXILAR.MEDIA" | translate }}</ion-label>
+      <ion-input 
+        disabled="{{readOnly}}"
+        placeholder="{{'DOBRAS.CUTANEAS.OBRIGATORIO' | translate}}"
+        type="number" 
+        [(ngModel)]="avaliacaoFisica.avaliacaoAntropometrica.dobrasCutaneas.axilarMedia" 
+        formControlName="axilarMedia"></ion-input>
+      <span item-end>{{"DOBRAS.CUTANEAS.MM" | translate}}</span>
+    </ion-item>
+    <ion-item>
+      <ion-label>{{"DOBRAS.CUTANEAS.BICITAL" | translate }}</ion-label>
+      <ion-input 
+        disabled="{{readOnly}}"
+        placeholder="{{'DOBRAS.CUTANEAS.OBRIGATORIO' | translate}}"
+        type="number" 
+        [(ngModel)]="avaliacaoFisica.avaliacaoAntropometrica.dobrasCutaneas.bicital" 
+        formControlName="bicital"></ion-input>
+      <span item-end>{{"DOBRAS.CUTANEAS.MM" | translate}}</span>
+    </ion-item>
+    <ion-item>
+      <ion-label>{{"DOBRAS.CUTANEAS.COXA" | translate }}</ion-label>
+      <ion-input 
+        disabled="{{readOnly}}"
+        placeholder="{{'DOBRAS.CUTANEAS.OBRIGATORIO' | translate}}"
+        type="number" 
+        [(ngModel)]="avaliacaoFisica.avaliacaoAntropometrica.dobrasCutaneas.coxa" 
+        formControlName="coxa"></ion-input>
+      <span item-end>{{"DOBRAS.CUTANEAS.MM" | translate}}</span>
+    </ion-item>
+    <ion-item>
+      <ion-label>{{"DOBRAS.CUTANEAS.PANTURRILHA" | translate }}</ion-label>
+      <ion-input 
+        disabled="{{readOnly}}"
+        placeholder="{{'DOBRAS.CUTANEAS.OBRIGATORIO' | translate}}"
+        type="number" 
+        [(ngModel)]="avaliacaoFisica.avaliacaoAntropometrica.dobrasCutaneas.panturrilha" 
+        formControlName="panturrilha"></ion-input>
+      <span item-end>{{"DOBRAS.CUTANEAS.MM" | translate}}</span>
+    </ion-item>
+    <ion-item>
+      <ion-label>{{"DOBRAS.CUTANEAS.PEITORAL" | translate }}</ion-label>
+      <ion-input 
+        disabled="{{readOnly}}"
+        placeholder="{{'DOBRAS.CUTANEAS.OBRIGATORIO' | translate}}"
+        type="number" 
+        [(ngModel)]="avaliacaoFisica.avaliacaoAntropometrica.dobrasCutaneas.peitoral" 
+        formControlName="peitoral"></ion-input>
+      <span item-end>{{"DOBRAS.CUTANEAS.MM" | translate}}</span>
+    </ion-item>
+    <ion-item>
+      <ion-label>{{"DOBRAS.CUTANEAS.SUBESCAPULAR" | translate }}</ion-label>
+      <ion-input 
+        disabled="{{readOnly}}"
+        placeholder="{{'DOBRAS.CUTANEAS.OBRIGATORIO' | translate}}"
+        type="number" 
+        [(ngModel)]="avaliacaoFisica.avaliacaoAntropometrica.dobrasCutaneas.subescapular" 
+        formControlName="subescapular"></ion-input>
+      <span item-end>{{"DOBRAS.CUTANEAS.MM" | translate}}</span>
+    </ion-item>
+    <ion-item>
+      <ion-label>{{"DOBRAS.CUTANEAS.SUPRAILIACA" | translate }}</ion-label>
+      <ion-input 
+        disabled="{{readOnly}}"
+        placeholder="{{'DOBRAS.CUTANEAS.OBRIGATORIO' | translate}}"
+        type="number" 
+        [(ngModel)]="avaliacaoFisica.avaliacaoAntropometrica.dobrasCutaneas.supraIliaca" 
+        formControlName="supraIliaca"></ion-input>
+      <span item-end>{{"DOBRAS.CUTANEAS.MM" | translate}}</span>
+    </ion-item>
+    <ion-item>
+      <ion-label>{{"DOBRAS.CUTANEAS.TORACICA" | translate }}</ion-label>
+      <ion-input 
+        disabled="{{readOnly}}"
+        placeholder="{{'DOBRAS.CUTANEAS.OBRIGATORIO' | translate}}"
+        type="number" 
+        [(ngModel)]="avaliacaoFisica.avaliacaoAntropometrica.dobrasCutaneas.toracica" 
+        formControlName="toracica"></ion-input>
+      <span item-end>{{"DOBRAS.CUTANEAS.MM" | translate}}</span>
+    </ion-item>
+    <ion-item>
+      <ion-label>{{"DOBRAS.CUTANEAS.TRICIPAL" | translate }}</ion-label>
+      <ion-input 
+        disabled="{{readOnly}}"
+        placeholder="{{'DOBRAS.CUTANEAS.OBRIGATORIO' | translate}}"
+        type="number" 
+        [(ngModel)]="avaliacaoFisica.avaliacaoAntropometrica.dobrasCutaneas.tricipal" 
+        formControlName="tricipal"></ion-input>
+      <span item-end>{{"DOBRAS.CUTANEAS.MM" | translate}}</span>
+    </ion-item>
+  </form>
+  <ion-fab bottom right *ngIf="readOnly == false">
+    <button 
+      [disabled]="!formDobras.valid"
+      (click)="form.ngSubmit.emit()"
+      ion-fab color="primary">
+        <ion-icon name="arrow-round-forward"></ion-icon>
+    </button>
+  </ion-fab>
+</ion-content>

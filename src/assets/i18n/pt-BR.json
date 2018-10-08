@@ -1,6 +1,10 @@
 {
     "APP" : {
-        "NAME": "Gym Body System"
+        "NAME": "Gym Body App",
+        "SAIR" : "Sair"
+    },
+    "AGENDA" : {
+        "TITLE" : "Agenda"
     },
     "ALTERAR.DADOS": {
         "TITLE": "Editar Dados",
@@ -15,11 +19,118 @@
         "NOVA": "Nova Senha:",
         "CONFIRMACAO": "Confirmação:"
     },
+    "ANAMNESE": {
+        "TITLE" : "Anamnese",
+        "PERGUNTA1" : "Objetivos com relação a atividade física?",
+        "PERGUNTA1.PLACEHOLDER" : "(Obrigatório)",
+        "PERGUNTA2" : "Pratica atividade atualmente?",
+        "PERGUNTA2.PLACEHOLDER" : "(Obritatório)",
+        "PERGUNTA3" : "Utiliza algum tipo de medicamento?",
+        "PERGUNTA3.PLACEHOLDER" : "(Obrigatório)",
+        "PERGUNTA4" : "Já passou por alguma cirurgia?",
+        "PERGUNTA4.PLACEHOLDER" : "(Obrigatório)",
+        "PERGUNTA5" : "Doenças na família?",
+        "PERGUNTA5.PLACEHOLDER" : "(Obritatório)",
+        "PERGUNTA6" : "Observações",
+        "PERGUNTA6.PLACEHOLDER" : "(Obritatório)"
+    },
+    "PERIMETRIA" : {
+        "TITLE": "Cadastro de perimetria",
+        "OBRIGATORIO" : "(Obrigatório)",
+        "CM": "cm.",
+        "OMBRO" : "Ombro:",
+        "PESCOCO" : "Pescoço:",
+        "TORAX" : "Tórax:",
+        "BRACO" : {
+            "DIREITO": {
+                "RELAXADO" : "Braço dir. relax.:",
+                "CONTRAIDO" : "Braço dir. contr.:"
+            },
+            "ESQUERDO" :{
+                "RELAXADO" : "Braço esq. relax.:",
+                "CONTRAIDO" : "Braço esq. contr.:"
+            }
+        },
+        "ANTEBRACO" : {
+            "DIREITO" : "Antebraço dir.:",
+            "ESQUERDO" : "Antebraço esq.:"
+        },
+        "CINTURA" : "Cintura:",
+        "QUADRIL" : "Quadril:",
+        "COXA" : {
+            "PROXIMAL" : {
+                "DIREITA" : "Coxa prox. dir.:",
+                "ESQUERDA" : "Coxa prox. esq.:"
+            },
+            "MEDIA" : {
+                "DIREITA" : "Coxa média dir.:",
+                "ESQUERDA" : "Coxa média esq.:"
+            },
+            "DISTAL" : {
+                "DIREITA" : "Coxa distal dir.:",
+                "ESQUERDA" : "Coxa distal esq.:"
+            }
+        },
+        "PANTURRILHA" : {
+            "DIREITA" : "Panturrilha dir.:",
+            "ESQUERDA" : "Panturrilha esq.:"
+        },
+        "BICIPTAL" : "Biciptal:",
+        "TRICIPTAL" : "Triciptal:",
+        "AXILAR.MEDIA" : "Axilar média:",
+        "SUPRA.ILIACA" : "Supra ilíaca:",
+        "PEITORAL" : "Peitoral:",
+        "ABDOMINAL" : "Abdominal:"
+    },
+    "AVALIACAO.FISICA" : {
+        "ESCOLHA.PROTOCOLO.TITLE" : "Escolha um protocolo",
+        "POLLOCK" : "Protocolo de Pollock, 7 Dobras",
+        "GUEDES" :  "Protocolo de Guedes, 3 Dobras",
+        "SELECIONAR.PESSOA" : {
+            "TITLE": "Pessoas",
+            "DIGITE.NOME" : "Digite um nome"
+        },
+        "RESULTADO" : {
+            "TITLE" : "Resultado da Avaliação",
+            "NOME.PESSOA" : "Avaliado: ",
+            "DATA" : "Data da avaliação: ",
+            "DENSIDADE.CORPORAL" : "Densidade Corporal: " 
+        }
+    },
     "BOTAO": {
         "CONFIRMAR": "Confirmar",
         "CANCELAR": "Cancelar",
         "SIM": "Sim",
         "NAO": "Não"
+    },
+    "DETALHAR.EXERCICIO": {
+        "TITLE": "Detalhes do exercício",
+        "NOME": "Nome: ",
+        "DESCRICAO": "Descrição: ",
+        "EQUIPAMENTO": "Equipamento: ",
+        "IMAGEM": "Imagem: "
+    },
+    "DOBRAS.CUTANEAS" : {
+        "TITLE" : "Dobras cutâneas",
+        "ABDOMINAL" : "Abdominal: ",
+        "AXILAR.MEDIA" : "Axilar média: ",
+        "BICITAL" : "Bicital: ",
+        "COXA" : "Coxa: ",
+        "PANTURRILHA" : "Pantirrilha: ",
+        "PEITORAL" : "Peitoral: ",
+        "SUBESCAPULAR" : "Subescapular: ",
+        "SUPRAILIACA": "Supra ilíaca: ",
+        "TORACICA" : "Torácica: ",
+        "TRICIPAL" : "Trícipal: ",
+        "MM" : "mm.",
+        "OBRIGATORIO" : "(Obrigatório)"
+    },
+    "IMC" : {
+        "TITLE" : "Cálculo do IMC",
+        "PESO" : "Peso (Kg): ",
+        "ALTURA" : "Altura (cm): ",
+        "RESULTADO": "Resultado: ",
+        "FINALIZAR" : "Finalizar avaliação física"
     },
     "INICIAR.TREINO": {
         "TITLE": "Iniciar Treino",
@@ -30,8 +141,15 @@
         "SERIE": "Séries",
         "TREINO" : "Nome treino",
         "HOJE": "Hoje",
+        "DATA": "Data",
         "PROXIMOS": "Próximos",
-        "ANTERIORES": "Anteriores"
+        "ANTERIORES": "Anteriores",
+        "DATA.REALIZAR" : "Realizar em: "
+    },
+    "LISTAGEM.AVALIACAO.FISICA" : {
+        "TITLE" : "Avaliação física",
+        "ITEM.START" : "Realizada em ",
+        "EMPTY": "Nenhuma avaliação física encontrada, tente informar datas diferentes!"
     },
     "LOGIN" : {
         "TITLE" : "Login",
@@ -62,8 +180,31 @@
         "SENHA" : "Senha:",
         "OBJETIVO" : "Objetivo:"
     },
+    "MODAL.PAUSE" :{
+        "TITLE" : "Pausa",
+        "BOTAO" : "Continuar"
+    },
+    "PROTOCOLO" : { 
+        "GUEDES" : "Guedes",
+        "POLLOCK": "Pollock"
+    },
     "TREINO" : {
         "TITLE": "Meu Treino",
-        "TEMPO.TOTAL": "Tempo total"
+        "TEMPO.TOTAL": "Tempo total",
+        "BOTAO.FINALIZAR": "Finalizar Treino",
+        "SERIES" : "Séries: ",
+        "REPETICOES" : "Repeticoes: ",
+        "CARGA" : "Carga: ",
+        "TEMPO": "Tempo: ",
+        "COMPLETO": "Completo: ", 
+        "HISTORICO" : {
+            "TITLE" : "Histórico de treinos",
+            "EMPTY" : "Nenhuma execução de treino foi encontrada em seu histórico"
+        }, 
+        "DETALHES" :{
+            "TITLE" : "Exercícios do treino",
+            "DATA" : "Data: ",
+            "EXERCICIOS.EXECUTADOS.EMPTY" : "Nenhum exercício foi realizado nesta data"
+        }
     }
 }

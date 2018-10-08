@@ -1,0 +1,32 @@
+
+<ion-header>
+
+  <ion-navbar color="primary">
+    <ion-title> {{ "TREINO.DETALHES.TITLE" | translate }} </ion-title>
+  </ion-navbar>
+
+</ion-header>
+
+<ion-content padding>
+
+  <ion-card>
+    <ion-card-header>
+      <span class="nome-pessoa">
+          {{ "TREINO.DETALHES.DATA" | translate }}{{ treinoData?.data | date: 'dd/MM/yyyy'}}
+      </span>
+    </ion-card-header>
+    <ion-card-content *ngIf="treinoData == null || treinoData.exerciciosRealizados == null || treinoData.exerciciosRealizados.lenght == 0" >
+      {{ "TREINO.DETALHES.EXERCICIOS.EXECUTADOS.EMPTY" | translate}}
+    </ion-card-content>
+    <ion-list>
+      <button 
+        *ngFor=" let exercicioRealizado of treinoData.exerciciosRealizados "
+        ion-item>
+          <ion-icon name="ai-fitness" item-start></ion-icon>
+          {{ exercicioRealizado?.treinoExercicio?.exercicio?.nome }}
+      </button>
+  
+    </ion-list>
+  </ion-card>
+
+</ion-content>

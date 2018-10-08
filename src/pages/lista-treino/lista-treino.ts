@@ -1,9 +1,12 @@
 import { Component } from '@angular/core';
 import { IonicPage, NavController, NavParams, AlertController } from 'ionic-angular';
 import { NavLifecycles } from '../../utils/nav-lifecycles';
-import { TreinoData } from '../../model/treino/treino-data';
-import { TreinoPage } from './treino/treino';
 import { TreinoDataServiceProvider } from '../../providers/services/treino-data-service/treino-data-service';
+import { SessionServiceProvider } from '../../providers/services/login-service/session-service';
+import { LoadingDefaultController } from '../../utils/loading-default-controller';
+import { TreinoData, Page } from '../../model/entities';
+import { TreinoPage } from './treino/treino';
+import { DatePipe } from '@angular/common';
 
 /**
  * Generated class for the ListaTreinoPage page.
@@ -21,20 +24,44 @@ export class ListaTreinoPage implements NavLifecycles {
 // listagem de treino
 
   public treinosData: TreinoData[];
-  public dataAtual: string = new Date().toISOString();
+  public dataAtual: string;
 
   constructor(
     public navCtrl: NavController, 
     public navParams: NavParams,
     private treinoService: TreinoDataServiceProvider,
     private alertControler: AlertController,
+    private sessionService: SessionServiceProvider,
+    private loading: LoadingDefaultController,
+    private datePipe: DatePipe
   ) {
-
+    this.dataAtual = this.datePipe.transform(new Date(), "yyyy-MM-dd");
   }
 
   ionViewDidLoad() {
+    
+    this.loading.create('Carregando treinos').present();
 
-    this.treinosData = this.treinoService.listarTreinos();
+    if(!this.sessionService.pessoalogada){
+      this.loading.loader.dismiss();
+      return;
+    } 
+    this.treinosData = null;
+
+    this.treinoService.listarTreinosByAluno(this.sessionService.pessoalogada.id)
+    .finally(() => this.loading.loader.dismiss())
+    .subscribe((treinosData: TreinoData[] ) =>{
+      
+      this.treinosData = treinosData;
+      console.log(this.treinosData);
+
+    }, (error)=>{
+      this.alertControler.create({
+        title: 'Erro',
+        subTitle: 'Ocorreu um erro ao consultar seus treinos!\nVerifique sua conexão!',
+        buttons: ['Ok']
+      }).present();
+    });
 
   }
 
@@ -45,8 +72,7 @@ export class ListaTreinoPage implements NavLifecycles {
       buttons: [
         {text: 'Não'},
         {text: 'Sim', handler: () => {
-          console.log('Abrir tela');
-          this.navCtrl.push(TreinoPage.name,{
+          this.navCtrl.setRoot(TreinoPage.name,{
             treinoData: treinoData 
           });
         }}

@@ -1,0 +1,50 @@
+<ion-header>
+    <ion-navbar color="primary">
+        <ion-title>{{"AVALIACAO.FISICA.RESULTADO.TITLE" | translate}}</ion-title>
+      </ion-navbar>
+
+</ion-header>
+
+<ion-content no-padding>
+
+  <ion-card>
+    <ion-card-header>
+      <span class="nome-pessoa">
+        {{"AVALIACAO.FISICA.RESULTADO.NOME.PESSOA" | translate}} {{avaliacaoFisica?.pessoa?.nome}}
+      </span>
+    </ion-card-header>
+    <ion-card-content>
+      <span>
+        {{"AVALIACAO.FISICA.RESULTADO.DATA" | translate}} 
+        {{avaliacaoFisica?.data | date: 'dd/MM/yyyy'}}.
+      </span>
+      <span>
+        {{"AVALIACAO.FISICA.RESULTADO.DENSIDADE.CORPORAL" | translate}}
+        {{avaliacaoFisica?.avaliacaoAntropometrica?.densidadeCorporal | number : '1.2-2'}}.
+      </span>
+    </ion-card-content>
+    <ion-list>
+      <button (click)="abrirAnamnese(avaliacaoFisica)" ion-item>
+        <ion-icon name="pulse" item-start></ion-icon>
+        {{"ANAMNESE.TITLE" | translate}}
+      </button>
+  
+      <button (click)="abrirPerimetria(avaliacaoFisica)" ion-item>
+        <ion-icon name="pulse" item-start></ion-icon>
+        {{"PERIMETRIA.TITLE" | translate}}
+      </button>
+  
+      <button (click)="abrirDobrasCutaneas(avaliacaoFisica)" ion-item>
+        <ion-icon name="pulse" item-start></ion-icon>
+        {{"DOBRAS.CUTANEAS.TITLE" | translate}}
+      </button>
+      
+      <button (click)="abrirImc(avaliacaoFisica)" ion-item>
+        <ion-icon name="pulse" item-start></ion-icon>
+        {{"IMC.TITLE" | translate}}
+      </button>
+    </ion-list>
+  </ion-card>
+
+ 
+</ion-content>

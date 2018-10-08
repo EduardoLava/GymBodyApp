@@ -6,7 +6,7 @@
 -->
 <ion-header>
 
-  <ion-navbar>
+  <ion-navbar color="primary">
     <ion-title>{{ 'TREINO.TITLE' | translate }}</ion-title>
   </ion-navbar>
 
@@ -18,69 +18,80 @@
     <timer #timerPrincipal></timer>
     <ion-grid no-padding text-center>
       <ion-row>
-        <ion-col>
-          <h2>{{treinoData.treino.nome}}</h2>
+        <ion-col class="borda-inferior">
+          <h2>{{treinoData?.treino?.nome}}</h2>
         </ion-col>
       </ion-row>
       <ion-row>
-        <ion-col>
+        <ion-col class="tempo-text">
           {{"TREINO.TEMPO.TOTAL" | translate}}
         </ion-col>
       </ion-row>
       <ion-row>
-        <ion-col>
+        <ion-col class="cronometro-principal">
           <div>{{timerPrincipal.timer.displayTime}}</div>
         </ion-col>
       </ion-row>
       <ion-row>
         <ion-col>
-          <button ion-button clear icon-only (click)="pause()" >
+          {{"TREINO.COMPLETO" | translate}}{{ percentualCompleto }} %
+        </ion-col>
+      </ion-row>
+      <ion-row>
+        <ion-col>
+          <button ion-button clear icon-only (click)="exercicioAnterior()" color="primary">
+            <ion-icon name="arrow-back"></ion-icon>
+          </button>
+          <button ion-button clear icon-only (click)="pause()" color="primary">
             <ion-icon name="pause"></ion-icon>
           </button>
-          <button ion-button clear icon-only (click)="teste()" >
-            <ion-icon name="play"></ion-icon>
+          <button ion-button clear icon-only (click)="completarExercicio()" color="primary">
+            <ion-icon name="checkmark"></ion-icon>
           </button>
-      </ion-col>
-      </ion-row>
-      <ion-row>
-        
-      </ion-row>
-      <!-- <ion-row>
-        <ion-col>
-          {{"MEUS.DADOS.NASCIMENTO" | translate}}
-        </ion-col>
-        <ion-col>
-          {{pessoa.dataNascimento | date: 'dd/MM/yyyy'}}
-        </ion-col>
-      </ion-row>
-      <ion-row>
-        <ion-col>
-          {{"MEUS.DADOS.GENERO" | translate}}
-        </ion-col>
-        <ion-col>
-          {{pessoa.genero}}
-        </ion-col>
-      </ion-row>
-      <ion-row> 
-        <ion-col>
-          {{"MEUS.DADOS.SENHA" | translate}}
-        </ion-col>
-        <ion-col>
-          <button ion-button small (click)="abrirModalAlterarSenha()">
-            <ion-icon name="key"></ion-icon>
+          <button ion-button clear icon-only (click)="proximoExercicio()" color="primary">
+              <ion-icon name="arrow-forward"></ion-icon>
           </button>
         </ion-col>
       </ion-row>
-      <ion-row>
-        <ion-col>
-          {{"MEUS.DADOS.OBJETIVO" | translate}}
+      <ion-row class="borda-inferior borda-superior">
+        <ion-col text-center>
+          <div class="center-vertical">
+            <label class="nome-exercicio">
+              {{ exercicioAtual?.treinoExercicio?.exercicio?.nome }}
+            </label>
+            <button class="icone-info-exercicio" ion-button icon-only (click)="detalharExercicio()" clear>
+              <ion-icon name=information-circle></ion-icon>
+            </button>
+          </div>
+        </ion-col>
+      </ion-row>
+      <ion-row class="borda-inferior">
+        <ion-col col-4 class="dados-exercicio">
+          {{ "TREINO.SERIES" | translate }}{{ exercicioAtual?.treinoExercicio?.series}} 
+        </ion-col>
+        <ion-col col-4 *ngIf=" exercicioAtual?.treinoExercicio?.tipoTreinoExercicio != 'TEMPO' " class="dados-exercicio">
+            {{ "TREINO.REPETICOES" | translate }}{{ exercicioAtual?.treinoExercicio?.repeticoes }}
+        </ion-col>
+        <ion-col col-4 *ngIf=" exercicioAtual?.treinoExercicio?.tipoTreinoExercicio == 'CARGA_REPETICOES' " class="dados-exercicio">
+            {{ "TREINO.CARGA" | translate }}{{ exercicioAtual?.treinoExercicio?.carga }}
+        </ion-col>
+        <ion-col col-4 *ngIf=" exercicioAtual?.treinoExercicio?.tipoTreinoExercicio == 'TEMPO' " class="dados-exercicio">
+          {{ "TREINO.TEMPO" | translate }}{{ exercicioAtual?.treinoExercicio?.tempoMin }}
         </ion-col>
       </ion-row>
       <ion-row>
         <ion-col>
-          {{pessoa.objetivo}}
+            <iframe *ngIf="idVideo" class="video" [src]="urlVideo" frameborder="0" allow="autoplay; encrypted-media" allowfullscreen></iframe>
+            <img *ngIf="!idVideo" class="video" [src]="imagemSemVideo"/>
         </ion-col>
-      </ion-row> -->
+      </ion-row>
+      <ion-row>
+        <ion-col text-center>
+          <button ion-button color="primary" (click)="finalizar()" outline>
+            {{ "TREINO.BOTAO.FINALIZAR" | translate }}
+          </button>
+        </ion-col>
+      </ion-row>
     </ion-grid>
   </ion-split-pane>
 </ion-content>

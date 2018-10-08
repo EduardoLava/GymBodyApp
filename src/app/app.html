@@ -1,23 +1,27 @@
 <ion-split-pane>
-    <ion-menu [content]="menu" persistent = 'true' *ngIf="token">
+    <ion-menu [content]="menu" persistent = 'true'>
         <ion-content>
-            <ion-item>
-                <div>
-                    <ion-thumbnail item-start>
-                        <img src="./assets/imgs/logo.png"/>
-                    </ion-thumbnail>
-                    <h1>{{ 'APP.NAME' | translate }}</h1> 
-                </div>
-            </ion-item>
+            <div ion-item>
+                <ion-thumbnail class="imagem" item-start>
+                    <img src="./assets/imgs/logo2.jpg"/>
+                </ion-thumbnail>
+                
+                <h3 class="app-title">{{ 'APP.NAME' | translate }}</h3> 
+                
+            </div>
             <ion-list>
                 <button ion-item menuClose
-                *ngFor="let pagina of paginas"
-                (click)="irParaPagina(pagina.componente)">
-                    <ion-icon [name]="pagina.icone" item-left ></ion-icon>
-                    {{ pagina.titulo | translate }}
+                    *ngFor="let pagina of paginas"
+                    (click)="irParaPagina(pagina.componente)">
+                        <ion-icon [name]="pagina.icone" item-left ></ion-icon>
+                        {{ pagina.titulo | translate }}
+                </button>
+                <button menuClose ion-item (click)="logout()">
+                    <ion-icon name="exit" item-left></ion-icon>
+                    {{"APP.SAIR" | translate}}
                 </button>
             </ion-list>
         </ion-content>
     </ion-menu>
-    <ion-nav main #menu [root]="rootPage" swipeBackEnabled="false"></ion-nav>
+    <ion-nav main #menu [root]="rootPage"></ion-nav>
 </ion-split-pane>

@@ -27,9 +27,91 @@ export interface Page<T> {
     pageable?: PageRequest
 }
 
+export interface GrupoMuscular {
+    nome?: string,
+    descricao?: string,
+    id?: number,
+    created?: string,
+    updated?: string
+}
+
+
+export let DiaSemanaValues: string[] = ['DOMINGO', 'SEGUNDA', 'TERCA', 'QUARTA', 'QUINTA', 'SEXTA', 'SABADO'];
+export type DiaSemana = 'DOMINGO' | 'SEGUNDA' | 'TERCA' | 'QUARTA' | 'QUINTA' | 'SEXTA' | 'SABADO';
+
+
+export interface Notificacao {
+    titulo?: string,
+    texto?: string,
+    destinatarioNotificacoes?: DestinatarioNotificacao[],
+    id?: number,
+    created?: string,
+    updated?: string
+}
+
+
+export interface Resposta {
+    objetivosAtividadeFisica?: string,
+    praticaAtividade?: string,
+    medicamento?: string,
+    cirurgia?: string,
+    doencaFamiliar?: string,
+    observacao?: string,
+    id?: number,
+    created?: string,
+    updated?: string
+}
+
+
 export interface ExercicioGrupoMuscular {
     exercicio?: Exercicio,
     grupoMuscular?: GrupoMuscular,
+    id?: number,
+    created?: string,
+    updated?: string
+}
+
+
+export interface AvaliacaoAntropometrica {
+    dobrasCutaneas?: DobrasCutaneas,
+    indiceMassaCorporal?: IndiceMassaCorporal,
+    predicaoGorduraSiri?: PredicaoGorduraSiri,
+    avaliacaoFisica?: AvaliacaoFisica,
+    tipoProtocolo?: TipoProtocolo,
+    densidadeCorporal?: number,
+    id?: number,
+    created?: string,
+    updated?: string
+}
+
+
+export interface IndiceMassaCorporal {
+    altura?: number,
+    peso?: number,
+    resultado?: number,
+    id?: number,
+    created?: string,
+    updated?: string
+}
+
+
+export let PapelValues: string[] = ['ADMINISTRATOR', 'PERSONAL', 'ALUNO'];
+export type Papel = 'ADMINISTRATOR' | 'PERSONAL' | 'ALUNO';
+
+
+export interface Pessoa {
+    nome?: string,
+    email?: string,
+    login?: string,
+    senha?: string,
+    genero?: Genero,
+    dataNascimento?: Date,
+    objetivo?: string,
+    isAtivo?: boolean,
+    papeis?: Papel[],
+    lastLogin?: string,
+    tokenJwt?: string,
+    senhaAntiga?: string,
     id?: number,
     created?: string,
     updated?: string
@@ -49,41 +131,9 @@ export interface Exercicio {
 }
 
 
-export interface GrupoMuscular {
-    nome?: string,
-    descricao?: string,
-    id?: number,
-    created?: string,
-    updated?: string
-}
-
-
 export interface PredicaoGorduraSiri {
     densidadeCorporal?: number,
     gordura?: number,
-    id?: number,
-    created?: string,
-    updated?: string
-}
-
-
-export interface ProtocoloGuedes extends AvaliacaoAntropometrica {
-    
-}
-
-
-export let DiaSemanaValues: string[] = ['DOMINGO', 'SEGUNDA', 'TERCA', 'QUARTA', 'QUINTA', 'SEXTA', 'SABADO'];
-export type DiaSemana = 'DOMINGO' | 'SEGUNDA' | 'TERCA' | 'QUARTA' | 'QUINTA' | 'SEXTA' | 'SABADO';
-
-
-export interface TreinoData {
-    data?: Date,
-    horaInicio?: Date,
-    horaTermino?: Date,
-    completo?: boolean,
-    treino?: Treino,
-    diaSemana?: DiaSemana,
-    exerciciosTreinoDatas?: ExercicioRealizado[],
     id?: number,
     created?: string,
     updated?: string
@@ -101,80 +151,23 @@ export interface Equipamento {
 }
 
 
-export let GeneroValues: string[] = ['MASCULINO', 'FEMININO'];
-export type Genero = 'MASCULINO' | 'FEMININO';
-
-
-export let PapelValues: string[] = ['ADMINISTRATOR', 'PERSONAL', 'ALUNO'];
-export type Papel = 'ADMINISTRATOR' | 'PERSONAL' | 'ALUNO';
-
-
-export interface AvaliacaoFisica {
-    data?: Date,
-    pessoa?: Pessoa,
-    perimetria?: Perimetria,
-    resposta?: Resposta,
-    avaliacaoAntropometrica?: AvaliacaoAntropometrica,
-    id?: number,
-    created?: string,
-    updated?: string
-}
-
-
-export interface ExercicioRealizado {
-    completo?: boolean,
-    treinoData?: TreinoData,
-    treinoExercicio?: TreinoExercicio,
-    id?: number,
-    created?: string,
-    updated?: string
-}
-
-
 export let TipoTreinoExercicioValues: string[] = ['CARGA_REPETICOES', 'TEMPO', 'REPETICOES'];
 export type TipoTreinoExercicio = 'CARGA_REPETICOES' | 'TEMPO' | 'REPETICOES';
 
 
-export interface Notificacao {
-    titulo?: string,
-    texto?: string,
-    destinatarioNotificacoes?: DestinatarioNotificacao[],
-    id?: number,
-    created?: string,
-    updated?: string
-}
+export let TipoProtocoloValues: string[] = ['GUEDES', 'POLLOCK'];
+export type TipoProtocolo = 'GUEDES' | 'POLLOCK';
 
 
-export interface AvaliacaoAntropometrica {
-    dobrasCutaneas?: DobrasCutaneas,
-    indiceMassaCorporal?: IndiceMassaCorporal,
-    predicaoGorduraSiri?: PredicaoGorduraSiri,
-    id?: number,
-    created?: string,
-    updated?: string
-}
-
-
-export interface Perimetria {
-    pescoco?: number,
-    torax?: number,
-    bracoDireitoRelaxado?: number,
-    bracoEsquerdoRelaxado?: number,
-    bracoDireitoContraido?: number,
-    bracoEsquerdoContraido?: number,
-    antebracoDireito?: number,
-    antebracoEsquerdo?: number,
-    cintura?: number,
-    abdomen?: number,
-    quadril?: number,
-    coxaProximalDireita?: number,
-    coxaProximalEsquerda?: number,
-    coxaMediaDireita?: number,
-    coxaMediaEsquerda?: number,
-    coxaDistalDireita?: number,
-    coxaDistalEsquerda?: number,
-    panturrilhaDireita?: number,
-    panturrilhaEsquerda?: number,
+export interface TreinoData {
+    data?: Date,
+    horaInicio?: Date,
+    horaTermino?: Date,
+    tempoGasto?: Date,
+    completo?: boolean,
+    treino?: Treino,
+    diaSemana?: DiaSemana,
+    exerciciosRealizados?: ExercicioRealizado[],
     id?: number,
     created?: string,
     updated?: string
@@ -196,6 +189,10 @@ export interface TreinoExercicio {
 }
 
 
+export let GeneroValues: string[] = ['MASCULINO', 'FEMININO'];
+export type Genero = 'MASCULINO' | 'FEMININO';
+
+
 export interface DestinatarioNotificacao {
     pessoa?: Pessoa,
     notificacao?: Notificacao,
@@ -205,26 +202,25 @@ export interface DestinatarioNotificacao {
 }
 
 
-export interface ProtocoloPollock extends AvaliacaoAntropometrica {
-    
+export interface ExercicioRealizado {
+    completo?: boolean,
+    treinoData?: TreinoData,
+    treinoExercicio?: TreinoExercicio,
+    id?: number,
+    created?: string,
+    updated?: string
 }
 
 
-export interface Pessoa {
-    nome?: string,
-    email?: string,
-    login?: string,
-    senha?: string,
-    genero?: Genero,
-    dataNascimento?: Date,
-    objetivo?: string,
-    isAtivo?: boolean,
-    papeis?: Papel[],
-    lastLogin?: string,
+export interface AvaliacaoFisica {
+    data?: Date,
+    pessoa?: Pessoa,
+    perimetria?: Perimetria,
+    resposta?: Resposta,
+    avaliacaoAntropometrica?: AvaliacaoAntropometrica,
     id?: number,
     created?: string,
-    updated?: string,
-    tokenJwt?: string
+    updated?: string
 }
 
 
@@ -261,26 +257,27 @@ export interface DobrasCutaneas {
 }
 
 
-export interface IndiceMassaCorporal {
-    altura?: number,
-    peso?: number,
+export interface Perimetria {
+    pescoco?: number,
+    torax?: number,
+    bracoDireitoRelaxado?: number,
+    bracoEsquerdoRelaxado?: number,
+    bracoDireitoContraido?: number,
+    bracoEsquerdoContraido?: number,
+    antebracoDireito?: number,
+    antebracoEsquerdo?: number,
+    cintura?: number,
+    abdomen?: number,
+    quadril?: number,
+    coxaProximalDireita?: number,
+    coxaProximalEsquerda?: number,
+    coxaMediaDireita?: number,
+    coxaMediaEsquerda?: number,
+    coxaDistalDireita?: number,
+    coxaDistalEsquerda?: number,
+    panturrilhaDireita?: number,
+    panturrilhaEsquerda?: number,
     id?: number,
     created?: string,
     updated?: string
 }
-
-
-export interface Resposta {
-    objetivosAtividadeFisica?: string,
-    praticaAtividade?: string,
-    medicamento?: string,
-    cirurgia?: string,
-    doencaFamiliar?: string,
-    observacao?: string,
-    id?: number,
-    created?: string,
-    updated?: string
-}
-
-
-

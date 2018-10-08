@@ -15,6 +15,9 @@ import { DatePicker } from '@ionic-native/date-picker';
 // ng imports
 import { TranslateModule, TranslateLoader } from '@ngx-translate/core';
 import { TranslateHttpLoader } from '@ngx-translate/http-loader';
+
+import { YoutubeVideoPlayer } from '@ionic-native/youtube-video-player';
+
 // fim ng imports
 
 import 'rxjs/add/operator/do';
@@ -41,6 +44,13 @@ import { HttpServiceProvider } from '../providers/services/http-service/http-ser
 import { SessionServiceProvider } from '../providers/services/login-service/session-service';
 import { LoadingDefaultController } from '../utils/loading-default-controller';
 import { ToastDefautController } from '../utils/toast-default-contoller';
+import { DatePipe } from '@angular/common';
+import { YoutubeUrlServiceProvider } from '../providers/youtube-url-service/youtube-url-service';
+import { TimeUtilProvider } from '../providers/time-util/time-util';
+import { AvaliacaoFisicaServiceProvider } from '../providers/services/avaliacao-fisica-service/avaliacao-fisica-service';
+
+import { CalendarModule } from "ion2-calendar";
+import { DataUtil } from '../utils/data-util';
 
 // import {} from 
 // FIM JWT
@@ -49,7 +59,8 @@ export function jwtOptionsFactory(storage: Storage) {
   return {
     tokenGetter: () => storage.get('jwt_token'),
     // diz que somente solicitacoes enviadas para localhost conterao Authorization no cabeçalho
-    whitelistedDomains: ['192.168.0.15:8080'],
+    // nao é ncessário iniciar com http:// pois pode ocorrer de não enviar os headers
+    whitelistedDomains: ['localhost:8080'],
   }
 }
 
@@ -77,7 +88,8 @@ export function jwtOptionsFactory(storage: Storage) {
         deps: [Storage]
       }
     }),
-    IonicModule.forRoot(MyApp)
+    IonicModule.forRoot(MyApp),
+    CalendarModule
   ],
   bootstrap: [IonicApp],
   entryComponents: [
@@ -101,6 +113,12 @@ export function jwtOptionsFactory(storage: Storage) {
     SessionServiceProvider,
     LoadingDefaultController,
     ToastDefautController,
+    DatePipe,
+    YoutubeUrlServiceProvider,
+    TimeUtilProvider,
+    AvaliacaoFisicaServiceProvider,
+    DataUtil
+    // YoutubeVideoPlayer
   ],
 })
 export class AppModule {

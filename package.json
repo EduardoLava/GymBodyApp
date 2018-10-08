@@ -28,6 +28,7 @@
         "@ionic-native/splash-screen": "4.7.0",
         "@ionic-native/sqlite": "^4.9.0",
         "@ionic-native/status-bar": "4.7.0",
+        "@ionic-native/youtube-video-player": "^4.14.0",
         "@ionic/pro": "1.0.20",
         "@ionic/storage": "^2.1.3",
         "@ngx-translate/core": "^9.1.1",
@@ -41,10 +42,13 @@
         "cordova-plugin-ionic-webview": "^1.1.19",
         "cordova-plugin-splashscreen": "^5.0.2",
         "cordova-plugin-whitelist": "^1.3.3",
+        "cordova-plugin-youtube-video-player": "^1.0.6",
         "cordova-sqlite-storage": "^2.3.3",
+        "ion2-calendar": "^2.2.0",
         "ionic-angular": "3.9.2",
         "ionicons": "3.0.0",
         "localdate": "^3.0.2",
+        "moment": "^2.22.2",
         "ng2-validation": "^4.2.0",
         "rxjs": "^5.5.11",
         "sw-toolbox": "3.6.0",
@@ -64,7 +68,8 @@
             "cordova-plugin-ionic-webview": {},
             "cordova-plugin-splashscreen": {},
             "cordova-plugin-whitelist": {},
-            "cordova-plugin-advanced-http": {}
+            "cordova-plugin-advanced-http": {},
+            "cordova-plugin-youtube-video-player": {}
         },
         "platforms": [
             "android"

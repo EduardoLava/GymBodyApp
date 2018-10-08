@@ -2,7 +2,7 @@ import { Component } from '@angular/core';
 import { IonicPage, NavController, NavParams, ToastController } from 'ionic-angular';
 import { DatePicker } from '@ionic-native/date-picker';
 import { PessoaServiceProvider } from '../../../providers/services/pessoa-service/pessoa-service';
-import { Pessoa } from '../../../model/entities';
+import { Pessoa, GeneroValues } from '../../../model/entities';
 import { ToastDefautController } from '../../../utils/toast-default-contoller';
 import { FormGroup, FormBuilder, Validators } from '@angular/forms';
 import { LoadingDefaultController } from '../../../utils/loading-default-controller';
@@ -23,7 +23,10 @@ export class AlterarDadosPage {
 
   // pessoa logada no sistema
   private pessoa: Pessoa;
+  // genero para carregar no select
+  private generoValues: String[];
 
+  // form group para gerenciar os campos do formulário
   private formGroup: FormGroup;
 
   constructor(
@@ -37,6 +40,8 @@ export class AlterarDadosPage {
   ) {
     this.pessoa = navParams.get('pessoa');
     // this.pessoa = this.pessoaService.obtemPessoaLogada();
+
+    this.generoValues = GeneroValues;
 
     this.formGroup = formBuilder.group(
       {

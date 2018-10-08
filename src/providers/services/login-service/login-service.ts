@@ -6,6 +6,9 @@ import { tap } from 'rxjs/operators';
 
 import { HttpServiceProvider } from '../http-service/http-service';
 import { SessionServiceProvider } from './session-service';
+import { Pessoa } from '../../../model/entities';
+import { MenuController } from 'ionic-angular';
+import { LoadingDefaultController } from '../../../utils/loading-default-controller';
 
 /**
  * 
@@ -21,27 +24,37 @@ export class LoginServiceProvider {
   constructor(
     private http: HttpServiceProvider,
     private jwthelper: JwtHelperService,
-    private sessionManagment: SessionServiceProvider
+    private sessionManagment: SessionServiceProvider,
+    private menu: MenuController,
+    private loading: LoadingDefaultController
   ) {
 
   }
 
   verificaLogin() {
+
+    this.loading.create('Verificando seu login..').present();
+
     this.sessionManagment.getToken()
       .subscribe(token => {
         // se tiver toke e ele não tiver expirado
         if (token && !this.jwthelper.isTokenExpired(token)) {
           // chama um metodo qualquer para que o jwtfilter verifique o token
-          this.http.get('/api/teste')
+          this.http.get('/api/valida-login')
+          .finally(()=> this.loading.loader.dismiss())
           .subscribe(() => {
+            this.sessionManagment.carregaPessoaLogada();
             this.sessionManagment.setTokenTokenAtivo(token);
             this.sessionManagment.authUser.next(token),
               (erro) => this.logout();
           });
         } else {
+          this.loading.loader.dismiss();
           this.logout();
         }
-      })
+      }, (erro) =>{
+        console.log(erro.message);
+      });
   }
 
   /**
@@ -68,22 +81,27 @@ export class LoginServiceProvider {
     // observable.subscribe((token)=> this.saveLogin(token));
     // .pipe(tap(token => this.saveLogin(token.data)));
 
-    return this.http.postResponseText(
+    return this.http.post(
       '/api-login', 
       {'login': dadosLogin.username, 'senha': dadosLogin.password}
     )
-    .pipe(tap(token => this.sessionManagment.saveLogin(token)))
+    .pipe(tap(pessoa => this.sessionManagment.salvaPessoaLogada(pessoa)))
     .do(
-      (token: string) => this.sessionManagment.setTokenTokenAtivo(token)
+      (pessoa: Pessoa) => {
+        this.sessionManagment.setTokenTokenAtivo(pessoa.tokenJwt);
+        // this.sessionManagment.setPessoaLogada(pessoa);
+      }
     );
 
+    
   }
 
   /**
    * Faz logout, setando o token para null no dispositivo
    */
   logout() {
-    this.sessionManagment.logout()
+    this.sessionManagment.logout();
+    this.menu.enable(false);
   }
 
 

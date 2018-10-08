@@ -1,60 +1,128 @@
-import { HttpClient } from '@angular/common/http';
 import { Injectable } from '@angular/core';
-import { Time } from '@angular/common';
-import { Treino } from '../../../model/treino/treino';
-import { TreinoData } from '../../../model/treino/treino-data';
+import { HttpServiceProvider } from '../http-service/http-service';
+import { Observable } from 'rxjs';
+import { map } from 'rxjs/operators/map';
+import { DatePipe } from '@angular/common';
+import { TreinoData, Page } from '../../../model/entities';
+import { DataUtil } from '../../../utils/data-util';
 
 @Injectable()
 export class TreinoDataServiceProvider {
 
-  constructor(public http: HttpClient) {
+  constructor(
+    public http: HttpServiceProvider,
+    private datePipe: DatePipe,
+    private dataUtil: DataUtil
+  ) {
   }
 
-  listarTreinos(){
+  /**
+   * 
+   * Lista treinos do aluno com base na data atual
+   * 
+   * @param idAluno 
+   */
+  listarTreinosByAluno(idAluno: number): Observable<TreinoData[]> {
 
-    let horaInicio: Time = {
-      hours: 10,
-      minutes: 0
-    };
-    let horaFim: Time = {
-      hours: 11,
-      minutes: 0
-    };
+    let dataInicio = new Date();
 
-    let treinos: Treino[] = [
-      {id: 1, nome:"Treino A",dataFim:new Date('2018-07-30'),dataInicio: new Date('2018-07-01'),horaPrevistaInicio: horaInicio ,  horaPrevistaTermino: horaFim ,sigla:"A"},
-      {id: 1, nome:"Treino B",dataFim:new Date('2018-07-30'),dataInicio: new Date('2018-07-01'),horaPrevistaInicio: horaInicio ,  horaPrevistaTermino: horaFim ,sigla:"B"},
-      {id: 1, nome:"Treino C",dataFim:new Date('2018-07-30'),dataInicio: new Date('2018-07-01'),horaPrevistaInicio: horaInicio ,  horaPrevistaTermino: horaFim ,sigla:"C"},
-    ];
+    let dataTermino = new Date();
+    dataTermino = this.dataUtil.addDays(dataTermino,90);
+    console.log('listarTreinos');
+    let url = '/api/treino-datas/data-inicio/'+
+    this.datePipe.transform(dataInicio, "yyyy-MM-dd")+
+    '/data-termino/'+
+    this.datePipe.transform(dataTermino, "yyyy-MM-dd")+
+    '/aluno/'+
+    idAluno+
+    '/somente-completos/'+false+'/';
 
-    let treinoData: TreinoData[] = [
-      {completo: true, data: new Date('2018-07-07'), treino: treinos[0]},
-      {completo: false, data: new Date('2018-07-08'), treino: treinos[1]},
-      {completo: false, data: new Date('2018-07-09'), treino: treinos[2]}
-    ];
+    // let url = '/api/treino-datas/data-inicio/'+this.datePipe.transform(dataInicio, "yyyy-MM-dd")+'/aluno/'+idAluno;
 
-    /* let hoje = false;
-    let proximo = false;
-    let anterior = false;
-
-    let dataAtual = new Date().toISOString();
+    return this.http.get<Page<TreinoData>>(url)
+      .map((pageTrainosDatas: Page<TreinoData>)=>{
+        return pageTrainosDatas.content.map((td: TreinoData) =>{
+          return Object.assign(td);
+        });
+    }) as Observable<TreinoData[]>;
     
-    treinoData.forEach(t => {
-      if(hoje == false && t.data.toISOString() == dataAtual){
-        hoje = true;
-        t.intervaloTempo = TipoSessao.HOJE;
-      }
-      if(anterior == false && t.data.toISOString() < dataAtual){
-        anterior = true;
-        t.intervaloTempo = TipoSessao.HOJE;
-      }
-      if(proximo == false && t.data.toISOString() < dataAtual){
-        proximo = true;
-        t.intervaloTempo = TipoSessao.HOJE;
-      }
-    }); */
+  }
 
-    return treinoData;
+  /**
+   * Lista os treinos de acordo com os filtros
+   * @param dataInicio 
+   * @param dataTermino 
+   * @param idAluno 
+   * @param isSomenteCompletos 
+   */
+  listarTreinosByFilters(
+    dataInicio: Date, 
+    dataTermino: Date, 
+    idAluno: number,
+    isSomenteCompletos: boolean
+  ): Observable<TreinoData[]> {
+
+    let url = '/api/treino-datas/data-inicio/'+
+    this.datePipe.transform(dataInicio, "yyyy-MM-dd")+
+    '/data-termino/'+
+    this.datePipe.transform(dataTermino, "yyyy-MM-dd")+
+    '/aluno/'+
+    idAluno+
+    (
+      isSomenteCompletos == null ?
+      '/'
+      :
+      '/somente-completos/'+isSomenteCompletos+'/'
+    );
+
+    // let url = '/api/treino-datas/data-inicio/'+this.datePipe.transform(dataInicio, "yyyy-MM-dd")+'/aluno/'+idAluno;
+
+    return this.http.get<Page<TreinoData>>(url)
+      .map((pageTrainosDatas: Page<TreinoData>)=>{
+        return pageTrainosDatas.content.map((td: TreinoData) =>{
+          return Object.assign(td);
+        });
+    }) as Observable<TreinoData[]>;
+    
+  }
+
+  /**
+   * Busca os treinos para o histórico, 
+   * 
+   * @param dataInicio 
+   * @param dataTermino 
+   * @param idAluno 
+   */
+  listarTreinosByFiltersHistorico(
+    dataInicio: Date, 
+    dataTermino: Date, 
+    idAluno: number,
+  ): Observable<TreinoData[]> {
+
+    let url = '/api/treino-datas/data-inicio/'+
+    this.datePipe.transform(dataInicio, "yyyy-MM-dd")+
+    '/data-termino/'+
+    this.datePipe.transform(dataTermino, "yyyy-MM-dd")+
+    '/aluno/'+
+    idAluno+'/';
+
+    // let url = '/api/treino-datas/data-inicio/'+this.datePipe.transform(dataInicio, "yyyy-MM-dd")+'/aluno/'+idAluno;
+
+    return this.http.get<Page<TreinoData>>(url)
+      .map((pageTrainosDatas: Page<TreinoData>)=>{
+        return pageTrainosDatas.content.map((td: TreinoData) =>{
+          return Object.assign(td);
+        });
+    }) as Observable<TreinoData[]>;
+    
+  }
+
+  salvarTreinoData(treinoDataRealizado: TreinoData): Observable<TreinoData> {
+
+    // salvar localmente antes de enviar
+
+    return this.http.post('/api/treino-datas/', treinoDataRealizado);
+
   }
 
 }

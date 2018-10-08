@@ -1,0 +1,21 @@
+
+<ion-header>
+  <ion-navbar color="primary">
+    <ion-title> {{ "AVALIACAO.FISICA.SELECIONAR.PESSOA.TITLE" | translate }} </ion-title>
+  </ion-navbar>
+</ion-header>
+
+
+<ion-content>
+  <ion-searchbar
+    [(ngModel)]="pesquisaPessoa"
+    placeholder="{{ 'AVALIACAO.FISICA.SELECIONAR.PESSOA.DIGITE.NOME' | translate }}"
+    [showCancelButton]="false"
+    (ionInput)="listByFilters($event.target.value)">
+  </ion-searchbar>
+  <ion-list>
+    <button ion-item *ngFor="let pessoa of pessoas;" (click)="proximaEtapa(pessoa)">
+      {{ pessoa?.nome }}
+    </button>
+  </ion-list>
+</ion-content>
