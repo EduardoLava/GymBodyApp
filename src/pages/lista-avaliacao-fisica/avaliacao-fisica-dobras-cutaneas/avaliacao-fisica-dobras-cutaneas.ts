@@ -4,6 +4,7 @@ import { FormBuilder, FormGroup, Validators } from '@angular/forms';
 import { AvaliacaoFisica, DobrasCutaneas } from '../../../model/entities';
 import { ToastDefautController } from '../../../utils/toast-default-contoller';
 import { AvaliacaoFisicaImcPage } from '../avaliacao-fisica-imc/avaliacao-fisica-imc';
+import { ListaAvaliacaoFisicaPage } from '../lista-avaliacao-fisica';
 
 /**
  * Generated class for the AvaliacaoFisicaDobrasCutaneasPage page.
@@ -27,6 +28,7 @@ export class AvaliacaoFisicaDobrasCutaneasPage {
   private isProtocoloGuedes: boolean = false;
   private dobrasCutaneas: DobrasCutaneas;
 
+  readOnly: boolean = false;
 
   constructor(
     public navCtrl: NavController, 
@@ -35,14 +37,20 @@ export class AvaliacaoFisicaDobrasCutaneasPage {
     public formBuilder: FormBuilder
   ) {
     this.avaliacaoFisica = this.navParams.get('avaliacaoFisica');
+    this.readOnly = this.navParams.get('readOnly');
+
+    if(this.readOnly == null){
+      this.readOnly = false;
+    }
 
     if(
-        !this.avaliacaoFisica 
-        || !this.avaliacaoFisica.avaliacaoAntropometrica
-        || !this.avaliacaoFisica.avaliacaoAntropometrica.dobrasCutaneas
+        this.avaliacaoFisica == null
+        || this.avaliacaoFisica.avaliacaoAntropometrica == null
+        || this.avaliacaoFisica.avaliacaoAntropometrica.dobrasCutaneas == null
     ) {
       this.toast.create('Ocorre um erro ao se comunicar com o servidor');
-      return null;
+      this.navCtrl.setRoot(ListaAvaliacaoFisicaPage.name);
+      return;
     }
   }
 
@@ -51,9 +59,20 @@ export class AvaliacaoFisicaDobrasCutaneasPage {
 
   ngOnInit(){
     // assumindo como padrão o protocolo do Pollock
+    if(
+      this.avaliacaoFisica == null
+      || this.avaliacaoFisica.avaliacaoAntropometrica == null
+      || this.avaliacaoFisica.avaliacaoAntropometrica.dobrasCutaneas == null
+    ) {
+      this.navCtrl.setRoot(ListaAvaliacaoFisicaPage.name);
+      return;
+    }
+
     this.dobrasCutaneas = this.avaliacaoFisica.avaliacaoAntropometrica.dobrasCutaneas;
 
     console.log("dobras cutaneas "+this.dobrasCutaneas);
+
+    console.log('Is guedes '+this.isProtocoloGuedes);
 
     this.formDobras = this.formBuilder.group({
       // abdominal, utilizado em ambos os protocolos
@@ -63,46 +82,32 @@ export class AvaliacaoFisicaDobrasCutaneasPage {
       ],
       axilarMedia: [
         this.dobrasCutaneas.axilarMedia, 
-        (!this.isProtocoloGuedes?
-          Validators.compose([Validators.required, Validators.min(0)])
-        :
-          Validators.nullValidator
-        )
+        Validators.compose([Validators.required, Validators.min(0)])
       ],
       bicital: [this.dobrasCutaneas.bicital],
       coxa: [
         this.dobrasCutaneas.coxa,
-        (!this.isProtocoloGuedes?
-          Validators.compose([Validators.required, Validators.min(0)])
-        :
-          Validators.nullValidator
-        )
+        Validators.compose([Validators.required, Validators.min(0)])
       ],
-      panturrilha: [this.dobrasCutaneas.panturrilha],
-      peitoral: [this.dobrasCutaneas.peitoral],
+      panturrilha: [
+        this.dobrasCutaneas.panturrilha,
+        Validators.compose([Validators.required, Validators.min(0)])
+      ],
+      peitoral: [
+        this.dobrasCutaneas.peitoral,
+        Validators.compose([Validators.required, Validators.min(0)])
+      ],
       subescapular: [
         this.dobrasCutaneas.subescapular, 
-        (!this.isProtocoloGuedes?
-          Validators.compose([Validators.required, Validators.min(0)])
-        :
-          Validators.nullValidator
-        )
+        Validators.compose([Validators.required, Validators.min(0)])
       ],
       supraIliaca: [
         this.dobrasCutaneas.supraIliaca,
-        (this.isProtocoloGuedes?
-          Validators.compose([Validators.required, Validators.min(0)])
-        :
-          Validators.nullValidator
-        )
+        Validators.compose([Validators.required, Validators.min(0)])
       ],
       toracica: [
         this.dobrasCutaneas.toracica, 
-        (!this.isProtocoloGuedes?
-            Validators.compose([Validators.required, Validators.min(0)])
-          :
-            Validators.nullValidator
-        )
+        Validators.compose([Validators.required, Validators.min(0)])
       ],
       // triciptal utilizado em ambos os protocolos
       tricipal: [
@@ -110,6 +115,8 @@ export class AvaliacaoFisicaDobrasCutaneasPage {
         Validators.compose([Validators.required, Validators.min(0)])
       ],
     });
+
+    console.log(this.formDobras);
 
   }
 

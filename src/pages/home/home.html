@@ -1,17 +1,37 @@
 <ion-header>
-  <ion-navbar>
+  <ion-navbar color="primary">
     <button ion-button menuToggle >
       <ion-icon name="menu"></ion-icon>
     </button>
-    <ion-title>
-      {{ 'APP.NAME' | translate }}
-    </ion-title>
+    <ion-title>{{"TREINO.HISTORICO.TITLE" | translate}}</ion-title>
+    <ion-buttons right>
+      <button ion-button (click)="openCalendar()">
+        <ion-icon name="calendar"></ion-icon>
+      </button>
+    </ion-buttons>
   </ion-navbar>
 </ion-header>
 
 <ion-content padding>
-  <p>página </p>
-  <button ion-button (click)="fazer()">clica aqui </button>
-  <button ion-button (click)="verificar()">verificar login </button>
-  <button ion-button (click)="data()">print data </button>
+  <ion-card>
+    <ion-card-content *ngIf="treinosRealizados == null || treinosRealizados.length == 0">
+      {{"TREINO.HISTORICO.EMPTY" | translate}}
+      </ion-card-content>
+  </ion-card>
+  <ion-list *ngIf="treinosRealizados">
+    <button 
+      ion-item 
+      *ngFor="let treinoData of treinosRealizados;"
+      (click)="detalhar(treinoData)">
+      <h2>
+        {{treinoData?.treino?.nome}}
+      </h2>
+      <p>
+          {{treinoData?.data | date: 'dd/MM/yyyy'}} - 
+          <strong [ngClass]="treinoData?.completo === true ? 'completo' : 'incompleto' ">
+            {{ treinoData?.completo == true ? 'Completo' : 'Incompleto' }}
+          </strong>
+      </p>
+    </button>
+  </ion-list>
 </ion-content>

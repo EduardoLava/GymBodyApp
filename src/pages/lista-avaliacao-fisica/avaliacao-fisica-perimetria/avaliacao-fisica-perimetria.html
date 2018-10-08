@@ -1,7 +1,7 @@
 
 <ion-header>
 
-  <ion-navbar>
+  <ion-navbar color="primary">
     <ion-title>{{"PERIMETRIA.TITLE"|translate}}</ion-title>
   </ion-navbar>
 
@@ -10,159 +10,197 @@
 <ion-content>
   <form [formGroup]="formPerimetria" #form="ngForm" (ngSubmit)="priximaEtapa()" >
     <ion-item>
-      <ion-label fixed >{{"PERIMETRIA.PESCOCO" | translate }}</ion-label>
+      <ion-label>{{"PERIMETRIA.PESCOCO" | translate }}</ion-label>
       <ion-input class="input-number"
+        disabled="{{readOnly}}"
+        placeholder="{{'PERIMETRIA.OBRIGATORIO' | translate}}"
         type="number" 
         [(ngModel)]="avaliacaoFisica.perimetria.pescoco" 
         formControlName="pescoco"></ion-input>
       <span item-end> {{"PERIMETRIA.CM" | translate}} </span>
     </ion-item>
     <ion-item>
-      <ion-label fixed>{{"PERIMETRIA.TORAX" | translate }}</ion-label>
+      <ion-label>{{"PERIMETRIA.TORAX" | translate }}</ion-label>
       <ion-input 
+        disabled="{{readOnly}}"
+        placeholder="{{'PERIMETRIA.OBRIGATORIO' | translate}}"
         type="number" 
         [(ngModel)]="avaliacaoFisica.perimetria.torax" 
         formControlName="torax"></ion-input>
         <span item-end> {{"PERIMETRIA.CM" | translate}} </span>
     </ion-item>
     <ion-item>
-      <ion-label fixed>{{"PERIMETRIA.BRACO.DIREITO.RELAXADO" | translate }}</ion-label>
+      <ion-label>{{"PERIMETRIA.BRACO.DIREITO.RELAXADO" | translate }}</ion-label>
       <ion-input 
+        disabled="{{readOnly}}"
+        placeholder="{{'PERIMETRIA.OBRIGATORIO' | translate}}"
         type="number" 
         [(ngModel)]="avaliacaoFisica.perimetria.bracoDireitoRelaxado" 
         formControlName="bracoDireitoRelaxado"></ion-input>
         <span item-end> {{"PERIMETRIA.CM" | translate}} </span>
     </ion-item>
     <ion-item>
-      <ion-label fixed>{{"PERIMETRIA.BRACO.ESQUERDO.RELAXADO" | translate }}</ion-label>
+      <ion-label>{{"PERIMETRIA.BRACO.ESQUERDO.RELAXADO" | translate }}</ion-label>
       <ion-input 
+        disabled="{{readOnly}}"
+        placeholder="{{'PERIMETRIA.OBRIGATORIO' | translate}}"
         type="number" 
         [(ngModel)]="avaliacaoFisica.perimetria.bracoEsquerdoRelaxado" 
         formControlName="bracoEsquerdoRelaxado"></ion-input>
         <span item-end> {{"PERIMETRIA.CM" | translate}} </span>
     </ion-item>
     <ion-item>
-      <ion-label fixed>{{"PERIMETRIA.BRACO.DIREITO.CONTRAIDO" | translate }}</ion-label>
+      <ion-label>{{"PERIMETRIA.BRACO.DIREITO.CONTRAIDO" | translate }}</ion-label>
       <ion-input 
+        disabled="{{readOnly}}"
+        placeholder="{{'PERIMETRIA.OBRIGATORIO' | translate}}"
         type="number" 
         [(ngModel)]="avaliacaoFisica.perimetria.bracoDireitoContraido" 
         formControlName="bracoDireitoContraido"></ion-input>
         <span item-end> {{"PERIMETRIA.CM" | translate}} </span>
     </ion-item>
     <ion-item>
-      <ion-label fixed>{{"PERIMETRIA.BRACO.ESQUERDO.CONTRAIDO" | translate }}</ion-label>
+      <ion-label>{{"PERIMETRIA.BRACO.ESQUERDO.CONTRAIDO" | translate }}</ion-label>
       <ion-input 
+        disabled="{{readOnly}}"
+        placeholder="{{'PERIMETRIA.OBRIGATORIO' | translate}}"
         type="number" 
         [(ngModel)]="avaliacaoFisica.perimetria.bracoEsquerdoContraido" 
         formControlName="bracoEsquerdoContraido"></ion-input>
         <span item-end> {{"PERIMETRIA.CM" | translate}} </span>
     </ion-item>
     <ion-item>
-      <ion-label fixed>{{"PERIMETRIA.ANTEBRACO.DIREITO" | translate }}</ion-label>
+      <ion-label>{{"PERIMETRIA.ANTEBRACO.DIREITO" | translate }}</ion-label>
       <ion-input 
+        disabled="{{readOnly}}"
+        placeholder="{{'PERIMETRIA.OBRIGATORIO' | translate}}"
         type="number" 
         [(ngModel)]="avaliacaoFisica.perimetria.antebracoDireito" 
         formControlName="antebracoDireito"></ion-input>
         <span item-end> {{"PERIMETRIA.CM" | translate}} </span>
     </ion-item>
     <ion-item>
-      <ion-label fixed>{{"PERIMETRIA.ANTEBRACO.ESQUERDO" | translate }}</ion-label>
+      <ion-label>{{"PERIMETRIA.ANTEBRACO.ESQUERDO" | translate }}</ion-label>
       <ion-input 
+        disabled="{{readOnly}}"
+        placeholder="{{'PERIMETRIA.OBRIGATORIO' | translate}}"
         type="number" 
         [(ngModel)]="avaliacaoFisica.perimetria.antebracoEsquerdo" 
         formControlName="antebracoEsquerdo"></ion-input>
         <span item-end> {{"PERIMETRIA.CM" | translate}} </span>
     </ion-item>
     <ion-item>
-      <ion-label fixed>{{"PERIMETRIA.CINTURA" | translate }}</ion-label>
+      <ion-label>{{"PERIMETRIA.CINTURA" | translate }}</ion-label>
       <ion-input 
+        disabled="{{readOnly}}"
+        placeholder="{{'PERIMETRIA.OBRIGATORIO' | translate}}"
         type="number" 
         [(ngModel)]="avaliacaoFisica.perimetria.cintura" 
         formControlName="cintura"></ion-input>
         <span item-end> {{"PERIMETRIA.CM" | translate}} </span>
     </ion-item>
     <ion-item>
-      <ion-label fixed>{{"PERIMETRIA.ABDOMINAL" | translate }}</ion-label>
+      <ion-label>{{"PERIMETRIA.ABDOMINAL" | translate }}</ion-label>
       <ion-input 
+        disabled="{{readOnly}}"
+        placeholder="{{'PERIMETRIA.OBRIGATORIO' | translate}}"
         type="number" 
         [(ngModel)]="avaliacaoFisica.perimetria.abdomen" 
         formControlName="abdomen"></ion-input>
         <span item-end> {{"PERIMETRIA.CM" | translate}} </span>
     </ion-item>
     <ion-item>
-      <ion-label fixed>{{"PERIMETRIA.QUADRIL" | translate }}</ion-label>
+      <ion-label>{{"PERIMETRIA.QUADRIL" | translate }}</ion-label>
       <ion-input 
+        disabled="{{readOnly}}"
+        placeholder="{{'PERIMETRIA.OBRIGATORIO' | translate}}"
         type="number" 
         [(ngModel)]="avaliacaoFisica.perimetria.quadril" 
         formControlName="quadril"></ion-input>
         <span item-end> {{"PERIMETRIA.CM" | translate}} </span>
     </ion-item>
     <ion-item>
-      <ion-label fixed>{{"PERIMETRIA.COXA.PROXIMAL.DIREITA" | translate }}</ion-label>
+      <ion-label>{{"PERIMETRIA.COXA.PROXIMAL.DIREITA" | translate }}</ion-label>
       <ion-input 
+        disabled="{{readOnly}}"
+        placeholder="{{'PERIMETRIA.OBRIGATORIO' | translate}}"
         type="number" 
         [(ngModel)]="avaliacaoFisica.perimetria.coxaProximalDireita" 
         formControlName="coxaProximalDireita"></ion-input>
         <span item-end> {{"PERIMETRIA.CM" | translate}} </span>
     </ion-item>
     <ion-item>
-      <ion-label fixed>{{"PERIMETRIA.COXA.PROXIMAL.ESQUERDA" | translate }}</ion-label>
+      <ion-label>{{"PERIMETRIA.COXA.PROXIMAL.ESQUERDA" | translate }}</ion-label>
       <ion-input 
-      type="number" 
-      [(ngModel)]="avaliacaoFisica.perimetria.coxaProximalEsquerda" 
-      formControlName="coxaProximalEsquerda"></ion-input>
+        disabled="{{readOnly}}"
+        placeholder="{{'PERIMETRIA.OBRIGATORIO' | translate}}"
+        type="number" 
+        [(ngModel)]="avaliacaoFisica.perimetria.coxaProximalEsquerda" 
+        formControlName="coxaProximalEsquerda"></ion-input>
       <span item-end> {{"PERIMETRIA.CM" | translate}} </span>
     </ion-item>
     <ion-item>
-      <ion-label fixed>{{"PERIMETRIA.COXA.MEDIA.DIREITA" | translate }}</ion-label>
+      <ion-label>{{"PERIMETRIA.COXA.MEDIA.DIREITA" | translate }}</ion-label>
       <ion-input 
+        disabled="{{readOnly}}"
+        placeholder="{{'PERIMETRIA.OBRIGATORIO' | translate}}"
         type="number" 
         [(ngModel)]="avaliacaoFisica.perimetria.coxaMediaDireita" 
         formControlName="coxaMediaDireita"></ion-input>
         <span item-end> {{"PERIMETRIA.CM" | translate}} </span>
     </ion-item>
     <ion-item>
-      <ion-label fixed>{{"PERIMETRIA.COXA.MEDIA.ESQUERDA" | translate }}</ion-label>
+      <ion-label>{{"PERIMETRIA.COXA.MEDIA.ESQUERDA" | translate }}</ion-label>
       <ion-input 
+        disabled="{{readOnly}}"
+        placeholder="{{'PERIMETRIA.OBRIGATORIO' | translate}}"
         type="number" 
         [(ngModel)]="avaliacaoFisica.perimetria.coxaMediaEsquerda" 
         formControlName="coxaMediaEsquerda"></ion-input>
         <span item-end> {{"PERIMETRIA.CM" | translate}} </span>
     </ion-item>
     <ion-item>
-      <ion-label fixed>{{"PERIMETRIA.COXA.DISTAL.DIREITA" | translate }}</ion-label>
+      <ion-label>{{"PERIMETRIA.COXA.DISTAL.DIREITA" | translate }}</ion-label>
       <ion-input 
+        disabled="{{readOnly}}"
+        placeholder="{{'PERIMETRIA.OBRIGATORIO' | translate}}"
         type="number" 
         [(ngModel)]="avaliacaoFisica.perimetria.coxaDistalDireita" 
         formControlName="coxaDistalDireita"></ion-input>
         <span item-end> {{"PERIMETRIA.CM" | translate}} </span>
     </ion-item>
     <ion-item>
-      <ion-label fixed>{{"PERIMETRIA.COXA.DISTAL.ESQUERDA" | translate }}</ion-label>
+      <ion-label>{{"PERIMETRIA.COXA.DISTAL.ESQUERDA" | translate }}</ion-label>
       <ion-input 
+        disabled="{{readOnly}}" 
+        placeholder="{{'PERIMETRIA.OBRIGATORIO' | translate}}"     
         type="number" 
         [(ngModel)]="avaliacaoFisica.perimetria.coxaDistalEsquerda" 
         formControlName="coxaDistalEsquerda"></ion-input>
         <span item-end> {{"PERIMETRIA.CM" | translate}} </span>
     </ion-item>
     <ion-item>
-      <ion-label fixed>{{"PERIMETRIA.PANTURRILHA.DIREITA" | translate }}</ion-label>
+      <ion-label>{{"PERIMETRIA.PANTURRILHA.DIREITA" | translate }}</ion-label>
       <ion-input 
+        disabled="{{readOnly}}"
+        placeholder="{{'PERIMETRIA.OBRIGATORIO' | translate}}"
         type="number" 
         [(ngModel)]="avaliacaoFisica.perimetria.panturrilhaDireita" 
         formControlName="panturrilhaDireita"></ion-input>
         <span item-end> {{"PERIMETRIA.CM" | translate}} </span>
     </ion-item>
     <ion-item>
-      <ion-label fixed>{{"PERIMETRIA.PANTURRILHA.ESQUERDA" | translate }}</ion-label>
+      <ion-label>{{"PERIMETRIA.PANTURRILHA.ESQUERDA" | translate }}</ion-label>
       <ion-input 
+        disabled="{{readOnly}}"
+        placeholder="{{'PERIMETRIA.OBRIGATORIO' | translate}}"
         type="number" 
         [(ngModel)]="avaliacaoFisica.perimetria.panturrilhaEsquerda" 
         formControlName="panturrilhaEsquerda"></ion-input>
         <span item-end> {{"PERIMETRIA.CM" | translate}} </span>
     </ion-item>
   </form>
-  <ion-fab bottom right>
+  <ion-fab bottom right *ngIf="readOnly == false">
     <button 
       [disabled]="!formPerimetria.valid"
       (click)="form.ngSubmit.emit()"

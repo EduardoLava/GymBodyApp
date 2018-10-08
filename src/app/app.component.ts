@@ -1,5 +1,5 @@
 import { Component, ViewChild } from '@angular/core';
-import { Platform, Nav } from 'ionic-angular';
+import { Platform, Nav, MenuController } from 'ionic-angular';
 import { StatusBar } from '@ionic-native/status-bar';
 import { SplashScreen } from '@ionic-native/splash-screen';
 
@@ -12,6 +12,7 @@ import { LoginPage } from '../pages/login/login';
 import { SessionServiceProvider } from '../providers/services/login-service/session-service';
 
 import { ListaAvaliacaoFisicaPage } from '../pages/lista-avaliacao-fisica/lista-avaliacao-fisica';
+import { LoadingDefaultController } from '../utils/loading-default-controller';
 
 @Component({
   templateUrl: 'app.html'
@@ -25,7 +26,7 @@ export class MyApp {
   public nav: Nav;
 
   public paginas = [
-    { titulo: 'MENU.HISTORICO', componente: ListaTreinoPage.name, icone: 'ai-history' },
+    { titulo: 'MENU.HISTORICO', componente: HomePage, icone: 'ai-history' },
     { titulo: 'MENU.TREINOS', componente: ListaTreinoPage.name, icone: 'ai-fitness' },
     { titulo: 'MENU.CONTA', componente: MinhaContaPage.name, icone: 'person' },
     { titulo: 'MENU.ALUNOS', componente: ListaTreinoPage.name, icone: 'people' },
@@ -40,7 +41,8 @@ export class MyApp {
     splashScreen: SplashScreen,
     translate: TranslateService,
     private sessionService: SessionServiceProvider,
-    private loginService: LoginServiceProvider
+    private loginService: LoginServiceProvider,
+    private menu: MenuController,
   ) {
     platform.ready().then(() => {
       // Okay, so the platform is ready and our plugins are available.
@@ -48,6 +50,8 @@ export class MyApp {
       statusBar.styleDefault();
       splashScreen.hide();
     });
+
+    this.menu.enable(false);
 
     // como usar o i18n https://github.com/ngx-translate/core#usage
 
@@ -78,7 +82,9 @@ export class MyApp {
    * 
    */
   verificarLogin(){
-    this.sessionService.authUser.subscribe(token=>{
+
+    this.sessionService.authUser
+    .subscribe(token=>{
       if(token){
         this.rootPage = HomePage;
       } else {

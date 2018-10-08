@@ -1,7 +1,7 @@
 import { Injectable } from "@angular/core";
 import { ReplaySubject, Observable } from "rxjs";
 import { Storage } from '@ionic/storage';
-import { Pessoa } from "../../../model/entities";
+import { Pessoa, Papel } from "../../../model/entities";
 
 @Injectable()
 export class SessionServiceProvider {
@@ -9,7 +9,8 @@ export class SessionServiceProvider {
     private token: string;
     private jwtTokenName = 'jwt_token';
     private pessoaLodadaName = 'pessoa_logada';
-    private pessoa;
+    private pessoa: Pessoa;
+    private isAdministradorOrPersonal: boolean = false;
 
     /**
      *  ReplaySubject fornecido pela biblioteca RxJs para notificar outras partes do aplicativo 
@@ -98,7 +99,28 @@ export class SessionServiceProvider {
 
     public setPessoaLogada(pessoa: Pessoa) {
         this.pessoa = pessoa;
+        this.setIsAdministradorOrPersonal(pessoa);
         // console.log('PessoaLogada' + pessoa.id + ' ', pessoa.nome);
+    }
+
+    public getIsAdministradorOrPersonal(){
+        return this.isAdministradorOrPersonal;
+    }
+
+    private setIsAdministradorOrPersonal(pessoa: Pessoa){
+        this.isAdministradorOrPersonal = false;
+        if(pessoa== null || pessoa.papeis == null){
+            return false;
+        }
+        console.log('Papeis '+pessoa.papeis);
+        pessoa.papeis.forEach((papel: Papel) =>{
+            if(papel == 'ADMINISTRATOR' || papel == 'PERSONAL'){
+                this.isAdministradorOrPersonal = true;
+            }
+        });
+
+        console.log( this.isAdministradorOrPersonal)
+
     }
 
 }    

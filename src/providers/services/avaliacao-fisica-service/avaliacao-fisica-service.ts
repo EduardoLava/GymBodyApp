@@ -3,6 +3,7 @@ import { HttpServiceProvider } from '../http-service/http-service';
 import { AvaliacaoFisica, AvaliacaoAntropometrica, TipoProtocolo } from '../../../model/entities';
 import { Observable } from 'rxjs';
 import { DatePipe } from '@angular/common';
+import { SessionServiceProvider } from '../login-service/session-service';
 
 /*
   Generated class for the AvaliacaoFisicaServiceProvider provider.
@@ -15,7 +16,8 @@ export class AvaliacaoFisicaServiceProvider {
 
   constructor(
     public http: HttpServiceProvider,
-    private datePipe: DatePipe
+    private datePipe: DatePipe,
+    private sessionService: SessionServiceProvider
   ) {
   }
 
@@ -62,33 +64,60 @@ export class AvaliacaoFisicaServiceProvider {
     return this.http.get(idPessoa+"/pessoa-id");
   }
 
-  listAvaliacaoFisicaByFilters(filters: string, dataInicio: Date, dataFim: Date){
+  listAvaliacaoFisicaByFilters(filters: string, idPessoa: number, dataInicio: Date, dataFim: Date){
 
-    
+
+    if(!this.sessionService.getIsAdministradorOrPersonal()){
+      let pes = this.sessionService.pessoalogada;
+
+      if(pes != null){
+        idPessoa = pes.id;
+      }
+
+    }
 
     if(filters == null || filters == ''){
-      filters = ' ';
-    }else {
-      filters = '/'+filters;
+      filters = '';
+    } else{
+      filters = '/'+ filters;
     }
 
     let dataInicioFormatada = '';
     if(dataInicio){
       dataInicioFormatada = this.datePipe.transform(dataInicio, "yyyy-MM-dd");
       console.log(dataInicioFormatada);
-      dataInicioFormatada = '/'+dataInicioFormatada+'/inicio';
+      dataInicioFormatada = '/inicio/'+dataInicioFormatada+'/';
     }
 
     let dataFimFormatada = '';
     if(dataFim){
       dataFimFormatada = this.datePipe.transform(dataFim, "yyyy-MM-dd");
-      dataFimFormatada  = '/'+dataFimFormatada+'/fim'
+      dataFimFormatada  = '/fim/'+dataFimFormatada+'/'
     }
 
-    return this.http.get('/api/avaliacao-fisica/by-filters/ /inicio/'
-      +this.datePipe.transform(dataInicio, "yyyy-MM-dd")+
-      '/fim/'+this.datePipe.transform(dataFim, "yyyy-MM-dd")+'/')
+    return this.http.get(
+      '/api/avaliacao-fisica/by-filters'+
+      filters+
+      (idPessoa != null ? '/pessoa-id/'+idPessoa: '')+
+      dataInicioFormatada+
+      dataFimFormatada
+      // '/inicio/'+
+      // this.datePipe.transform(dataInicio, "yyyy-MM-dd")+
+      // '/fim/'+
+      // this.datePipe.transform(dataFim, "yyyy-MM-dd")+
+      // '/'
+    )
     // return this.http.get('/api/avaliacao-fisica/'+filters+'/by-filters'+dataInicioFormatada+dataFimFormatada);
+  }
+
+  /**
+   * 
+   * Busca uma avaliaçao física por id
+   * 
+   * @param avaliacaoFisicaId 
+   */
+  findAvaliacaoFisicaById(avaliacaoFisicaId: number) : Observable<AvaliacaoFisica>{
+    return this.http.get('/api/avaliacao-fisica/'+avaliacaoFisicaId);
   }
 
 }

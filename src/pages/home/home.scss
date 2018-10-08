@@ -1,3 +1,11 @@
 page-home {
 
+    .completo {
+        color: map-get($colors, confirm);
+    }
+    
+    .incompleto {
+        color: map-get($colors, danger);
+    }
+
 }

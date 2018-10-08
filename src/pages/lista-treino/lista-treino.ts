@@ -46,10 +46,9 @@ export class ListaTreinoPage implements NavLifecycles {
       this.loading.loader.dismiss();
       return;
     } 
-
     this.treinosData = null;
 
-    this.treinoService.listarTreinos(this.sessionService.pessoalogada.id)
+    this.treinoService.listarTreinosByAluno(this.sessionService.pessoalogada.id)
     .finally(() => this.loading.loader.dismiss())
     .subscribe((treinosData: TreinoData[] ) =>{
       
@@ -57,7 +56,6 @@ export class ListaTreinoPage implements NavLifecycles {
       console.log(this.treinosData);
 
     }, (error)=>{
-      this.loading.loader.dismiss();
       this.alertControler.create({
         title: 'Erro',
         subTitle: 'Ocorreu um erro ao consultar seus treinos!\nVerifique sua conexão!',

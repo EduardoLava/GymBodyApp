@@ -4,7 +4,8 @@ import { Time } from '@angular/common';
 import { Treino } from '../../../model/treino/treino';
 import { Observable } from 'rxjs';
 import { HttpServiceProvider } from '../http-service/http-service';
-import { ExercicioRealizado } from '../../../model/entities';
+import { ExercicioRealizado, Page, TreinoData } from '../../../model/entities';
+import { TreinoExercicio } from '../../../model/treino/treino-exercicio';
 
 /*
   Generated class for the TreinoServiceProvider provider.
@@ -18,13 +19,15 @@ export class TreinoServiceProvider {
   constructor(private http: HttpServiceProvider) {
   }
 
-
-  public salvar(exerciciosRealizados: ExercicioRealizado[]) {
-
-
+  /**
+   * 
+   * busca um objeto do tipo TreinoData no servidor com os exercicios realizados
+   * 
+   * @param idTreino 
+   */
+  findTreinoDataById(idTreino: number) : Observable<TreinoData>{
+    return this.http.get('/api/treino-datas/'+idTreino+'/');
   }
-
-
 
 
 }

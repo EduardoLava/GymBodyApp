@@ -150,7 +150,8 @@ export class TreinoPage implements NavLifecycles{
           this.alertController.create({
             buttons: [{text: 'Ok'}],
             title: 'Problema de conexão',
-            subTitle: 'Ocorreu um erro ao se conectar com o servidor, verifique sua conexão com a internet e tente novamente'
+            subTitle: 'Ocorreu um erro ao se conectar com o servidor, verifique sua conexão com a internet e tente novamente',
+            message: "error "+ erro.error
           }).present();
 
           // depois fecha a tela de treinos

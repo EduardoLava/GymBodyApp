@@ -1,11 +1,12 @@
 import { Component } from '@angular/core';
-import { IonicPage, NavController, NavParams } from 'ionic-angular';
+import { IonicPage, NavController, NavParams, LoadingController } from 'ionic-angular';
 import { FormGroup, FormBuilder, Validators } from '@angular/forms';
 import { AvaliacaoFisica, IndiceMassaCorporal } from '../../../model/entities';
 import { ToastDefautController } from '../../../utils/toast-default-contoller';
 import { HomePage } from '../../home/home';
 import { AvaliacaoFisicaServiceProvider } from '../../../providers/services/avaliacao-fisica-service/avaliacao-fisica-service';
 import { ListaAvaliacaoFisicaPage } from '../lista-avaliacao-fisica';
+import { LoadingDefaultController } from '../../../utils/loading-default-controller';
 
 /**
  * Generated class for the AvaliacaoFisicaImcPage page.
@@ -25,11 +26,13 @@ export class AvaliacaoFisicaImcPage {
   // ------------ ATRIBUTOS ------------------
   // -----------------------------------------
 
-  private formImc: FormGroup;
-  private avaliacaoAvaiacaoFisica: AvaliacaoFisica;
-  private imc: IndiceMassaCorporal;
+  public formImc: FormGroup;
+  public avaliacaoAvaiacaoFisica: AvaliacaoFisica;
+  public imc: IndiceMassaCorporal;
   public textoResultado: string = "";
   public corResultado: string;
+
+  public readOnly: boolean = false;
 
   constructor(
     public navCtrl: NavController,
@@ -37,8 +40,17 @@ export class AvaliacaoFisicaImcPage {
     private formBuilder: FormBuilder,
     private toast: ToastDefautController,
     private avaliacaoFisicaService: AvaliacaoFisicaServiceProvider,
+    private loading: LoadingDefaultController
   ) {
+
+    this.imc = {};
+
     this.avaliacaoAvaiacaoFisica = this.navParams.get('avaliacaoFisica');
+    this.readOnly = this.navParams.get('readOnly');
+
+    if(this.readOnly == null){
+      this.readOnly = false;
+    }
 
     if(
         this.avaliacaoAvaiacaoFisica == null 
@@ -50,13 +62,12 @@ export class AvaliacaoFisicaImcPage {
     }
 
     this.imc = this.avaliacaoAvaiacaoFisica.avaliacaoAntropometrica.indiceMassaCorporal;
+    this.calcularImc();
   }
 
-  ionViewDidLoad() {
-  }  
-  
+  ionViewDidLoad() {}
+
   ngOnInit(){
-    console.log('passsou');
     this.formImc = this.formBuilder.group({
       altura: [
         this.imc.altura,   
@@ -75,15 +86,18 @@ export class AvaliacaoFisicaImcPage {
         ]),
       ]
     });
-  }
 
+  }  
+  
   /**
    * Realiza o calculo do imc de acodo com o preenchido no formulário
    */
   calcularImc(){
     
+    
     if(
-      this.imc.altura == null 
+      this.imc == null
+      || this.imc.altura == null 
       || this.imc.altura <= 0 
       || this.imc.peso == null
       || this.imc.altura.toString().length < 2
@@ -149,15 +163,19 @@ export class AvaliacaoFisicaImcPage {
     this.avaliacaoAvaiacaoFisica.avaliacaoAntropometrica.indiceMassaCorporal = this.imc;
 
     console.log(typeof this.avaliacaoAvaiacaoFisica.avaliacaoAntropometrica);
-
+    this.loading.create('Salavando avaliação física').present();
     console.log('save');
     this.avaliacaoFisicaService.salvarAvaliacaoFisica(this.avaliacaoAvaiacaoFisica)
+    .finally(()=>{
+      this.loading.loader.dismiss();
+    })
     .subscribe((avaliacao: AvaliacaoFisica) =>{
       this.avaliacaoAvaiacaoFisica = avaliacao;
       this.toast.create("Avaliacação física salva com sucesso!").present();
       this.navCtrl.setRoot(ListaAvaliacaoFisicaPage.name);
     }, (error) =>{
-      this.toast.create(error.message).present();
+      console.log(error);
+      this.toast.create(error.error).present();
     });
 
   }

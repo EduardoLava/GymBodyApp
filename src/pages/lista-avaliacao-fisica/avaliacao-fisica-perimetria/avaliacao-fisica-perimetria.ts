@@ -26,6 +26,8 @@ export class AvaliacaoFisicaPerimetriaPage {
   public avaliacaoFisica: AvaliacaoFisica;
   public formPerimetria: FormGroup;
 
+  readOnly: boolean = false;
+
   /**
    * 
    * @param navCtrl 
@@ -40,6 +42,11 @@ export class AvaliacaoFisicaPerimetriaPage {
     private formBuilder: FormBuilder
   ) {
     this.avaliacaoFisica = navParams.get('avaliacaoFisica');
+    this.readOnly = navParams.get('readOnly');
+
+    if(this.readOnly == null){
+      this.readOnly = false;
+    }
 
     if(!this.avaliacaoFisica || !this.avaliacaoFisica.perimetria){
       this.toast.create('Ocorreu um erro ao ir para a etapa de permitria');
@@ -92,13 +99,15 @@ export class AvaliacaoFisicaPerimetriaPage {
       bracoEsquerdoContraido: [
         this.avaliacaoFisica.perimetria.bracoEsquerdoContraido, 
         Validators.compose([
+          Validators.required,
           Validators.min(0), 
-          Validators.pattern('[-+]?([0-9]*\.[0-9]+|[0-9]+)')
+          Validators.pattern('[-+]?([0-9]*\.[0-9]+|[0-9]+)'),
         ])
       ],
       antebracoDireito: [
         this.avaliacaoFisica.perimetria.antebracoDireito, 
         Validators.compose([
+          Validators.required,
           Validators.min(0), 
           Validators.pattern('[-+]?([0-9]*\.[0-9]+|[0-9]+)')
         ])
@@ -106,6 +115,7 @@ export class AvaliacaoFisicaPerimetriaPage {
       antebracoEsquerdo: [
         this.avaliacaoFisica.perimetria.antebracoEsquerdo, 
         Validators.compose([
+          Validators.required,
           Validators.min(0), 
           Validators.pattern('[-+]?([0-9]*\.[0-9]+|[0-9]+)')
         ])
@@ -113,6 +123,7 @@ export class AvaliacaoFisicaPerimetriaPage {
       cintura: [
         this.avaliacaoFisica.perimetria.cintura, 
         Validators.compose([
+          Validators.required,
           Validators.min(0), 
           Validators.pattern('[-+]?([0-9]*\.[0-9]+|[0-9]+)')
         ])
@@ -120,6 +131,7 @@ export class AvaliacaoFisicaPerimetriaPage {
       abdomen: [
         this.avaliacaoFisica.perimetria.abdomen, 
         Validators.compose([
+          Validators.required,
           Validators.min(0), 
           Validators.pattern('[-+]?([0-9]*\.[0-9]+|[0-9]+)')
         ])
@@ -127,6 +139,7 @@ export class AvaliacaoFisicaPerimetriaPage {
       quadril: [
         this.avaliacaoFisica.perimetria.quadril, 
         Validators.compose([
+          Validators.required,
           Validators.min(0), 
           Validators.pattern('[-+]?([0-9]*\.[0-9]+|[0-9]+)')
         ])
@@ -134,6 +147,7 @@ export class AvaliacaoFisicaPerimetriaPage {
       coxaProximalDireita: [
         this.avaliacaoFisica.perimetria.coxaProximalDireita, 
         Validators.compose([
+          Validators.required,
           Validators.min(0), 
           Validators.pattern('[-+]?([0-9]*\.[0-9]+|[0-9]+)')
         ])
@@ -141,6 +155,7 @@ export class AvaliacaoFisicaPerimetriaPage {
       coxaProximalEsquerda: [
         this.avaliacaoFisica.perimetria.coxaProximalEsquerda, 
         Validators.compose([
+          Validators.required,
           Validators.min(0), 
           Validators.pattern('[-+]?([0-9]*\.[0-9]+|[0-9]+)')
         ])
@@ -148,6 +163,7 @@ export class AvaliacaoFisicaPerimetriaPage {
       coxaMediaDireita: [
         this.avaliacaoFisica.perimetria.coxaMediaDireita, 
         Validators.compose([
+          Validators.required,
           Validators.min(0), 
           Validators.pattern('[-+]?([0-9]*\.[0-9]+|[0-9]+)')
         ])
@@ -155,6 +171,7 @@ export class AvaliacaoFisicaPerimetriaPage {
       coxaMediaEsquerda: [
         this.avaliacaoFisica.perimetria.coxaMediaEsquerda, 
         Validators.compose([
+          Validators.required,
           Validators.min(0), 
           Validators.pattern('[-+]?([0-9]*\.[0-9]+|[0-9]+)')
         ])
@@ -162,6 +179,7 @@ export class AvaliacaoFisicaPerimetriaPage {
       coxaDistalDireita: [
         this.avaliacaoFisica.perimetria.coxaDistalDireita, 
         Validators.compose([
+          Validators.required,
           Validators.min(0), 
           Validators.pattern('[-+]?([0-9]*\.[0-9]+|[0-9]+)')
         ])
@@ -169,6 +187,7 @@ export class AvaliacaoFisicaPerimetriaPage {
       coxaDistalEsquerda: [
         this.avaliacaoFisica.perimetria.coxaDistalEsquerda, 
         Validators.compose([
+          Validators.required,
           Validators.min(0), 
           Validators.pattern('[-+]?([0-9]*\.[0-9]+|[0-9]+)')
         ])
@@ -176,6 +195,7 @@ export class AvaliacaoFisicaPerimetriaPage {
       panturrilhaDireita: [
         this.avaliacaoFisica.perimetria.panturrilhaDireita, 
         Validators.compose([
+          Validators.required,
           Validators.min(0), 
           Validators.pattern('[-+]?([0-9]*\.[0-9]+|[0-9]+)')
         ])
@@ -183,6 +203,7 @@ export class AvaliacaoFisicaPerimetriaPage {
       panturrilhaEsquerda: [
         this.avaliacaoFisica.perimetria.panturrilhaEsquerda, 
         Validators.compose([
+          Validators.required,
           Validators.min(0), 
           Validators.pattern('[-+]?([0-9]*\.[0-9]+|[0-9]+)')
         ])

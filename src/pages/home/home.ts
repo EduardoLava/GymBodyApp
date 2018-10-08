@@ -1,9 +1,14 @@
 import { Component } from '@angular/core';
-import { NavController, AlertController } from 'ionic-angular';
-import { PessoaServiceProvider } from '../../providers/services/pessoa-service/pessoa-service';
-import { Pessoa } from '../../model/entities';
+import { NavController, AlertController, ModalController } from 'ionic-angular';
+import { Treino, Pessoa, Page, TreinoData } from '../../model/entities';
 import { LoginServiceProvider } from '../../providers/services/login-service/login-service';
-import { JwtHelperService } from '@auth0/angular-jwt';
+import { ToastDefautController } from '../../utils/toast-default-contoller';
+import { TreinoDataServiceProvider } from '../../providers/services/treino-data-service/treino-data-service';
+import { SessionServiceProvider } from '../../providers/services/login-service/session-service';
+import { DataUtil } from '../../utils/data-util';
+import { CalendarModalOptions, CalendarModal, CalendarResult } from 'ion2-calendar';
+import { TreinoDetalhesPage } from '../treino-detalhes/treino-detalhes';
+// import { JwtHelperService } from '@auth0/angular-jwt';
 
 @Component({
   selector: 'page-home',
@@ -11,29 +16,110 @@ import { JwtHelperService } from '@auth0/angular-jwt';
 })
 export class HomePage {
 
+  treinosRealizados: Treino[];
+  pessoaFiltrada: Pessoa;
+
   constructor(
     public navCtrl: NavController, 
-    public loginService: LoginServiceProvider
+    public sessionService: SessionServiceProvider,
+    private toast: ToastDefautController,
+    private treinoDataService: TreinoDataServiceProvider,
+    private dataUtil: DataUtil,
+    private alert: AlertController,
+    private modalCntr: ModalController,
   ) {
 
+    this.pessoaFiltrada = sessionService.pessoalogada;
+
+    if(this.pessoaFiltrada == null){
+      this.sessionService.logout();
+      return;
+    }
+
   }
 
-  fazer(){
-    this.loginService.logout();
+  ionViewDidLoad() {
+    let dataInicio: Date = this.dataUtil.addDays(new Date(), -30);
+    let dataTermino: Date = this.dataUtil.addDays(new Date(), 15);
+    this.listByFilters( dataInicio, dataTermino);
   }
 
-  verificar(){
-    this.loginService.verificaLogin();
+  listByFilters(dataInicio: Date, dataTermino: Date){
+
+    if(dataInicio == null || dataTermino == null){
+      this.toast.create('Selecine um intervalo de datas').present();
+      return;
+    }
+
+    this.treinoDataService.listarTreinosByFiltersHistorico(
+      dataInicio, 
+      dataTermino, 
+      this.pessoaFiltrada.id
+    ).subscribe((treinosData: TreinoData[])=>{
+      this.treinosRealizados = treinosData;
+      // console.log(treinosData);
+    }, (error)=>{
+      
+      this.alert.create({
+        buttons: ['Ok'],
+        title: 'Error',
+        subTitle: error.message
+      }).present();
+
+
+    });
+
+
   }
 
-  data(){
-    let date = new Date();
+   /**
+   * Abre um modal com o calendário para selecionar o intervalo de datas.
+   */
+  openCalendar() {
 
-    console.log(date.toISOString());
-    console.log(date.getDate());
-    console.log(date.toString());
-    console.log(date.toLocaleDateString());
+    const options: CalendarModalOptions = {
+      pickMode: 'range',
+      title: 'Selecione um intervalo de datas',
+      doneIcon: true,
+      closeIcon: true,
+      closeLabel: null,
+      defaultScrollTo: new Date(),
+      from: new Date('2018-02-01'),
+      showYearPicker: true
+    };
+
+    let myCalendar = this.modalCntr.create(CalendarModal, {
+      options: options
+    });
+
+    myCalendar.present();
+
+    myCalendar.onDidDismiss((date: { from: CalendarResult; to: CalendarResult }, type: string) => {
+
+      if(date && date.from && date.to ){
+        this.listByFilters(date.from.dateObj, date.to.dateObj);
+      } else {
+        this.toast.create('Selecione um intervalo de datas').present();
+      }
+
+    });
   }
 
+  /**
+   * Abre tela para detalhar o treino executado na data XX
+   * @param treinoData 
+   */
+  detalhar(treinoData: Treino){
+
+    if(treinoData == null || treinoData.id == null){
+      this.toast.create("Ocorreu um erro ao detalhar seu treino").present();
+      return;
+    }
+
+    this.navCtrl.push(TreinoDetalhesPage.name, {
+      treinoData: treinoData
+    })
+
+  }
 
 }

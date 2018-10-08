@@ -50,6 +50,7 @@ import { TimeUtilProvider } from '../providers/time-util/time-util';
 import { AvaliacaoFisicaServiceProvider } from '../providers/services/avaliacao-fisica-service/avaliacao-fisica-service';
 
 import { CalendarModule } from "ion2-calendar";
+import { DataUtil } from '../utils/data-util';
 
 // import {} from 
 // FIM JWT
@@ -116,6 +117,7 @@ export function jwtOptionsFactory(storage: Storage) {
     YoutubeUrlServiceProvider,
     TimeUtilProvider,
     AvaliacaoFisicaServiceProvider,
+    DataUtil
     // YoutubeVideoPlayer
   ],
 })

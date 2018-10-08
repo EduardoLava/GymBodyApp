@@ -28,6 +28,8 @@ export class AvaliacaoFisicaAnamnesePage {
   public resposta: Resposta;
   public formAnamnese: FormGroup;
 
+  // chamado ao detalhar
+  private readOnly = false;
 
   /**
    * 
@@ -46,7 +48,12 @@ export class AvaliacaoFisicaAnamnesePage {
     this.resposta = {};
 
     this.avaliacaoFisica = this.navParams.get('avaliacaoFisica');
-    console.log('paramentros');
+    this.readOnly = this.navParams.get('readOnly');
+    console.log(this.readOnly);
+    if(this.readOnly == null){
+      this.readOnly = false;
+    }
+
 
     if(this.avaliacaoFisica == null || this.avaliacaoFisica.resposta == null) {
       this.toast.create('Ocorreu um erro ao iniciar a avaliação fisica');
@@ -59,27 +66,27 @@ export class AvaliacaoFisicaAnamnesePage {
     this.formAnamnese = this.formBuilder.group({  
       objetivosAtividadeFisica: [
         this.resposta.objetivosAtividadeFisica, 
-        Validators.compose([Validators.required, Validators.minLength(1)])
+        Validators.compose([Validators.required, Validators.minLength(1)]),
       ],
       praticaAtividade: [
         this.resposta.praticaAtividade, 
-        Validators.compose([Validators.required, Validators.minLength(1)])
+        Validators.compose([Validators.required, Validators.minLength(1)]),
       ],
       medicamento: [
         this.resposta.medicamento, 
-        Validators.compose([Validators.required, Validators.minLength(1)])
+        Validators.compose([Validators.required, Validators.minLength(1)]),
       ],
       cirurgia: [
         this.resposta.cirurgia, 
-        Validators.compose([Validators.required, Validators.minLength(1)])
+        Validators.compose([Validators.required, Validators.minLength(1)]),
       ],
       doencaFamiliar: [
         this.resposta.doencaFamiliar, 
-        Validators.compose([Validators.required, Validators.minLength(1)])
+        Validators.compose([Validators.required, Validators.minLength(1)]),
       ],
       observacao: [
         this.resposta.observacao,
-        Validators.compose([Validators.required, Validators.minLength(1)])
+        Validators.compose([Validators.required, Validators.minLength(1)]),
       ]
     });
 
