@@ -13,7 +13,7 @@ export class ToastDefautController {
         return this.toast1 = this.toastCntrl.create({
             message: mensagem,
             duration: 4000,
-            position: 'top'
+            position: 'middle'
         });
     }
 

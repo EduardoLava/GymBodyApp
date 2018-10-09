@@ -43,6 +43,14 @@ export class PessoaServiceProvider {
 
   }
 
+  /**
+   * 
+   * Altera senha de uma pessoa no servidor
+   * 
+   * @param idPessoa 
+   * @param novaSenha 
+   * @param senhaAntiga 
+   */
   alteraSenha(idPessoa: number, novaSenha: string, senhaAntiga: string): Observable<any>{
 
     let parametros = {'senha' : novaSenha, 'id': idPessoa.toString(), 'senhaAntiga': senhaAntiga};
@@ -59,8 +67,26 @@ export class PessoaServiceProvider {
     return this.http.put('/api/pessoas', JSON.stringify(pessoa));
   } 
 
+  /**
+   * Lista pessoas por filtro
+   * @param filter 
+   */
   listPessoasByFilters(filter: string): Observable<Page<Pessoa>>{
     return this.http.get('/api/pessoas/'+filter.toString()+'/filters');
+  }
+
+  /**
+   * Lista somente alunos por filtro
+   * @param nome 
+   */
+  listarAlunosByNome(nome: string) : Observable<Page<Pessoa>>{
+
+    if(nome != null && nome != ''){
+      nome = nome+'/';
+    }
+
+    return this.http.get<Page<Pessoa>>('/api/pessoas/alunos/'+nome);
+
   }
 
 }

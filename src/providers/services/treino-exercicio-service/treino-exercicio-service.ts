@@ -1,8 +1,7 @@
-import { HttpClient } from '@angular/common/http';
 import { Injectable } from '@angular/core';
 import { HttpServiceProvider } from '../http-service/http-service';
 import { Observable } from 'rxjs';
-import { Page, TreinoExercicio } from '../../../model/entities';
+import { Page, TreinoExercicio, ExercicioRealizado } from '../../../model/entities';
 
 /*
   Generated class for the TreinoExercicioServiceProvider provider.

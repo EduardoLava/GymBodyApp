@@ -1,0 +1,38 @@
+
+<ion-header>
+
+  <ion-navbar color="primary">
+    <ion-buttons left>
+      <button ion-button menuToggle>
+        <ion-icon name="menu"></ion-icon>
+      </button>
+    </ion-buttons>
+    <ion-title>{{"MEUS.ALUNOS.TITLE" | translate}}</ion-title>
+  </ion-navbar>
+
+</ion-header>
+
+<ion-content no-padding>
+
+  <ion-searchbar 
+    placeholder="{{'MEUS.ALUNOS.BUSCA' | translate}}" 
+    (ionInput)="listAlunosByNome($event.target.value)"></ion-searchbar>
+
+  <ion-list>
+    <ion-item 
+      *ngFor=" let aluno of alunos;">
+      <ion-buttons left>
+        <button (click)="visualizarHistorico(aluno)" ion-button clear>
+          <ion-icon name="ai-history"></ion-icon>
+        </button>
+        <button (click)="visualizarTreinos(aluno)" ion-button clear>
+          <ion-icon name="ai-fitness"></ion-icon>
+        </button>
+        <button (click)="visualizarDados(aluno)" ion-button clear>
+          <ion-icon name="person"></ion-icon>
+        </button>
+      </ion-buttons>
+      <span item-end>{{aluno?.nome}}</span>
+    </ion-item>
+  </ion-list>
+</ion-content>

@@ -1,0 +1,61 @@
+<!--
+  Generated template for the ExercicioRealizadoDetalhesPage page.
+
+  See http://ionicframework.com/docs/components/#navigation for more info on
+  Ionic pages and navigation.
+-->
+<ion-header>
+
+  <ion-navbar color="primary">
+    <ion-title>{{"EXERCICIO.REALIZADO.TITLE" | translate}}</ion-title>
+  </ion-navbar>
+
+</ion-header>
+
+<ion-content padding>
+
+  <ion-card>
+    <ion-card-header>
+      <h2 text-center>{{exercicioRealizado?.treinoData?.treino?.nome}}</h2>
+    </ion-card-header>
+    <ion-card-content>
+      <ion-card-title text-center>
+        <p *ngIf="exercicioRealizado?.treinoExercicio?.tipoTreinoExercicio == 'CARGA_REPETICOES'">
+          {{"EXERCICIO.REALIZADO.CARGA_REPETICOES" | translate}}
+        </p>
+        <p *ngIf="exercicioRealizado?.treinoExercicio?.tipoTreinoExercicio == 'TEMPO'">
+          {{"EXERCICIO.REALIZADO.TEMPO" | translate}}
+        </p>
+        <p *ngIf="exercicioRealizado?.treinoExercicio?.tipoTreinoExercicio == 'REPETICOES'">
+          {{"EXERCICIO.REALIZADO.REPETICOES" | translate}}
+        </p>
+        <p>
+          {{"EXERCICIO.REALIZADO.DATA" | translate }}{{exercicioRealizado?.treinoData?.data | date: 'dd/MM/yyyy'}}
+        </p>
+      </ion-card-title>
+      <p
+        translate 
+        [translateParams]="{quantidade: exercicioRealizado?.treinoExercicio?.series}">
+        EXERCICIO.REALIZADO.SERIES
+      </p>
+      <p
+        translate 
+        [translateParams]="{value: exercicioRealizado?.treinoExercicio?.carga}"
+        *ngIf="exercicioRealizado?.treinoExercicio?.tipoTreinoExercicio == 'CARGA_REPETICOES'">
+          EXERCICIO.REALIZADO.CARGA
+      </p>
+      <p
+        translate 
+        [translateParams]="{value: exercicioRealizado?.treinoExercicio?.repeticoes}"
+        *ngIf="exercicioRealizado?.treinoExercicio?.tipoTreinoExercicio != 'TEMPO'">
+          EXERCICIO.REALIZADO.REPETICOES.LABEL
+      </p>
+      <p 
+        translate 
+        [translateParams]="{value: exercicioRealizado?.treinoExercicio?.tempoMin}"
+        *ngIf="exercicioRealizado?.treinoExercicio?.tipoTreinoExercicio == 'TEMPO'">
+          EXERCICIO.REALIZADO.TEMPO.LABEL
+      </p>
+    </ion-card-content>
+  </ion-card>
+</ion-content>

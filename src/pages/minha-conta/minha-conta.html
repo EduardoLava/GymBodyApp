@@ -6,7 +6,7 @@
 -->
 <ion-header>
   <ion-navbar color="primary">
-    <ion-buttons left>
+    <ion-buttons *ngIf="apresentarMenu" left>
       <button ion-button menuToggle>
         <ion-icon name="menu"></ion-icon>
       </button>

@@ -6,16 +6,25 @@
 -->
 <ion-header>
   <ion-navbar color="primary">
-    <button ion-button menuToggle >
+    <button *ngIf="apresentarMenu == true" ion-button menuToggle >
       <ion-icon name="menu"></ion-icon>
     </button>
-    <ion-title>
+    <ion-title *ngIf="!apresentarNome">
       {{ 'LISTAGEM.TREINOS.TITLE' | translate }}
+    </ion-title>
+    <ion-title *ngIf="apresentarNome">
+        {{pessoa?.nome}}
     </ion-title>
   </ion-navbar>
 </ion-header>
 
 <ion-content no-padding>
+    <ion-card>
+      <ion-card-content *ngIf="treinosData == null || treinosData.length == 0">
+        {{"TREINO.EMPTY" | translate}}
+        </ion-card-content>
+    </ion-card>
+
     <ion-list>
       <button ion-item (click)="iniciarTreino(treinoData)" *ngFor="let treinoData of treinosData; let i = index">
         <ion-grid no-padding>
