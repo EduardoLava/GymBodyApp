@@ -13,6 +13,7 @@ import { SessionServiceProvider } from '../providers/services/login-service/sess
 
 import { ListaAvaliacaoFisicaPage } from '../pages/lista-avaliacao-fisica/lista-avaliacao-fisica';
 import { LoadingDefaultController } from '../utils/loading-default-controller';
+import { MeusAlunosPage } from '../pages/meus-alunos/meus-alunos';
 
 @Component({
   templateUrl: 'app.html'
@@ -29,7 +30,7 @@ export class MyApp {
     { titulo: 'MENU.HISTORICO', componente: HomePage, icone: 'ai-history' },
     { titulo: 'MENU.TREINOS', componente: ListaTreinoPage.name, icone: 'ai-fitness' },
     { titulo: 'MENU.CONTA', componente: MinhaContaPage.name, icone: 'person' },
-    { titulo: 'MENU.ALUNOS', componente: ListaTreinoPage.name, icone: 'people' },
+    { titulo: 'MENU.ALUNOS', componente: MeusAlunosPage.name, icone: 'people' },
     // { titulo: 'MENU.AGENDA', componente: ListaTreinoPage.name, icone: 'calendar' },
     { titulo: 'MENU.AVALIACAO.FISICA', componente: ListaAvaliacaoFisicaPage.name, icone: 'pulse' },
     { titulo: 'MENU.NOTIFICACOES', componente: ListaTreinoPage.name, icone: 'notifications' }

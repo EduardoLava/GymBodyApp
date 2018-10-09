@@ -29,6 +29,8 @@ export class MinhaContaPage implements OnInit{
   // token
   public user: string;
 
+  apresentarMenu = false;
+
   constructor(
     public navCtrl: NavController,
     public navParams: NavParams,
@@ -39,7 +41,8 @@ export class MinhaContaPage implements OnInit{
     private loading: LoadingDefaultController,
     private toast: ToastDefautController,
   ) {
-    console.log('Passou no constructor da minha conta');
+
+    this.pessoa = this.navParams.get('pessoa');
 
     this.sessionService.authUser.subscribe(jwt => {
       if (jwt) {
@@ -55,7 +58,11 @@ export class MinhaContaPage implements OnInit{
   }
 
   ngOnInit(){
-
+    
+    if(this.pessoa != null){
+      return;
+    }
+    this.apresentarMenu = true;
     this.loading.create('Carregando dados...');
 
     this.loading.loader.present();
@@ -63,7 +70,6 @@ export class MinhaContaPage implements OnInit{
     this.pessoaService.obtemPessoaLogada()
     .finally(()=> this.loading.loader.dismiss())
     .subscribe((pessoa:Pessoa) => {
-      console.log(pessoa);
       this.pessoa = pessoa;
     }, (erro: Error)=>{
       console.log(erro);

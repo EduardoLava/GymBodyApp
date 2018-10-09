@@ -125,6 +125,18 @@
         "MM" : "mm.",
         "OBRIGATORIO" : "(Obrigatório)"
     },
+    "EXERCICIO.REALIZADO" : {
+        "TITLE" : "Histórico de treinos",
+        "DATA" : "Data: ",
+        "SERIES" : "Séries: {{quantidade}}",
+        "REPETICOES.LABEL" :"Repeticoes: {{value}}",
+        "CARGA" : "Carga: {{value}} Kg",  
+        "TEMPO.LABEL" :"Tempo: {{value}} min",
+        "TIPO" : "Tipo exercício: ", 
+        "CARGA_REPETICOES" : "Tipo de treino: repetições com carga",
+        "REPETICOES" :"Tipo de treino: somente repetições",
+        "TEMPO" :"Tipo de treino: por tempo"
+    },
     "IMC" : {
         "TITLE" : "Cálculo do IMC",
         "PESO" : "Peso (Kg): ",
@@ -172,13 +184,19 @@
         "AVALIACAO.FISICA" : "Avaliação física",
         "NOTIFICACOES" : "Notificações"
     },
-    "MEUS.DADOS" : {
-        "TITLE" : "Meus Dados",
-        "LOGIN" : "Login:",
-        "NASCIMENTO" : "Nascimento:",
-        "GENERO" : "Gênero:",
-        "SENHA" : "Senha:",
-        "OBJETIVO" : "Objetivo:"
+    "MEUS" : {
+        "ALUNOS" : {
+            "TITLE" : "Alunos",
+            "BUSCA" : "Digite um nome"
+        },
+        "DADOS" : {
+            "TITLE" : "Meus Dados",
+            "LOGIN" : "Login:",
+            "NASCIMENTO" : "Nascimento:",
+            "GENERO" : "Gênero:",
+            "SENHA" : "Senha:",
+            "OBJETIVO" : "Objetivo:"
+        }
     },
     "MODAL.PAUSE" :{
         "TITLE" : "Pausa",
@@ -197,9 +215,11 @@
         "CARGA" : "Carga: ",
         "TEMPO": "Tempo: ",
         "COMPLETO": "Completo: ", 
+        "EMPTY" : "Nenhum treino foi encontrado",
         "HISTORICO" : {
             "TITLE" : "Histórico de treinos",
-            "EMPTY" : "Nenhuma execução de treino foi encontrada em seu histórico"
+            "EMPTY" : "Nenhuma execução de treino foi encontrada em seu histórico",
+            "HIST.DE" : "{{aluno}}"
         }, 
         "DETALHES" :{
             "TITLE" : "Exercícios do treino",

@@ -4,9 +4,10 @@ import { NavLifecycles } from '../../utils/nav-lifecycles';
 import { TreinoDataServiceProvider } from '../../providers/services/treino-data-service/treino-data-service';
 import { SessionServiceProvider } from '../../providers/services/login-service/session-service';
 import { LoadingDefaultController } from '../../utils/loading-default-controller';
-import { TreinoData, Page } from '../../model/entities';
+import { TreinoData, Page, Pessoa } from '../../model/entities';
 import { TreinoPage } from './treino/treino';
 import { DatePipe } from '@angular/common';
+import { ToastDefautController } from '../../utils/toast-default-contoller';
 
 /**
  * Generated class for the ListaTreinoPage page.
@@ -26,6 +27,10 @@ export class ListaTreinoPage implements NavLifecycles {
   public treinosData: TreinoData[];
   public dataAtual: string;
 
+  pessoa: Pessoa;
+  apresentarMenu = false;
+  apresentarNome = true;
+
   constructor(
     public navCtrl: NavController, 
     public navParams: NavParams,
@@ -33,27 +38,36 @@ export class ListaTreinoPage implements NavLifecycles {
     private alertControler: AlertController,
     private sessionService: SessionServiceProvider,
     private loading: LoadingDefaultController,
-    private datePipe: DatePipe
+    private datePipe: DatePipe,
+    private toast: ToastDefautController
   ) {
     this.dataAtual = this.datePipe.transform(new Date(), "yyyy-MM-dd");
+    
+    this.pessoa = this.navParams.get('pessoa');
+    console.log(this.pessoa);
+    if(this.pessoa == null){
+      this.apresentarNome = false;
+      this.apresentarMenu = true;
+      this.pessoa = this.sessionService.pessoalogada;
+    }
+
   }
 
   ionViewDidLoad() {
     
     this.loading.create('Carregando treinos').present();
 
-    if(!this.sessionService.pessoalogada){
+    if(this.pessoa == null){
       this.loading.loader.dismiss();
       return;
     } 
     this.treinosData = null;
 
-    this.treinoService.listarTreinosByAluno(this.sessionService.pessoalogada.id)
+    this.treinoService.listarTreinosByAluno(this.pessoa.id)
     .finally(() => this.loading.loader.dismiss())
     .subscribe((treinosData: TreinoData[] ) =>{
       
       this.treinosData = treinosData;
-      console.log(this.treinosData);
 
     }, (error)=>{
       this.alertControler.create({
@@ -66,6 +80,17 @@ export class ListaTreinoPage implements NavLifecycles {
   }
 
   iniciarTreino(treinoData: TreinoData){
+
+    if(this.pessoa == null || this.sessionService.pessoalogada == null){
+      this.sessionService.logout();
+      return;
+    }
+
+    if(this.pessoa.id != this.sessionService.pessoalogada.id){
+      this.toast.create('Você não pode iniciar o treino de: '+this.pessoa.nome).present();
+      return;
+    }
+
     this.alertControler.create({
       title: 'Iniciar Treino',
       subTitle: 'Deseja iniciar o treino?',

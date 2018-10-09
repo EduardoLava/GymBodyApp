@@ -1,5 +1,5 @@
 import { Component } from '@angular/core';
-import { NavController, AlertController, ModalController } from 'ionic-angular';
+import { NavController, AlertController, ModalController, NavParams } from 'ionic-angular';
 import { Treino, Pessoa, Page, TreinoData } from '../../model/entities';
 import { LoginServiceProvider } from '../../providers/services/login-service/login-service';
 import { ToastDefautController } from '../../utils/toast-default-contoller';
@@ -19,8 +19,12 @@ export class HomePage {
   treinosRealizados: Treino[];
   pessoaFiltrada: Pessoa;
 
+  apresentarMenu = false;
+  apresentarNome = true;
+
   constructor(
-    public navCtrl: NavController, 
+    public navCtrl: NavController,
+    public navParamns: NavParams, 
     public sessionService: SessionServiceProvider,
     private toast: ToastDefautController,
     private treinoDataService: TreinoDataServiceProvider,
@@ -29,7 +33,13 @@ export class HomePage {
     private modalCntr: ModalController,
   ) {
 
-    this.pessoaFiltrada = sessionService.pessoalogada;
+    this.pessoaFiltrada = this.navParamns.get('pessoa');
+
+    if(this.pessoaFiltrada == null){
+      this.apresentarMenu = true;
+      this.apresentarNome = false;
+      this.pessoaFiltrada =  sessionService.pessoalogada;
+    }
 
     if(this.pessoaFiltrada == null){
       this.sessionService.logout();
