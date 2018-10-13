@@ -61,7 +61,7 @@ export function jwtOptionsFactory(storage: Storage) {
     tokenGetter: () => storage.get('jwt_token'),
     // diz que somente solicitacoes enviadas para localhost conterao Authorization no cabeçalho
     // nao é ncessário iniciar com http:// pois pode ocorrer de não enviar os headers
-    whitelistedDomains: ['localhost:8080'],
+    whitelistedDomains: ['192.168.0.15:8080'],
   }
 }
 

@@ -20,10 +20,11 @@
     </ion-card-content>
     <ion-list>
       <button 
+        class="item-lista"
         *ngFor=" let exercicioRealizado of exerciciosRealizados "
         (click)="detalharExercicio(exercicioRealizado)"
         ion-item>
-          <ion-icon name="ai-fitness" item-start></ion-icon>
+          <ion-icon color='primary' name="ai-fitness" item-start></ion-icon>
           {{ exercicioRealizado?.treinoExercicio?.exercicio?.nome }}
       </button>
   

@@ -45,10 +45,10 @@ export class LoginPage {
   handleError(error: any) {
     let message: string;
     if (error.status && error.status === 401) {
-      message = 'Falha ao fazer login';
+      message = 'Usuário ou senha incorretos';
     }
     else {
-      message = `Ocorreu um erro ao tentar fazer login: ${error.error}`;
+      message = 'Erro ao conectar com o servidor'
     }
 
     const toast = this.toastCtrl.create({

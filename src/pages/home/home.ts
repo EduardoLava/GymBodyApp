@@ -41,16 +41,18 @@ export class HomePage {
       this.pessoaFiltrada =  sessionService.pessoalogada;
     }
 
+  }
+
+  ionViewDidLoad() {
+
     if(this.pessoaFiltrada == null){
       this.sessionService.logout();
       return;
     }
 
-  }
-
-  ionViewDidLoad() {
     let dataInicio: Date = this.dataUtil.addDays(new Date(), -30);
     let dataTermino: Date = this.dataUtil.addDays(new Date(), 15);
+
     this.listByFilters( dataInicio, dataTermino);
   }
 

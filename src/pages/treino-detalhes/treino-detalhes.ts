@@ -32,6 +32,9 @@ export class TreinoDetalhesPage {
     private alertCntrl: AlertController,
   ) {
     this.treinoData = this.navParams.get('treinoData');
+    if(this.treinoData == null || this.treinoData.id == null){
+      this.navCtrl.pop();
+    }
     this.findExerciciosTreino(this.treinoData.id);
   }
 

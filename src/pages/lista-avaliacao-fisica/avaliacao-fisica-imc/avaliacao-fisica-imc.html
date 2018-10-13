@@ -9,7 +9,7 @@
 
 <ion-content no-padding>
   <form  [formGroup]="formImc" (ngSubmit)="calcularImc()" #form="ngForm">
-    <ion-item>
+    <ion-item class="item-lista">
       <ion-label stacked >
         {{"IMC.PESO" | translate}}
       </ion-label>
@@ -20,7 +20,7 @@
         [(ngModel)]="imc.peso" 
         formControlName="peso"></ion-input>
     </ion-item>
-    <ion-item>
+    <ion-item class="item-lista">
       <ion-label for="altura" stacked>
         {{"IMC.ALTURA" | translate}}
       </ion-label>

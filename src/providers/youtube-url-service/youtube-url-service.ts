@@ -21,6 +21,11 @@ export class YoutubeUrlServiceProvider {
     let indiceInicio = url.indexOf('=')+1;
     let indiceFinal = url.length;
 
+    if(url.indexOf('&') > 0){
+      indiceFinal = url.indexOf('&')
+    }
+
+
     let idVideo = url.substring(indiceInicio, indiceFinal);
     console.log(idVideo);
     return idVideo;

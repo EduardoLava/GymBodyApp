@@ -26,14 +26,11 @@ export class LoginServiceProvider {
     private jwthelper: JwtHelperService,
     private sessionManagment: SessionServiceProvider,
     private menu: MenuController,
-    private loading: LoadingDefaultController
   ) {
 
   }
 
   verificaLogin() {
-
-    this.loading.create('Verificando seu login..').present();
 
     this.sessionManagment.getToken()
       .subscribe(token => {
@@ -41,7 +38,6 @@ export class LoginServiceProvider {
         if (token && !this.jwthelper.isTokenExpired(token)) {
           // chama um metodo qualquer para que o jwtfilter verifique o token
           this.http.get('/api/valida-login')
-          .finally(()=> this.loading.loader.dismiss())
           .subscribe(() => {
             this.sessionManagment.carregaPessoaLogada();
             this.sessionManagment.setTokenTokenAtivo(token);
@@ -49,7 +45,6 @@ export class LoginServiceProvider {
               (erro) => this.logout();
           });
         } else {
-          this.loading.loader.dismiss();
           this.logout();
         }
       }, (erro) =>{

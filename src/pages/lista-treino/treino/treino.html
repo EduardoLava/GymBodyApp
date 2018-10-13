@@ -16,7 +16,7 @@
 <ion-content padding>
   <ion-split-pane>
     <timer #timerPrincipal></timer>
-    <ion-grid no-padding text-center>
+    <ion-grid no-padding text-center style="height: 100%"> 
       <ion-row>
         <ion-col class="borda-inferior">
           <h2>{{treinoData?.treino?.nome}}</h2>
@@ -33,7 +33,7 @@
         </ion-col>
       </ion-row>
       <ion-row>
-        <ion-col>
+        <ion-col [ngClass]="(exercicioAtual?.completo)?'completo':'incompleto'">
           {{"TREINO.COMPLETO" | translate}}{{ percentualCompleto }} %
         </ion-col>
       </ion-row>
@@ -54,35 +54,42 @@
         </ion-col>
       </ion-row>
       <ion-row class="borda-inferior borda-superior">
-        <ion-col text-center>
-          <div class="center-vertical">
-            <label class="nome-exercicio">
-              {{ exercicioAtual?.treinoExercicio?.exercicio?.nome }}
-            </label>
-            <button class="icone-info-exercicio" ion-button icon-only (click)="detalharExercicio()" clear>
-              <ion-icon name=information-circle></ion-icon>
-            </button>
-          </div>
+        <ion-col justify-content-center align-items-center style="height: 100%">
+          <button class="icone-info-exercicio" ion-button icon-only (click)="detalharExercicio()" clear>
+            {{ exercicioAtual?.treinoExercicio?.exercicio?.nome }}
+            <ion-icon name=information-circle></ion-icon>
+          </button>
         </ion-col>
       </ion-row>
-      <ion-row class="borda-inferior">
-        <ion-col col-4 class="dados-exercicio">
+      <ion-row class="borda-inferior" text-center>
+        
+        <ion-col col-4 class="dados-exercicio" *ngIf=" exercicioAtual?.treinoExercicio?.tipoTreinoExercicio == 'CARGA_REPETICOES' ">
           {{ "TREINO.SERIES" | translate }}{{ exercicioAtual?.treinoExercicio?.series}} 
         </ion-col>
-        <ion-col col-4 *ngIf=" exercicioAtual?.treinoExercicio?.tipoTreinoExercicio != 'TEMPO' " class="dados-exercicio">
+        <ion-col col-6 class="dados-exercicio" *ngIf=" exercicioAtual?.treinoExercicio?.tipoTreinoExercicio != 'CARGA_REPETICOES' ">
+          {{ "TREINO.SERIES" | translate }}{{ exercicioAtual?.treinoExercicio?.series}} 
+        </ion-col>
+
+        <ion-col col-4 *ngIf=" exercicioAtual?.treinoExercicio?.tipoTreinoExercicio == 'CARGA_REPETICOES' " class="dados-exercicio">
             {{ "TREINO.REPETICOES" | translate }}{{ exercicioAtual?.treinoExercicio?.repeticoes }}
         </ion-col>
         <ion-col col-4 *ngIf=" exercicioAtual?.treinoExercicio?.tipoTreinoExercicio == 'CARGA_REPETICOES' " class="dados-exercicio">
             {{ "TREINO.CARGA" | translate }}{{ exercicioAtual?.treinoExercicio?.carga }}
         </ion-col>
-        <ion-col col-4 *ngIf=" exercicioAtual?.treinoExercicio?.tipoTreinoExercicio == 'TEMPO' " class="dados-exercicio">
+
+        <ion-col col-6 *ngIf=" exercicioAtual?.treinoExercicio?.tipoTreinoExercicio == 'REPETICOES' " class="dados-exercicio">
+            {{ "TREINO.REPETICOES" | translate }}{{ exercicioAtual?.treinoExercicio?.repeticoes }}
+        </ion-col>
+
+        <ion-col col-6 *ngIf=" exercicioAtual?.treinoExercicio?.tipoTreinoExercicio == 'TEMPO' " class="dados-exercicio">
           {{ "TREINO.TEMPO" | translate }}{{ exercicioAtual?.treinoExercicio?.tempoMin }}
         </ion-col>
       </ion-row>
       <ion-row>
         <ion-col>
-            <iframe *ngIf="idVideo" class="video" [src]="urlVideo" frameborder="0" allow="autoplay; encrypted-media" allowfullscreen></iframe>
-            <img *ngIf="!idVideo" class="video" [src]="imagemSemVideo"/>
+          {{idVideo}}
+            <iframe *ngIf="idVideo != null && idVideo != '' " class="video" [src]="urlVideo" frameborder="0" allow="autoplay; encrypted-media" allowfullscreen></iframe>
+            <img *ngIf="idVideo == null || idVideo == '' " class="video" [src]="imagemSemVideo"/>
         </ion-col>
       </ion-row>
       <ion-row>

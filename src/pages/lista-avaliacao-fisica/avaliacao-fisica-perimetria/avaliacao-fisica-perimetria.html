@@ -9,7 +9,7 @@
 
 <ion-content>
   <form [formGroup]="formPerimetria" #form="ngForm" (ngSubmit)="priximaEtapa()" >
-    <ion-item>
+    <ion-item  class="item-lista">
       <ion-label>{{"PERIMETRIA.PESCOCO" | translate }}</ion-label>
       <ion-input class="input-number"
         disabled="{{readOnly}}"
@@ -19,7 +19,7 @@
         formControlName="pescoco"></ion-input>
       <span item-end> {{"PERIMETRIA.CM" | translate}} </span>
     </ion-item>
-    <ion-item>
+    <ion-item class="item-lista">
       <ion-label>{{"PERIMETRIA.TORAX" | translate }}</ion-label>
       <ion-input 
         disabled="{{readOnly}}"
@@ -29,7 +29,7 @@
         formControlName="torax"></ion-input>
         <span item-end> {{"PERIMETRIA.CM" | translate}} </span>
     </ion-item>
-    <ion-item>
+    <ion-item class="item-lista">
       <ion-label>{{"PERIMETRIA.BRACO.DIREITO.RELAXADO" | translate }}</ion-label>
       <ion-input 
         disabled="{{readOnly}}"
@@ -39,7 +39,7 @@
         formControlName="bracoDireitoRelaxado"></ion-input>
         <span item-end> {{"PERIMETRIA.CM" | translate}} </span>
     </ion-item>
-    <ion-item>
+    <ion-item  class="item-lista">
       <ion-label>{{"PERIMETRIA.BRACO.ESQUERDO.RELAXADO" | translate }}</ion-label>
       <ion-input 
         disabled="{{readOnly}}"
@@ -49,7 +49,7 @@
         formControlName="bracoEsquerdoRelaxado"></ion-input>
         <span item-end> {{"PERIMETRIA.CM" | translate}} </span>
     </ion-item>
-    <ion-item>
+    <ion-item class="item-lista">
       <ion-label>{{"PERIMETRIA.BRACO.DIREITO.CONTRAIDO" | translate }}</ion-label>
       <ion-input 
         disabled="{{readOnly}}"
@@ -59,7 +59,7 @@
         formControlName="bracoDireitoContraido"></ion-input>
         <span item-end> {{"PERIMETRIA.CM" | translate}} </span>
     </ion-item>
-    <ion-item>
+    <ion-item class="item-lista">
       <ion-label>{{"PERIMETRIA.BRACO.ESQUERDO.CONTRAIDO" | translate }}</ion-label>
       <ion-input 
         disabled="{{readOnly}}"
@@ -69,7 +69,7 @@
         formControlName="bracoEsquerdoContraido"></ion-input>
         <span item-end> {{"PERIMETRIA.CM" | translate}} </span>
     </ion-item>
-    <ion-item>
+    <ion-item class="item-lista">
       <ion-label>{{"PERIMETRIA.ANTEBRACO.DIREITO" | translate }}</ion-label>
       <ion-input 
         disabled="{{readOnly}}"
@@ -79,7 +79,7 @@
         formControlName="antebracoDireito"></ion-input>
         <span item-end> {{"PERIMETRIA.CM" | translate}} </span>
     </ion-item>
-    <ion-item>
+    <ion-item class="item-lista">
       <ion-label>{{"PERIMETRIA.ANTEBRACO.ESQUERDO" | translate }}</ion-label>
       <ion-input 
         disabled="{{readOnly}}"
@@ -89,7 +89,7 @@
         formControlName="antebracoEsquerdo"></ion-input>
         <span item-end> {{"PERIMETRIA.CM" | translate}} </span>
     </ion-item>
-    <ion-item>
+    <ion-item class="item-lista">
       <ion-label>{{"PERIMETRIA.CINTURA" | translate }}</ion-label>
       <ion-input 
         disabled="{{readOnly}}"
@@ -99,7 +99,7 @@
         formControlName="cintura"></ion-input>
         <span item-end> {{"PERIMETRIA.CM" | translate}} </span>
     </ion-item>
-    <ion-item>
+    <ion-item class="item-lista">
       <ion-label>{{"PERIMETRIA.ABDOMINAL" | translate }}</ion-label>
       <ion-input 
         disabled="{{readOnly}}"
@@ -109,7 +109,7 @@
         formControlName="abdomen"></ion-input>
         <span item-end> {{"PERIMETRIA.CM" | translate}} </span>
     </ion-item>
-    <ion-item>
+    <ion-item class="item-lista">
       <ion-label>{{"PERIMETRIA.QUADRIL" | translate }}</ion-label>
       <ion-input 
         disabled="{{readOnly}}"
@@ -119,7 +119,7 @@
         formControlName="quadril"></ion-input>
         <span item-end> {{"PERIMETRIA.CM" | translate}} </span>
     </ion-item>
-    <ion-item>
+    <ion-item class="item-lista">
       <ion-label>{{"PERIMETRIA.COXA.PROXIMAL.DIREITA" | translate }}</ion-label>
       <ion-input 
         disabled="{{readOnly}}"
@@ -129,7 +129,7 @@
         formControlName="coxaProximalDireita"></ion-input>
         <span item-end> {{"PERIMETRIA.CM" | translate}} </span>
     </ion-item>
-    <ion-item>
+    <ion-item class="item-lista">
       <ion-label>{{"PERIMETRIA.COXA.PROXIMAL.ESQUERDA" | translate }}</ion-label>
       <ion-input 
         disabled="{{readOnly}}"
@@ -139,7 +139,7 @@
         formControlName="coxaProximalEsquerda"></ion-input>
       <span item-end> {{"PERIMETRIA.CM" | translate}} </span>
     </ion-item>
-    <ion-item>
+    <ion-item class="item-lista">
       <ion-label>{{"PERIMETRIA.COXA.MEDIA.DIREITA" | translate }}</ion-label>
       <ion-input 
         disabled="{{readOnly}}"
@@ -149,7 +149,7 @@
         formControlName="coxaMediaDireita"></ion-input>
         <span item-end> {{"PERIMETRIA.CM" | translate}} </span>
     </ion-item>
-    <ion-item>
+    <ion-item class="item-lista">
       <ion-label>{{"PERIMETRIA.COXA.MEDIA.ESQUERDA" | translate }}</ion-label>
       <ion-input 
         disabled="{{readOnly}}"
@@ -159,7 +159,7 @@
         formControlName="coxaMediaEsquerda"></ion-input>
         <span item-end> {{"PERIMETRIA.CM" | translate}} </span>
     </ion-item>
-    <ion-item>
+    <ion-item class="item-lista">
       <ion-label>{{"PERIMETRIA.COXA.DISTAL.DIREITA" | translate }}</ion-label>
       <ion-input 
         disabled="{{readOnly}}"
@@ -169,7 +169,7 @@
         formControlName="coxaDistalDireita"></ion-input>
         <span item-end> {{"PERIMETRIA.CM" | translate}} </span>
     </ion-item>
-    <ion-item>
+    <ion-item class="item-lista">
       <ion-label>{{"PERIMETRIA.COXA.DISTAL.ESQUERDA" | translate }}</ion-label>
       <ion-input 
         disabled="{{readOnly}}" 
@@ -179,7 +179,7 @@
         formControlName="coxaDistalEsquerda"></ion-input>
         <span item-end> {{"PERIMETRIA.CM" | translate}} </span>
     </ion-item>
-    <ion-item>
+    <ion-item class="item-lista">
       <ion-label>{{"PERIMETRIA.PANTURRILHA.DIREITA" | translate }}</ion-label>
       <ion-input 
         disabled="{{readOnly}}"
@@ -189,7 +189,7 @@
         formControlName="panturrilhaDireita"></ion-input>
         <span item-end> {{"PERIMETRIA.CM" | translate}} </span>
     </ion-item>
-    <ion-item>
+    <ion-item class="item-lista">
       <ion-label>{{"PERIMETRIA.PANTURRILHA.ESQUERDA" | translate }}</ion-label>
       <ion-input 
         disabled="{{readOnly}}"

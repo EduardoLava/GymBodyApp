@@ -11,7 +11,10 @@
         <ion-icon name="menu"></ion-icon>
       </button> 
     </ion-buttons>
-    <ion-searchbar *ngIf="isPersonal" (ionInput)="buscarPorfiltro($event.target.value)"></ion-searchbar>
+    <ion-searchbar 
+      *ngIf="isPersonal" 
+      (ionInput)="buscarPorfiltro($event.target.value)"
+      placeholder="{{ 'LISTAGEM.AVALIACAO.FISICA.PLACEHOLDER' | translate }}"></ion-searchbar>
     <ion-title *ngIf="!isPersonal">{{"LISTAGEM.AVALIACAO.FISICA.TITLE" | translate}}</ion-title>
     <ion-buttons right>
       <button ion-button (click)="openCalendar()">
@@ -29,7 +32,10 @@
       </ion-card-content>
   </ion-card>
   <ion-list *ngIf="avaliacoesFisicas">
-    <button ion-item (click)="detalharAvaliacaoFisica(avaliacaoFisica)" *ngFor="let avaliacaoFisica of avaliacoesFisicas;">
+    <button 
+      class="item-lista" 
+      ion-item (click)="detalharAvaliacaoFisica(avaliacaoFisica)" 
+      *ngFor="let avaliacaoFisica of avaliacoesFisicas;">
       <h2>
         {{avaliacaoFisica?.pessoa?.nome}}
       </h2>
@@ -40,7 +46,7 @@
     </button>
   </ion-list>
   <ion-fab bottom right *ngIf="isPersonal">
-    <button ion-fab color="secondary">
+    <button ion-fab color="primary">
       <ion-icon name="add"></ion-icon>
     </button>
     <ion-fab-list side="left">

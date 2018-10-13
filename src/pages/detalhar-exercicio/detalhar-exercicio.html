@@ -55,7 +55,8 @@
     <ion-row>
       <ion-col>
           <!-- <ion-img class="imagem" [src]="exercicio?.equipamento?.imagem"></ion-img> -->
-          <img class="imagem" src="data:image/JPEG;base64,{{exercicio?.equipamento?.imagem}}"/>
+          <img *ngIf="!exercicio?.equipamento?.imagem" class="imagem" src="{{imagemDefault}}"/>
+          <img *ngIf="exercicio?.equipamento?.imagem" class="imagem" src="data:image/JPEG;base64,{{exercicio?.equipamento?.imagem}}"/>
       <!-- <img  -->
       <!-- [src]="exercicio?.equipamento?.imagem"  -->
       <!-- class="imagem-preview" /> -->

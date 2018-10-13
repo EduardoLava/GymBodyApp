@@ -105,5 +105,9 @@ export class MyApp {
     this.loginService.logout();
   }
 
+  get pessoalogada(){
+    return this.sessionService.pessoalogada;
+  }
+
 }
 

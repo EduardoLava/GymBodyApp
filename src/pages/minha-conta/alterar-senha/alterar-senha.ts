@@ -74,7 +74,8 @@ export class AlterarSenhaPage {
       this.alertControler.create({
         title: 'Campos inválidos',
         subTitle: 'A nova senha não confere com a confirmação!',
-        buttons: ['OK']
+        cssClass: 'secondary',
+        buttons: [{text:'Ok'}],
       }).present();
 
       return;

@@ -14,7 +14,7 @@
     (ionInput)="listByFilters($event.target.value)">
   </ion-searchbar>
   <ion-list>
-    <button ion-item *ngFor="let pessoa of pessoas;" (click)="proximaEtapa(pessoa)">
+    <button  class="item-lista" ion-item *ngFor="let pessoa of pessoas;" (click)="proximaEtapa(pessoa)">
       {{ pessoa?.nome }}
     </button>
   </ion-list>

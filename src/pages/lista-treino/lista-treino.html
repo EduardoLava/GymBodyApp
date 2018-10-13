@@ -26,7 +26,11 @@
     </ion-card>
 
     <ion-list>
-      <button ion-item (click)="iniciarTreino(treinoData)" *ngFor="let treinoData of treinosData; let i = index">
+      <button 
+        ion-item 
+        (click)="iniciarTreino(treinoData)" 
+        class="item-lista"
+        *ngFor="let treinoData of treinosData; let i = index">
         <ion-grid no-padding>
           <ion-row *ngIf=" dataAtual == treinoData.data " class="sobrescrito">Hoje</ion-row>
           <ion-row *ngIf=" i == 0 && dataAtual != treinosData[0].data " class="sobrescrito" >Próximos</ion-row>
@@ -36,7 +40,7 @@
               <h2>
                   {{treinoData?.treino?.nome}}
               </h2>
-              <p>
+              <p class="sub-texto">
                   {{ "LISTAGEM.TREINOS.DATA.REALIZAR" | translate }}{{treinoData?.data | date: 'dd/MM/yyyy'}}
               </p>
             </ion-col>

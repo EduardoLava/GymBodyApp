@@ -17,6 +17,7 @@ import { Exercicio } from '../../model/entities';
 export class DetalharExercicioPage {
 
   public exercicio: Exercicio;
+  imagemDefault = '../../assets/imgs/imagem-default.png';
 
   constructor(public navCtrl: NavController, public navParams: NavParams) {
     this.exercicio = navParams.get('exercicio');

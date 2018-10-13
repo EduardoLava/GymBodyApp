@@ -13,7 +13,7 @@
 <ion-content padding>
   <form [formGroup]="formGroup" (ngSubmit)="confirmar(formGroup.value)">
     <ion-list>
-      <ion-item>
+      <ion-item class="item-lista">
         <ion-label stacked>{{'ALTERAR.SENHA.ATUAL' | translate}}</ion-label>
         <ion-input 
           [ngClass]="{'error-border':!formGroup.controls.senhaAtual.valid && formGroup.controls.senhaAtual.touched}" 
@@ -21,7 +21,7 @@
           autocomplete="off" 
           type="password"></ion-input>
       </ion-item>
-      <ion-item>
+      <ion-item class="item-lista">
         <ion-label stacked>{{'ALTERAR.SENHA.NOVA' | translate}}</ion-label>
         <ion-input 
           [ngClass]="{'error-border':!formGroup.controls.novaSenha.valid && formGroup.controls.novaSenha.touched}" 
@@ -29,7 +29,7 @@
           autocomplete="off" 
           type="password"></ion-input>
       </ion-item>
-      <ion-item>
+      <ion-item class="item-lista">
         <ion-label stacked>{{'ALTERAR.SENHA.CONFIRMACAO' | translate}}</ion-label>
         <ion-input 
           [ngClass]="{'error-border':!formGroup.controls.confirmacaoSenha.valid && formGroup.controls.confirmacaoSenha.touched}" 
@@ -37,11 +37,11 @@
           autocomplete="off" 
           type="password"></ion-input>
       </ion-item>
-      <ion-item>
-        <button ion-button item-start default color="confirm"  type="submit" [disabled]="!formGroup.valid">
+      <ion-item class="transparente">
+        <button ion-button item-start default color="primary"  type="submit" [disabled]="!formGroup.valid">
           {{ 'BOTAO.CONFIRMAR' | translate }}
         </button>
-        <button ion-button item-end default color="cancel"  type="button" (click)="cancelar()">
+        <button ion-button item-end default color="danger"  type="button" (click)="cancelar()">
           {{ 'BOTAO.CANCELAR' | translate }}
           </button>
       </ion-item>

@@ -2,6 +2,8 @@ page-avaliacao-fisica-anamnese {
 
     .titulo {
         text-align: center;
+        color: map-get($colors, secondary );
+        font-weight: bold !important;
     }
 
 }

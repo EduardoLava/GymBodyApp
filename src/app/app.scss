@@ -17,6 +17,29 @@
 
 @import "../theme/icons";
 
+// estilo padrao para texto
+$font-weight: bold;
+$text-color: map-get($colors , primary);
+
+%estilo-texto {
+    color: $text-color !important;
+    font-weight: $font-weight !important;
+}
+
+// defaults backgrounds
+%estilo-background-color {
+    background-color: transparent !important;
+}
+
+%estilo-background {
+    background-image:  url('../assets/imgs/fundo17.jpg');
+    background-position: center;
+    background-repeat: repeat;
+    background-size: contain;
+}
+
+// estilizacao...
+// classes 
 
 .center{
     position: absolute;
@@ -35,5 +58,108 @@
 }
 
 .app-title{
-    font-weight: bold !important;
+    @extend %estilo-texto;
+}
+
+.item-menu {
+    @extend %estilo-texto;
+    color: map-get($colors, secondary);
+}
+
+.item-menu-sair {
+    @extend %estilo-texto;
+    color: map-get($colors, danger) !important;
+}
+
+.item-lista, ion-item-divider{
+    @extend %estilo-background-color;
+    p, label, span, h1, h2, h3, ion-label, ion-datetime{
+        @extend %estilo-texto;
+    }
+
+    ion-textarea{
+        @extend %estilo-texto;
+        color: map-get($colors, secondary);
+    }
+
+    .sub-texto {
+        color: map-get($colors, secondary);
+        font-weight: normal;
+    }
+}
+
+.transparente{
+    @extend %estilo-background-color;
+}
+
+.action-sheet{
+    .item-action-sheet{
+        @extend %estilo-texto;
+        color: map-get($colors, secondary);
+    }
+
+    .item-action-sheet-cancelar {
+        color: map-get($colors, danger);
+    }
+}
+
+.alert-title, .alert-radio-group {
+    color: $text-color !important;
+}
+
+.alert-sub-title, .alert-message {
+    color: map-get($colors, secondary);
+}
+
+.error-message {
+    color: map-get($colors , danger);
+    background: transparent;
+}
+
+
+.completo {
+    color: map-get($colors, hist-completo) !important;
+}
+
+.incompleto {
+    color: map-get($colors, hist-imcompleto) !important;
+}
+
+// estiliza tags
+
+ion-content {
+    @extend %estilo-background;
+    ion-card {
+        @extend %estilo-background-color;
+        ion-card-header h2 {
+            @extend %estilo-texto;
+            color: map-get($colors, secondary);
+        } 
+        ion-card-content {
+            p , ion-card-title p {
+                @extend %estilo-texto;
+                color: map-get($colors, secondary) !important;
+            }
+        }
+    }
+}
+
+ion-col {
+    @extend %estilo-texto; 
+}
+
+ion-input, ion-select{
+    @extend %estilo-texto;
+}
+
+div {
+    .bem-vindo {
+        font-weight: $font-weight;
+    }
+    
+    .nome-pessoa {
+        font-weight: $font-weight;
+        color: $text-color;
+        font-size: 15pt;
+    }
 }

@@ -22,14 +22,15 @@
       </ion-card-content>
   </ion-card>
   <ion-list *ngIf="treinosRealizados">
-    <button 
+    <button
+      class="item-lista" 
       ion-item 
       *ngFor="let treinoData of treinosRealizados;"
       (click)="detalhar(treinoData)">
       <h2>
         {{treinoData?.treino?.nome}}
       </h2>
-      <p>
+      <p class="sub-texto">
           {{treinoData?.data | date: 'dd/MM/yyyy'}} - 
           <strong [ngClass]="treinoData?.completo === true ? 'completo' : 'incompleto' ">
             {{ treinoData?.completo == true ? 'Completo' : 'Incompleto' }}

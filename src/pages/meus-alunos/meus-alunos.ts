@@ -1,11 +1,12 @@
 import { Component } from '@angular/core';
-import { IonicPage, NavController, NavParams, AlertController } from 'ionic-angular';
+import { IonicPage, NavController, NavParams, AlertController, ActionSheetController } from 'ionic-angular';
 import { Pessoa, Page } from '../../model/entities';
 import { PessoaServiceProvider } from '../../providers/services/pessoa-service/pessoa-service';
 import { LoadingDefaultController } from '../../utils/loading-default-controller';
 import { ListaTreinoPage } from '../lista-treino/lista-treino';
 import { MinhaContaPage } from '../minha-conta/minha-conta';
 import { HomePage } from '../home/home';
+import { text } from '@angular/core/src/render3/instructions';
 
 /**
  * Generated class for the MeusAlunosPage page.
@@ -28,7 +29,8 @@ export class MeusAlunosPage {
     public navParams: NavParams,
     private pessoaService: PessoaServiceProvider,
     private loader: LoadingDefaultController,
-    private alertCntrl: AlertController
+    private alertCntrl: AlertController,
+    private actionSheet: ActionSheetController
   ) {
     this.alunos = [];
   }
@@ -52,6 +54,50 @@ export class MeusAlunosPage {
         subTitle: error.error
       });
     });
+  }
+
+  openAction(aluno: Pessoa){
+
+    this.actionSheet.create({
+      title: 'Visualizar',
+      cssClass: 'action-sheet',
+      buttons: [
+        {
+          text: 'Dados do aluno',
+          icon: 'person',
+          cssClass: 'item-action-sheet',
+          handler: ()=> {
+            this.visualizarDados(aluno)
+          } 
+        },
+        {
+          text: 'Treinos',
+          icon: 'ai-fitness',
+          cssClass: 'item-action-sheet',
+          handler: ()=>{
+            this.visualizarTreinos(aluno);
+          }
+        },
+        {
+          text: 'Histórico de treinos',
+          icon: 'ai-history',
+          cssClass: 'item-action-sheet',
+          handler: ()=>{
+            this.visualizarHistorico(aluno);
+          }
+        },
+        {
+          text: 'Cancelar',
+          role: 'cancel',
+          icon: 'exit',
+          cssClass: 'item-action-sheet-cancelar',
+          handler: () => {
+            console.log('Cancel clicked');
+          }
+        }
+      ]
+    }).present();
+
   }
 
   visualizarTreinos(aluno: Pessoa){

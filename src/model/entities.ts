@@ -1,37 +1,37 @@
-export interface Sort {
+export class Sort {
     orders: SortOrder[]
 }
 
-export interface SortOrder {
-    direction: SortDirection,
-    property: string,
+export class SortOrder {
+    direction: SortDirection;
+    property: string;
     nullHandlingHint?: NullHandling
 }
 
 export type SortDirection = 'ASC' | 'DESC';
 export type NullHandling = 'NATIVE' | 'NULLS_FIRST' | 'NULLS_LAST';
 
-export interface Pageable {
-    page: number,
-    size: number,
+export class Pageable {
+    page: number;
+    size: number;
     sort?: Sort
 }
 
-export interface PageRequest extends Pageable {}
+export class PageRequest extends Pageable {}
 
-export interface Page<T> {
-    content: T[],
-    totalElements: number,
-    numberOfElements: number,
-    totalPages: number,
+export class Page<T> {
+    content: T[];
+    totalElements: number;
+    numberOfElements: number;
+    totalPages: number;
     pageable?: PageRequest
 }
 
-export interface GrupoMuscular {
-    nome?: string,
-    descricao?: string,
-    id?: number,
-    created?: string,
+export class GrupoMuscular {
+    nome?: string;
+    descricao?: string;
+    id?: number;
+    created?: string;
     updated?: string
 }
 
@@ -40,57 +40,57 @@ export let DiaSemanaValues: string[] = ['DOMINGO', 'SEGUNDA', 'TERCA', 'QUARTA',
 export type DiaSemana = 'DOMINGO' | 'SEGUNDA' | 'TERCA' | 'QUARTA' | 'QUINTA' | 'SEXTA' | 'SABADO';
 
 
-export interface Notificacao {
-    titulo?: string,
-    texto?: string,
-    destinatarioNotificacoes?: DestinatarioNotificacao[],
-    id?: number,
-    created?: string,
+export class Notificacao {
+    titulo?: string;
+    texto?: string;
+    destinatarioNotificacoes?: DestinatarioNotificacao[];
+    id?: number;
+    created?: string;
     updated?: string
 }
 
 
-export interface Resposta {
-    objetivosAtividadeFisica?: string,
-    praticaAtividade?: string,
-    medicamento?: string,
-    cirurgia?: string,
-    doencaFamiliar?: string,
-    observacao?: string,
-    id?: number,
-    created?: string,
+export class Resposta {
+    objetivosAtividadeFisica?: string;
+    praticaAtividade?: string;
+    medicamento?: string;
+    cirurgia?: string;
+    doencaFamiliar?: string;
+    observacao?: string;
+    id?: number;
+    created?: string;
     updated?: string
 }
 
 
-export interface ExercicioGrupoMuscular {
-    exercicio?: Exercicio,
-    grupoMuscular?: GrupoMuscular,
-    id?: number,
-    created?: string,
+export class ExercicioGrupoMuscular {
+    exercicio?: Exercicio;
+    grupoMuscular?: GrupoMuscular;
+    id?: number;
+    created?: string;
     updated?: string
 }
 
 
-export interface AvaliacaoAntropometrica {
-    dobrasCutaneas?: DobrasCutaneas,
-    indiceMassaCorporal?: IndiceMassaCorporal,
-    predicaoGorduraSiri?: PredicaoGorduraSiri,
-    avaliacaoFisica?: AvaliacaoFisica,
-    tipoProtocolo?: TipoProtocolo,
-    densidadeCorporal?: number,
-    id?: number,
-    created?: string,
+export class AvaliacaoAntropometrica {
+    dobrasCutaneas?: DobrasCutaneas;
+    indiceMassaCorporal?: IndiceMassaCorporal;
+    predicaoGorduraSiri?: PredicaoGorduraSiri;
+    avaliacaoFisica?: AvaliacaoFisica;
+    tipoProtocolo?: TipoProtocolo;
+    densidadeCorporal?: number;
+    id?: number;
+    created?: string;
     updated?: string
 }
 
 
-export interface IndiceMassaCorporal {
-    altura?: number,
-    peso?: number,
-    resultado?: number,
-    id?: number,
-    created?: string,
+export class IndiceMassaCorporal {
+    altura?: number;
+    peso?: number;
+    resultado?: number;
+    id?: number;
+    created?: string;
     updated?: string
 }
 
@@ -99,54 +99,54 @@ export let PapelValues: string[] = ['ADMINISTRATOR', 'PERSONAL', 'ALUNO'];
 export type Papel = 'ADMINISTRATOR' | 'PERSONAL' | 'ALUNO';
 
 
-export interface Pessoa {
-    nome?: string,
-    email?: string,
-    login?: string,
-    senha?: string,
-    genero?: Genero,
-    dataNascimento?: Date,
-    objetivo?: string,
-    isAtivo?: boolean,
-    papeis?: Papel[],
-    lastLogin?: string,
-    tokenJwt?: string,
-    senhaAntiga?: string,
-    id?: number,
-    created?: string,
+export class Pessoa {
+    nome?: string;
+    email?: string;
+    login?: string;
+    senha?: string;
+    genero?: Genero;
+    dataNascimento?: Date;
+    objetivo?: string;
+    isAtivo?: boolean;
+    papeis?: Papel[];
+    lastLogin?: string;
+    tokenJwt?: string;
+    senhaAntiga?: string;
+    id?: number;
+    created?: string;
     updated?: string
 }
 
 
-export interface Exercicio {
-    nome?: string,
-    descricao?: string,
-    linkVideo?: string,
-    isAtivo?: boolean,
-    equipamento?: Equipamento,
-    exercicioGrupoMusculares?: ExercicioGrupoMuscular[],
-    id?: number,
-    created?: string,
+export class Exercicio {
+    nome?: string;
+    descricao?: string;
+    linkVideo?: string;
+    isAtivo?: boolean;
+    equipamento?: Equipamento;
+    exercicioGrupoMusculares?: ExercicioGrupoMuscular[];
+    id?: number;
+    created?: string;
     updated?: string
 }
 
 
-export interface PredicaoGorduraSiri {
-    densidadeCorporal?: number,
-    gordura?: number,
-    id?: number,
-    created?: string,
+export class PredicaoGorduraSiri {
+    densidadeCorporal?: number;
+    gordura?: number;
+    id?: number;
+    created?: string;
     updated?: string
 }
 
 
-export interface Equipamento {
-    descricao?: string,
-    imagem?: number,
-    imagemFileTransfer?: HTMLInputElement,
-    isAtivo?: boolean,
-    id?: number,
-    created?: string,
+export class Equipamento {
+    descricao?: string;
+    imagem?: number;
+    imagemFileTransfer?: HTMLInputElement;
+    isAtivo?: boolean;
+    id?: number;
+    created?: string;
     updated?: string
 }
 
@@ -159,32 +159,38 @@ export let TipoProtocoloValues: string[] = ['GUEDES', 'POLLOCK'];
 export type TipoProtocolo = 'GUEDES' | 'POLLOCK';
 
 
-export interface TreinoData {
-    data?: Date,
-    horaInicio?: Date,
-    horaTermino?: Date,
-    tempoGasto?: Date,
-    completo?: boolean,
-    treino?: Treino,
-    diaSemana?: DiaSemana,
-    exerciciosRealizados?: ExercicioRealizado[],
-    id?: number,
-    created?: string,
+export class TreinoData {
+    data?: Date;
+    horaInicio?: Date;
+    horaTermino?: Date;
+    tempoGasto?: Date;
+    completo?: boolean;
+    treino?: Treino;
+    diaSemana?: DiaSemana;
+    exerciciosRealizados?: ExercicioRealizado[];
+    id?: number;
+    created?: string;
     updated?: string
+
+    constructor(objeto: any){
+        Object.assign(this, objeto);
+        this.treino = new Treino(objeto.treino);
+    }
+
 }
 
 
-export interface TreinoExercicio {
-    series?: number,
-    carga?: number,
-    repeticoes?: number,
-    tempoMin?: number,
-    observacoes?: string,
-    treino?: Treino,
-    tipoTreinoExercicio?: TipoTreinoExercicio,
-    exercicio?: Exercicio,
-    id?: number,
-    created?: string,
+export class TreinoExercicio {
+    series?: number;
+    carga?: number;
+    repeticoes?: number;
+    tempoMin?: number;
+    observacoes?: string;
+    treino?: Treino;
+    tipoTreinoExercicio?: TipoTreinoExercicio;
+    exercicio?: Exercicio;
+    id?: number;
+    created?: string;
     updated?: string
 }
 
@@ -193,91 +199,96 @@ export let GeneroValues: string[] = ['MASCULINO', 'FEMININO'];
 export type Genero = 'MASCULINO' | 'FEMININO';
 
 
-export interface DestinatarioNotificacao {
-    pessoa?: Pessoa,
-    notificacao?: Notificacao,
-    id?: number,
-    created?: string,
+export class DestinatarioNotificacao {
+    pessoa?: Pessoa;
+    notificacao?: Notificacao;
+    id?: number;
+    created?: string;
     updated?: string
 }
 
 
-export interface ExercicioRealizado {
-    completo?: boolean,
-    treinoData?: TreinoData,
-    treinoExercicio?: TreinoExercicio,
-    id?: number,
-    created?: string,
+export class ExercicioRealizado {
+    completo?: boolean;
+    treinoData?: TreinoData;
+    treinoExercicio?: TreinoExercicio;
+    id?: number;
+    created?: string;
     updated?: string
 }
 
 
-export interface AvaliacaoFisica {
-    data?: Date,
-    pessoa?: Pessoa,
-    perimetria?: Perimetria,
-    resposta?: Resposta,
-    avaliacaoAntropometrica?: AvaliacaoAntropometrica,
-    id?: number,
-    created?: string,
+export class AvaliacaoFisica {
+    data?: Date;
+    pessoa?: Pessoa;
+    perimetria?: Perimetria;
+    resposta?: Resposta;
+    avaliacaoAntropometrica?: AvaliacaoAntropometrica;
+    id?: number;
+    created?: string;
     updated?: string
 }
 
 
-export interface Treino {
-    nome?: string,
-    dataInicio?: Date,
-    dataFim?: Date,
-    horaPrevistaInicio?: Date,
-    horaPrevistaTermino?: Date,
-    treinoExercicios?: TreinoExercicio[],
-    aluno?: Pessoa,
-    personal?: Pessoa,
-    diasSemanaSelecionados?: DiaSemana[],
-    id?: number,
-    created?: string,
+export class Treino {
+    nome?: string;
+    dataInicio?: Date;
+    dataFim?: Date;
+    horaPrevistaInicio?: Date;
+    horaPrevistaTermino?: Date;
+    treinoExercicios?: TreinoExercicio[];
+    aluno?: Pessoa;
+    personal?: Pessoa;
+    diasSemanaSelecionados?: DiaSemana[];
+    id?: number;
+    created?: string;
+    updated?: string;
+
+    constructor(objeto: any){
+        Object.assign(this, objeto);
+    }
+
+}
+
+
+export class DobrasCutaneas {
+    tricipal?: number;
+    bicital?: number;
+    subescapular?: number;
+    peitoral?: number;
+    toracica?: number;
+    axilarMedia?: number;
+    supraIliaca?: number;
+    abdominal?: number;
+    coxa?: number;
+    panturrilha?: number;
+    id?: number;
+    created?: string;
     updated?: string
 }
 
 
-export interface DobrasCutaneas {
-    tricipal?: number,
-    bicital?: number,
-    subescapular?: number,
-    peitoral?: number,
-    toracica?: number,
-    axilarMedia?: number,
-    supraIliaca?: number,
-    abdominal?: number,
-    coxa?: number,
-    panturrilha?: number,
-    id?: number,
-    created?: string,
-    updated?: string
-}
-
-
-export interface Perimetria {
-    pescoco?: number,
-    torax?: number,
-    bracoDireitoRelaxado?: number,
-    bracoEsquerdoRelaxado?: number,
-    bracoDireitoContraido?: number,
-    bracoEsquerdoContraido?: number,
-    antebracoDireito?: number,
-    antebracoEsquerdo?: number,
-    cintura?: number,
-    abdomen?: number,
-    quadril?: number,
-    coxaProximalDireita?: number,
-    coxaProximalEsquerda?: number,
-    coxaMediaDireita?: number,
-    coxaMediaEsquerda?: number,
-    coxaDistalDireita?: number,
-    coxaDistalEsquerda?: number,
-    panturrilhaDireita?: number,
-    panturrilhaEsquerda?: number,
-    id?: number,
-    created?: string,
+export class Perimetria {
+    pescoco?: number;
+    torax?: number;
+    bracoDireitoRelaxado?: number;
+    bracoEsquerdoRelaxado?: number;
+    bracoDireitoContraido?: number;
+    bracoEsquerdoContraido?: number;
+    antebracoDireito?: number;
+    antebracoEsquerdo?: number;
+    cintura?: number;
+    abdomen?: number;
+    quadril?: number;
+    coxaProximalDireita?: number;
+    coxaProximalEsquerda?: number;
+    coxaMediaDireita?: number;
+    coxaMediaEsquerda?: number;
+    coxaDistalDireita?: number;
+    coxaDistalEsquerda?: number;
+    panturrilhaDireita?: number;
+    panturrilhaEsquerda?: number;
+    id?: number;
+    created?: string;
     updated?: string
 }

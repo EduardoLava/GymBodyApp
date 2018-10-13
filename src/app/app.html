@@ -1,23 +1,28 @@
 <ion-split-pane>
     <ion-menu [content]="menu" persistent = 'true'>
         <ion-content>
-            <div ion-item>
+            <div ion-item no-lines>
                 <ion-thumbnail class="imagem" item-start>
-                    <img src="./assets/imgs/logo2.jpg"/>
+                    <img src="./assets/imgs/logo3.jpg"/>
                 </ion-thumbnail>
                 
                 <h3 class="app-title">{{ 'APP.NAME' | translate }}</h3> 
                 
             </div>
+            <div text-center ion-item no-lines>
+                <h4 class="bem-vindo" *ngIf="pessoalogada?.genero == 'MASCULINO' ">{{"APP.BEM.VINDO" | translate}}</h4>
+                <h4 class="bem-vindo" *ngIf="pessoalogada?.genero !== 'MASCULINO' ">{{"APP.BEM.VINDO" | translate}}</h4>
+                <h3 class="nome-pessoa">{{ pessoalogada?.nome }}</h3>
+            </div>
             <ion-list>
-                <button ion-item menuClose
+                <button class="item-menu" ion-item menuClose
                     *ngFor="let pagina of paginas"
                     (click)="irParaPagina(pagina.componente)">
-                        <ion-icon [name]="pagina.icone" item-left ></ion-icon>
+                        <ion-icon color='primary' [name]="pagina.icone" item-left ></ion-icon>
                         {{ pagina.titulo | translate }}
                 </button>
-                <button menuClose ion-item (click)="logout()">
-                    <ion-icon name="exit" item-left></ion-icon>
+                <button class="item-menu-sair" menuClose ion-item (click)="logout()">
+                    <ion-icon color='danger' name="exit" item-left></ion-icon>
                     {{"APP.SAIR" | translate}}
                 </button>
             </ion-list>

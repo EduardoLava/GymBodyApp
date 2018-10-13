@@ -16,15 +16,15 @@
 <ion-content padding>
   <form (ngSubmit)="salvar()" [formGroup]="formGroup" >
     <ion-list>
-      <ion-item>
+      <ion-item class="item-lista">
         <ion-label stacked>{{'ALTERAR.DADOS.NOME' | translate}}</ion-label>
         <ion-input type="text" [(ngModel)]="pessoa.nome" formControlName="nome"  name="pessoa.nome"></ion-input>
       </ion-item>
-      <ion-item (click)="selecionaData()"> 
+      <ion-item (click)="selecionaData()" class="item-lista">
         <ion-label stacked>{{'ALTERAR.DADOS.NASCIMENTO' | translate}}</ion-label>
-        <ion-datetime disabled="true" displayFormat="DD/MM/YYYY" [(ngModel)]="pessoa.dataNascimento" formControlName="dataNascimento" name="pessoa.dataNascimento"></ion-datetime>
+        <ion-datetime class="disabled" displayFormat="DD/MM/YYYY" [(ngModel)]="pessoa.dataNascimento" formControlName="dataNascimento" name="pessoa.dataNascimento"></ion-datetime>
       </ion-item>
-      <ion-item>
+      <ion-item class="item-lista">
         <ion-label stacked>{{'ALTERAR.DADOS.GENERO' | translate}}</ion-label>
         <ion-select 
           [(ngModel)]="pessoa.genero"  
@@ -36,15 +36,15 @@
           <ion-option *ngFor="let genero of generoValues" [value]="genero">{{ genero }}</ion-option>
         </ion-select>
       </ion-item>
-      <ion-item>
+      <ion-item class="item-lista">
         <ion-label stacked>{{'ALTERAR.DADOS.LOGIN' | translate}}</ion-label>
         <ion-input type="text" [(ngModel)]="pessoa.login"  formControlName="login" name="pessoa.login"></ion-input>
       </ion-item>
-      <ion-item>
-        <button ion-button item-start default color="confirm"  type="submit">
+      <ion-item class="transparente">
+        <button ion-button item-start default color="primary"  type="submit">
           {{ 'BOTAO.CONFIRMAR' | translate }}
         </button>
-        <button  ion-button item-end default color="cancel"  type="button" (click)="cancelar()">
+        <button  ion-button item-end default color="danger"  type="button" (click)="cancelar()">
           {{ 'BOTAO.CANCELAR' | translate }}
           </button>
       </ion-item>

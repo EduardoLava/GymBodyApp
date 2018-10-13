@@ -1,7 +1,11 @@
 {
     "APP" : {
         "NAME": "Gym Body App",
-        "SAIR" : "Sair"
+        "SAIR" : "Sair",
+        "BEM" : {
+            "VINDO" : "Seja bem vindo",
+            "VINDA" : "Seja bem vinda"
+        }
     },
     "AGENDA" : {
         "TITLE" : "Agenda"
@@ -161,7 +165,8 @@
     "LISTAGEM.AVALIACAO.FISICA" : {
         "TITLE" : "Avaliação física",
         "ITEM.START" : "Realizada em ",
-        "EMPTY": "Nenhuma avaliação física encontrada, tente informar datas diferentes!"
+        "EMPTY": "Nenhuma avaliação física encontrada, tente informar datas diferentes!",
+        "PLACEHOLDER" : "Pesquisar alunos"
     },
     "LOGIN" : {
         "TITLE" : "Login",
