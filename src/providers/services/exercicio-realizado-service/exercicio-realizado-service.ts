@@ -15,7 +15,9 @@ export class ExercicioRealizadoServiceProvider {
   constructor(public http: HttpServiceProvider) {
   }
 
-  listExerciciosRealizadosByTreinoDataId(idTreinoData: number) : Observable<Page<ExercicioRealizado>>{
+  listExerciciosRealizadosByTreinoDataId(
+    idTreinoData: number
+  ) : Observable<Page<ExercicioRealizado>>{
     return this.http.get('/api/exercicios-realizados/treino-data-id/'+idTreinoData+'/');
   }
 

@@ -1,10 +1,11 @@
 import { Injectable } from '@angular/core';
 import { HttpServiceProvider } from '../http-service/http-service';
 import { Observable } from 'rxjs';
-import { map } from 'rxjs/operators/map';
 import { DatePipe } from '@angular/common';
 import { TreinoData, Page } from '../../../model/entities';
 import { DataUtil } from '../../../utils/data-util';
+
+import 'rxjs/add/operator/toPromise';
 
 @Injectable()
 export class TreinoDataServiceProvider {
@@ -39,12 +40,13 @@ export class TreinoDataServiceProvider {
 
     // let url = '/api/treino-datas/data-inicio/'+this.datePipe.transform(dataInicio, "yyyy-MM-dd")+'/aluno/'+idAluno;
 
-    return this.http.get<Page<TreinoData>>(url)
-      .map((pageTrainosDatas: Page<TreinoData>)=>{
-        return pageTrainosDatas.content.map((td: TreinoData) =>{
-          return Object.assign(td);
-        });
-    }) as Observable<TreinoData[]>;
+    return this.http.get(url);
+    //   .map((pageTrainosDatas: Page<TreinoData>)=>{
+    //       console.log(pageTrainosDatas);
+    //       let treinoData = deserializeArray(TreinoData, JSON.stringify(classToPlain(pageTrainosDatas.content)));
+    //       console.log(treinoData);
+    //       return treinoData;
+    // }) as Observable<TreinoData[]>;
     
   }
 
@@ -76,7 +78,7 @@ export class TreinoDataServiceProvider {
     );
 
     // let url = '/api/treino-datas/data-inicio/'+this.datePipe.transform(dataInicio, "yyyy-MM-dd")+'/aluno/'+idAluno;
-
+    
     return this.http.get<Page<TreinoData>>(url)
       .map((pageTrainosDatas: Page<TreinoData>)=>{
         return pageTrainosDatas.content.map((td: TreinoData) =>{

@@ -52,7 +52,7 @@ $text-color: map-get($colors , primary);
     height: 200px;
 }
 
-.imagem img {
+.logo img {
     width: 100px !important;
     height: 100px !important;
 }
@@ -123,6 +123,15 @@ $text-color: map-get($colors , primary);
 
 .incompleto {
     color: map-get($colors, hist-imcompleto) !important;
+}
+
+.imagem{
+    margin: 0 auto;
+    width: 200px;
+    height: 180px;
+    border: 4px;
+    border-color: #CCC;
+    border-style: dashed;
 }
 
 // estiliza tags

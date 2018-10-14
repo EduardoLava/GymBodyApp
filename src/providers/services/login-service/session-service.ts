@@ -77,11 +77,12 @@ export class SessionServiceProvider {
         this.saveLogin(pessoa.tokenJwt);
     }
 
-    public carregaPessoaLogada(){
-        Observable.fromPromise(this.storage.get(this.pessoaLodadaName))
-        .subscribe((pessoa)=>{
+    public carregaPessoaLogada() : Observable<Pessoa>{
+        return Observable.fromPromise(this.storage.get(this.pessoaLodadaName))
+        .map((pessoa)=>{
             this.setPessoaLogada(pessoa);
-        })
+            return pessoa;
+        }) as Observable<Pessoa>
         ;
     }
 

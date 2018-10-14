@@ -16,8 +16,6 @@ import { DatePicker } from '@ionic-native/date-picker';
 import { TranslateModule, TranslateLoader } from '@ngx-translate/core';
 import { TranslateHttpLoader } from '@ngx-translate/http-loader';
 
-import { YoutubeVideoPlayer } from '@ionic-native/youtube-video-player';
-
 // fim ng imports
 
 import 'rxjs/add/operator/do';

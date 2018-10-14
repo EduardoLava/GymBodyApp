@@ -1,5 +1,5 @@
 import { Component } from '@angular/core';
-import { IonicPage, NavController, NavParams, LoadingController, ToastController, MenuController } from 'ionic-angular';
+import { IonicPage, NavController, ToastController, MenuController } from 'ionic-angular';
 import { LoginServiceProvider } from '../../providers/services/login-service/login-service';
 import { finalize } from 'rxjs/operators';
 import { LoadingDefaultController } from '../../utils/loading-default-controller';
@@ -17,7 +17,7 @@ import { LoadingDefaultController } from '../../utils/loading-default-controller
 })
 export class LoginPage {
 
-  constructor(private readonly navCtrl: NavController,
+  constructor(public navCtrl: NavController,
     private readonly loading: LoadingDefaultController,
     private readonly authProvider: LoginServiceProvider,
     private readonly toastCtrl: ToastController,

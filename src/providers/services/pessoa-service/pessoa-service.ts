@@ -18,7 +18,7 @@ import { SessionServiceProvider } from '../login-service/session-service';
 export class PessoaServiceProvider {
 
   // pessoa logada no aplicativo
-  private pessoaLogada: Pessoa;
+  public pessoaLogada: Pessoa;
 
   constructor(
     public http: HttpServiceProvider,

@@ -23,8 +23,8 @@ import { AvaliacaoFisicaAnamnesePage } from '../avaliacao-fisica-anamnese/avalia
 })
 export class AvaliacaoFisicaSelecionarPessoaPage {
 
-  private pessoas: Pessoa[];
-  private avaliacaoFisica: AvaliacaoFisica;
+  pessoas: Pessoa[];
+  avaliacaoFisica: AvaliacaoFisica;
 
   constructor(
     public navCtrl: NavController, 

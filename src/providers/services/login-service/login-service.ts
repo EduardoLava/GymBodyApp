@@ -8,7 +8,6 @@ import { HttpServiceProvider } from '../http-service/http-service';
 import { SessionServiceProvider } from './session-service';
 import { Pessoa } from '../../../model/entities';
 import { MenuController } from 'ionic-angular';
-import { LoadingDefaultController } from '../../../utils/loading-default-controller';
 
 /**
  * 

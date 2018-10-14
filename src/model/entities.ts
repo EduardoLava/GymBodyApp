@@ -118,15 +118,15 @@ export class Pessoa {
 }
 
 
-export class Exercicio {
-    nome?: string;
-    descricao?: string;
-    linkVideo?: string;
-    isAtivo?: boolean;
-    equipamento?: Equipamento;
-    exercicioGrupoMusculares?: ExercicioGrupoMuscular[];
-    id?: number;
-    created?: string;
+export interface Exercicio {
+    nome?: string,
+    descricao?: string,
+    isAtivo?: boolean,
+    equipamento?: Equipamento,
+    exercicioGrupoMusculares?: ExercicioGrupoMuscular[],
+    imagem?: number,
+    id?: number,
+    created?: string,
     updated?: string
 }
 
@@ -143,7 +143,6 @@ export class PredicaoGorduraSiri {
 export class Equipamento {
     descricao?: string;
     imagem?: number;
-    imagemFileTransfer?: HTMLInputElement;
     isAtivo?: boolean;
     id?: number;
     created?: string;
@@ -171,11 +170,6 @@ export class TreinoData {
     id?: number;
     created?: string;
     updated?: string
-
-    constructor(objeto: any){
-        Object.assign(this, objeto);
-        this.treino = new Treino(objeto.treino);
-    }
 
 }
 
@@ -243,10 +237,6 @@ export class Treino {
     id?: number;
     created?: string;
     updated?: string;
-
-    constructor(objeto: any){
-        Object.assign(this, objeto);
-    }
 
 }
 

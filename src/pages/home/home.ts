@@ -1,14 +1,12 @@
 import { Component } from '@angular/core';
 import { NavController, AlertController, ModalController, NavParams } from 'ionic-angular';
-import { Treino, Pessoa, Page, TreinoData } from '../../model/entities';
-import { LoginServiceProvider } from '../../providers/services/login-service/login-service';
+import { Treino, Pessoa, TreinoData } from '../../model/entities';
 import { ToastDefautController } from '../../utils/toast-default-contoller';
 import { TreinoDataServiceProvider } from '../../providers/services/treino-data-service/treino-data-service';
 import { SessionServiceProvider } from '../../providers/services/login-service/session-service';
 import { DataUtil } from '../../utils/data-util';
 import { CalendarModalOptions, CalendarModal, CalendarResult } from 'ion2-calendar';
 import { TreinoDetalhesPage } from '../treino-detalhes/treino-detalhes';
-// import { JwtHelperService } from '@auth0/angular-jwt';
 
 @Component({
   selector: 'page-home',
@@ -35,18 +33,38 @@ export class HomePage {
 
     this.pessoaFiltrada = this.navParamns.get('pessoa');
 
+    this.carregaDados();
+
+  }
+
+  carregaDados(){
+
     if(this.pessoaFiltrada == null){
       this.apresentarMenu = true;
       this.apresentarNome = false;
-      this.pessoaFiltrada =  sessionService.pessoalogada;
-    }
+      
+      this.sessionService.carregaPessoaLogada()
+      .subscribe((pessoa: Pessoa) =>{ 
+      this.pessoaFiltrada =  pessoa;
 
+      if(this.pessoaFiltrada == null){
+        this.sessionService.logout();
+        return;
+      }
+
+      let dataInicio: Date = this.dataUtil.addDays(new Date(), -30);
+      let dataTermino: Date = this.dataUtil.addDays(new Date(), 15);
+
+      this.listByFilters( dataInicio, dataTermino);
+
+    });
+
+    }
   }
 
   ionViewDidLoad() {
 
     if(this.pessoaFiltrada == null){
-      this.sessionService.logout();
       return;
     }
 

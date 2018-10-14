@@ -1,5 +1,5 @@
 import { Component } from '@angular/core';
-import { IonicPage, NavController, NavParams, LoadingController } from 'ionic-angular';
+import { IonicPage, NavController, NavParams } from 'ionic-angular';
 import { FormGroup, FormBuilder, Validators } from '@angular/forms';
 import { AvaliacaoFisica, IndiceMassaCorporal } from '../../../model/entities';
 import { ToastDefautController } from '../../../utils/toast-default-contoller';

@@ -11,9 +11,8 @@ import { LoginServiceProvider } from '../providers/services/login-service/login-
 import { LoginPage } from '../pages/login/login';
 import { SessionServiceProvider } from '../providers/services/login-service/session-service';
 
-import { ListaAvaliacaoFisicaPage } from '../pages/lista-avaliacao-fisica/lista-avaliacao-fisica';
-import { LoadingDefaultController } from '../utils/loading-default-controller';
 import { MeusAlunosPage } from '../pages/meus-alunos/meus-alunos';
+import { ListaAvaliacaoFisicaPage } from '../pages/lista-avaliacao-fisica/lista-avaliacao-fisica';
 
 @Component({
   templateUrl: 'app.html'
@@ -33,7 +32,7 @@ export class MyApp {
     { titulo: 'MENU.ALUNOS', componente: MeusAlunosPage.name, icone: 'people' },
     // { titulo: 'MENU.AGENDA', componente: ListaTreinoPage.name, icone: 'calendar' },
     { titulo: 'MENU.AVALIACAO.FISICA', componente: ListaAvaliacaoFisicaPage.name, icone: 'pulse' },
-    { titulo: 'MENU.NOTIFICACOES', componente: ListaTreinoPage.name, icone: 'notifications' }
+    // { titulo: 'MENU.NOTIFICACOES', componente: ListaTreinoPage.name, icone: 'notifications' }
   ];
 
   constructor(

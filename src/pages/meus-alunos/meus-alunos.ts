@@ -6,7 +6,6 @@ import { LoadingDefaultController } from '../../utils/loading-default-controller
 import { ListaTreinoPage } from '../lista-treino/lista-treino';
 import { MinhaContaPage } from '../minha-conta/minha-conta';
 import { HomePage } from '../home/home';
-import { text } from '@angular/core/src/render3/instructions';
 
 /**
  * Generated class for the MeusAlunosPage page.

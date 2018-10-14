@@ -43,7 +43,7 @@ export class ListaAvaliacaoFisicaPage {
     private toast: ToastDefautController,
     private dataUtil: DataUtil,
     private loading: LoadingDefaultController,
-    private session: SessionServiceProvider
+    session: SessionServiceProvider
   ) {
     this.isPersonal = session.getIsAdministradorOrPersonal();
   }

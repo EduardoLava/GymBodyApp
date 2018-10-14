@@ -87,9 +87,17 @@
       </ion-row>
       <ion-row>
         <ion-col>
-          {{idVideo}}
+          <img 
+            *ngIf="exercicioAtual?.treinoExercicio?.exercicio?.imagem" 
+            src="data:image/JPEG;base64,{{exercicioAtual?.treinoExercicio?.exercicio?.imagem}}" 
+            class="imagem" />
+          <img 
+            *ngIf="!exercicioAtual?.treinoExercicio?.exercicio?.imagem"
+            [src]="imageUrl" 
+            class="imagem" />
+          <!-- {{idVideo}}
             <iframe *ngIf="idVideo != null && idVideo != '' " class="video" [src]="urlVideo" frameborder="0" allow="autoplay; encrypted-media" allowfullscreen></iframe>
-            <img *ngIf="idVideo == null || idVideo == '' " class="video" [src]="imagemSemVideo"/>
+            <img *ngIf="idVideo == null || idVideo == '' " class="video" [src]="imagemSemVideo"/> -->
         </ion-col>
       </ion-row>
       <ion-row>

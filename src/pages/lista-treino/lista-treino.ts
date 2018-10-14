@@ -4,7 +4,7 @@ import { NavLifecycles } from '../../utils/nav-lifecycles';
 import { TreinoDataServiceProvider } from '../../providers/services/treino-data-service/treino-data-service';
 import { SessionServiceProvider } from '../../providers/services/login-service/session-service';
 import { LoadingDefaultController } from '../../utils/loading-default-controller';
-import { TreinoData, Page, Pessoa } from '../../model/entities';
+import { TreinoData, Pessoa } from '../../model/entities';
 import { TreinoPage } from './treino/treino';
 import { DatePipe } from '@angular/common';
 import { ToastDefautController } from '../../utils/toast-default-contoller';
@@ -44,7 +44,6 @@ export class ListaTreinoPage implements NavLifecycles {
     this.dataAtual = this.datePipe.transform(new Date(), "yyyy-MM-dd");
     
     this.pessoa = this.navParams.get('pessoa');
-    console.log(this.pessoa);
     if(this.pessoa == null){
       this.apresentarNome = false;
       this.apresentarMenu = true;
@@ -64,12 +63,12 @@ export class ListaTreinoPage implements NavLifecycles {
     this.treinosData = null;
 
     this.treinoService.listarTreinosByAluno(this.pessoa.id)
-    .finally(() => this.loading.loader.dismiss())
     .subscribe((treinosData: TreinoData[] ) =>{
-      
+      this.loading.loader.dismiss();
       this.treinosData = treinosData;
 
     }, (error)=>{
+      this.loading.loader.dismiss();
       this.alertControler.create({
         title: 'Erro',
         subTitle: 'Ocorreu um erro ao consultar seus treinos!\nVerifique sua conexão!',
@@ -97,7 +96,7 @@ export class ListaTreinoPage implements NavLifecycles {
       buttons: [
         {text: 'Não'},
         {text: 'Sim', handler: () => {
-          this.navCtrl.setRoot(TreinoPage.name,{
+          this.navCtrl.push(TreinoPage.name,{
             treinoData: treinoData 
           });
         }}

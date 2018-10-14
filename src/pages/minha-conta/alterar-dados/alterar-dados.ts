@@ -1,5 +1,5 @@
 import { Component } from '@angular/core';
-import { IonicPage, NavController, NavParams, ToastController, AlertController } from 'ionic-angular';
+import { IonicPage, NavController, NavParams, AlertController } from 'ionic-angular';
 import { DatePicker } from '@ionic-native/date-picker';
 import { PessoaServiceProvider } from '../../../providers/services/pessoa-service/pessoa-service';
 import { Pessoa, GeneroValues } from '../../../model/entities';
@@ -24,10 +24,10 @@ export class AlterarDadosPage {
   // pessoa logada no sistema
   private pessoa: Pessoa;
   // genero para carregar no select
-  private generoValues: String[];
+  generoValues: String[];
 
   // form group para gerenciar os campos do formulário
-  private formGroup: FormGroup;
+  formGroup: FormGroup;
 
   constructor(
     public navCtrl: NavController,
@@ -35,7 +35,7 @@ export class AlterarDadosPage {
     private pessoaService: PessoaServiceProvider,
     private dataPicker: DatePicker,
     private toast: ToastDefautController,
-    private formBuilder: FormBuilder,
+    formBuilder: FormBuilder,
     private loading: LoadingDefaultController,
     private alertCntrl: AlertController
   ) {

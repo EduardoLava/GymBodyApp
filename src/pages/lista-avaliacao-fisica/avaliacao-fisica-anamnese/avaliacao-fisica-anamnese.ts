@@ -1,6 +1,6 @@
 import { Component } from '@angular/core';
 import { IonicPage, NavController, NavParams } from 'ionic-angular';
-import { AvaliacaoFisica, Pessoa, Resposta } from '../../../model/entities';
+import { AvaliacaoFisica, Resposta } from '../../../model/entities';
 import { FormGroup, FormBuilder, Validators } from '@angular/forms';
 import { ToastDefautController } from '../../../utils/toast-default-contoller';
 

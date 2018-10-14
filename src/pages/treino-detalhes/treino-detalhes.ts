@@ -3,8 +3,6 @@ import { IonicPage, NavController, NavParams, AlertController } from 'ionic-angu
 import { LoadingDefaultController } from '../../utils/loading-default-controller';
 import { TreinoData, ExercicioRealizado, Page } from '../../model/entities';
 import { ExercicioRealizadoServiceProvider } from '../../providers/services/exercicio-realizado-service/exercicio-realizado-service';
-import { Exercicio } from '../../model/treino/exercicio';
-import { DetalharExercicioPage } from '../detalhar-exercicio/detalhar-exercicio';
 import { ExercicioRealizadoDetalhesPage } from '../exercicio-realizado-detalhes/exercicio-realizado-detalhes';
 
 /**

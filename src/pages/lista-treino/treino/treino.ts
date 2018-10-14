@@ -16,7 +16,6 @@ import { DetalharExercicioPage } from '../../detalhar-exercicio/detalhar-exercic
 import { TimeUtilProvider } from '../../../providers/time-util/time-util';
 // import { TreinoExercicioServiceProvider } from '../../../providers/services/treino-exercicio-service/treino-exercicio-service';
 
-
 /**
  * 
  */
@@ -42,10 +41,7 @@ export class TreinoPage implements NavLifecycles{
   // treino no indice atual
   public exercicioAtual: ExercicioRealizado;
 
-  // para caregad video embed
-  urlVideo: SafeResourceUrl;
-  idVideo: string;
-  imagemSemVideo: string = '../../../../assets/imgs/sem_video.png';
+  imageUrl: string = '../../../assets/imgs/imagem-default.png';
 
   // percentual completo do treino, apresentado na tela
   percentualCompleto;
@@ -62,8 +58,6 @@ export class TreinoPage implements NavLifecycles{
    * @param alertController 
    * @param treinoDataService 
    * @param toast 
-   * @param domSanitizer 
-   * @param youtubeServiceProvider 
    * @param timerUtil 
    */
   constructor(
@@ -75,17 +69,13 @@ export class TreinoPage implements NavLifecycles{
     private alertController: AlertController,
     private treinoDataService: TreinoDataServiceProvider,
     private toast: ToastDefautController,
-    private domSanitizer: DomSanitizer,
-    // private youtubePlayer: YoutubeVideoPlayer,
-    // private platform: Platform,
-    private youtubeServiceProvider: YoutubeUrlServiceProvider,
     private timerUtil: TimeUtilProvider
   ) {
 
     this.treinoData = navParams.get('treinoData');
     // console.log(this.treinoData);
     if(this.treinoData == null){
-      this.navCtrl.setRoot(ListaTreinoPage.name);
+      this.navCtrl.pop();
       return;
     }
 
@@ -155,7 +145,7 @@ export class TreinoPage implements NavLifecycles{
           }).present();
 
           // depois fecha a tela de treinos
-          this.navCtrl.setRoot(ListaTreinoPage.name);
+          this.navCtrl.pop();
 
         }
       );
@@ -166,7 +156,7 @@ export class TreinoPage implements NavLifecycles{
           {
             text: 'Ok',
             handler: ()=>{ 
-              this.navCtrl.setRoot(ListaTreinoPage.name);
+              this.navCtrl.pop();
             }
           }
         ],
@@ -183,8 +173,6 @@ export class TreinoPage implements NavLifecycles{
    */
   proximoExercicio(){
 
-    // console.log('proximo');
-    console.log(this.treinoData.exerciciosRealizados.length == (this.indiceTreinoAtual + 1));
     // verifica se a lista terá tamanho para pegar o proximo item
     if(!(this.treinoData.exerciciosRealizados.length == (this.indiceTreinoAtual + 1))){
       this.indiceTreinoAtual = this.indiceTreinoAtual + 1;
@@ -228,10 +216,10 @@ export class TreinoPage implements NavLifecycles{
 
     this.calculaPercentualCompleto();
 
-    if(this.exercicioAtual != null && this.exercicioAtual.treinoExercicio != null){
-      this.idVideo = this.youtubeServiceProvider.urlVideioByUrl(this.exercicioAtual.treinoExercicio.exercicio.linkVideo+'');
-      this.preparavideo(this.idVideo);
-    }
+    // if(this.exercicioAtual != null && this.exercicioAtual.treinoExercicio != null){
+    //   // this.idVideo = this.youtubeServiceProvider.urlVideioByUrl(this.exercicioAtual.treinoExercicio.exercicio.linkVideo+'');
+    //   // this.preparavideo(this.idVideo);
+    // }
 
   }
 
@@ -262,9 +250,9 @@ export class TreinoPage implements NavLifecycles{
    * Carrega o vídeo para ser possível realizar sua execução no dispositivo
    * @param id 
    */
-  preparavideo(id){
-    this.urlVideo = this.domSanitizer.bypassSecurityTrustResourceUrl('https://www.youtube.com/embed/'+id);
-  }
+  // preparavideo(id){
+  //   this.urlVideo = this.domSanitizer.bypassSecurityTrustResourceUrl('https://www.youtube.com/embed/'+id);
+  // }
 
   /**
    * Abra modal para detalhar exercicio, para que o usuári possa ver mais detalhes
