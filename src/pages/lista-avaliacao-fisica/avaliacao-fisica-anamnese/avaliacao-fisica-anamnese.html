@@ -78,12 +78,21 @@
         placeholder="{{'ANAMNESE.PERGUNTA6.PLACEHOLDER' | translate }}"></ion-textarea>
     </ion-item>
   </form>
-  <ion-fab bottom right *ngIf="readOnly == false">
+  <ion-fab bottom right>
     <button 
+      *ngIf="!readOnly && !edicao"
       [disabled]="!formAnamnese.valid"
       (click)="form.ngSubmit.emit()"
       ion-fab color="primary">
       <ion-icon name="arrow-round-forward"></ion-icon>
+    </button>
+    <button 
+      *ngIf="!readOnly && edicao"
+      [disabled]="!formAnamnese.valid"
+      (click)="editar()"
+      type="button"
+      ion-fab color="primary">
+      <ion-icon name="checkmark"></ion-icon>
     </button>
   </ion-fab>
 </ion-content>

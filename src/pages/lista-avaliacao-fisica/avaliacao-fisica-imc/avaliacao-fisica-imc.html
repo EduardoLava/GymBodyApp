@@ -42,11 +42,22 @@
       {{textoResultado}}!
     </h4>
   </form>
-  <div text-center *ngIf="readOnly == false">
+  <div text-center *ngIf="!readOnly && !edicao">
     <button 
       [disabled]="!formImc.valid"
       ion-button 
       (click)="salvar()"
       large>{{"IMC.FINALIZAR" | translate}}</button>
   </div>
+
+  <ion-fab bottom right *ngIf="!readOnly && edicao">
+    <button 
+      type="button"
+      [disabled]="!formImc.valid"
+      (click)="editar()"
+      ion-fab color="primary">
+      <ion-icon name="checkmark"></ion-icon>
+    </button>
+  </ion-fab>
+
 </ion-content>

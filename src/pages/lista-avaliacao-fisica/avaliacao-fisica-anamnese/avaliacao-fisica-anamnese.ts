@@ -5,6 +5,7 @@ import { FormGroup, FormBuilder, Validators } from '@angular/forms';
 import { ToastDefautController } from '../../../utils/toast-default-contoller';
 
 import { AvaliacaoFisicaPerimetriaPage } from '../avaliacao-fisica-perimetria/avaliacao-fisica-perimetria';
+import { AvaliacaoFisicaServiceProvider } from '../../../providers/services/avaliacao-fisica-service/avaliacao-fisica-service';
 
 /**
  * Generated class for the AvaliacaoFisicaAnamnesePage page.
@@ -29,7 +30,8 @@ export class AvaliacaoFisicaAnamnesePage {
   public formAnamnese: FormGroup;
 
   // chamado ao detalhar
-  private readOnly = false;
+  readOnly: boolean = false;
+  edicao: boolean = false;
 
   /**
    * 
@@ -42,16 +44,19 @@ export class AvaliacaoFisicaAnamnesePage {
     public navCtrl: NavController, 
     public navParams: NavParams,
     public formBuilder: FormBuilder,
-    private toast: ToastDefautController
+    private toast: ToastDefautController,
+    private avaliacaoFisicaService: AvaliacaoFisicaServiceProvider
   ) {
     
     this.resposta = {};
 
     this.avaliacaoFisica = this.navParams.get('avaliacaoFisica');
     this.readOnly = this.navParams.get('readOnly');
-    console.log(this.readOnly);
+    this.edicao = this.navParams.get('edicao');
+
     if(this.readOnly == null){
       this.readOnly = false;
+      this.edicao = false;
     }
 
 
@@ -108,6 +113,22 @@ export class AvaliacaoFisicaAnamnesePage {
     this.navCtrl.push(AvaliacaoFisicaPerimetriaPage.name, {
       avaliacaoFisica: this.avaliacaoFisica
     });
+  }
+
+  editar(){
+    
+    this.avaliacaoFisica.resposta = this.resposta;
+
+    this.avaliacaoFisicaService
+      .salvarAvaliacaoFisica(this.avaliacaoFisica)
+      .subscribe((avaliacao: AvaliacaoFisica) =>{
+        this.toast.create('Avaliacao física atualizada com sucesso!').present();
+        this.navCtrl.pop();
+        }, (error) =>{
+          this.toast.create('Erro ao salvar: '+ error.error).present();
+        }
+      );
+
   }
 
 }

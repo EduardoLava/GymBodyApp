@@ -14,6 +14,7 @@ import { YoutubeUrlServiceProvider } from '../../../providers/youtube-url-servic
 import { ListaTreinoPage } from '../lista-treino';
 import { DetalharExercicioPage } from '../../detalhar-exercicio/detalhar-exercicio';
 import { TimeUtilProvider } from '../../../providers/time-util/time-util';
+import { DatePipe } from '@angular/common';
 // import { TreinoExercicioServiceProvider } from '../../../providers/services/treino-exercicio-service/treino-exercicio-service';
 
 /**
@@ -69,7 +70,8 @@ export class TreinoPage implements NavLifecycles{
     private alertController: AlertController,
     private treinoDataService: TreinoDataServiceProvider,
     private toast: ToastDefautController,
-    private timerUtil: TimeUtilProvider
+    private timerUtil: TimeUtilProvider,
+    private datePipe: DatePipe
   ) {
 
     this.treinoData = navParams.get('treinoData');
@@ -299,6 +301,8 @@ export class TreinoPage implements NavLifecycles{
     let segundos = this.timerPrincipal.timer.timeRemaining;
 
     this.treinoData.tempoGasto = this.timerUtil.getDateTime(segundos);
+    
+    this.treinoData.tempoGasto = this.timerUtil.convertUTCDateToLocalDate(this.treinoData.tempoGasto);
 
     this.treinoData.horaTermino = new Date();
     this.treinoDataService.salvarTreinoData(treinoData).subscribe(
@@ -309,7 +313,11 @@ export class TreinoPage implements NavLifecycles{
         // console.log(treinoData);
         this.loading.loader.dismiss();
         this.navCtrl.setRoot(ListaTreinoPage.name);
-        this.toast.create('Treino salvo com sucesso!').present();
+
+        this.toast.create(
+          'Treino salvo com sucesso!'+
+          '\nTempo total gasto: '+this.datePipe.transform(this.treinoData.tempoGasto, "HH:mm:ss")
+        ).present();
 
       }, 
       (erro) =>{

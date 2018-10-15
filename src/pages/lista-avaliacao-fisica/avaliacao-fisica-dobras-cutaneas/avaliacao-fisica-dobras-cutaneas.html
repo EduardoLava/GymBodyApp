@@ -110,12 +110,21 @@
       <span item-end>{{"DOBRAS.CUTANEAS.MM" | translate}}</span>
     </ion-item>
   </form>
-  <ion-fab bottom right *ngIf="readOnly == false">
+  <ion-fab bottom right>
     <button 
+      *ngIf="!readOnly && !edicao"
       [disabled]="!formDobras.valid"
       (click)="form.ngSubmit.emit()"
       ion-fab color="primary">
         <ion-icon name="arrow-round-forward"></ion-icon>
+    </button>
+    <button 
+      *ngIf="!readOnly && edicao"
+      type="button"
+      [disabled]="!formDobras.valid"
+      (click)="editar()"
+      ion-fab color="primary">
+      <ion-icon name="checkmark"></ion-icon>
     </button>
   </ion-fab>
 </ion-content>

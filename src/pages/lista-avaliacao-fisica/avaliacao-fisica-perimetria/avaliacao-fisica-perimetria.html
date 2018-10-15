@@ -200,12 +200,21 @@
         <span item-end> {{"PERIMETRIA.CM" | translate}} </span>
     </ion-item>
   </form>
-  <ion-fab bottom right *ngIf="readOnly == false">
+  <ion-fab bottom right>
     <button 
+      *ngIf="!readOnly && !edicao"
       [disabled]="!formPerimetria.valid"
       (click)="form.ngSubmit.emit()"
       ion-fab color="primary">
       <ion-icon name="arrow-round-forward"></ion-icon>
+    </button>
+    <button 
+      *ngIf="!readOnly && edicao"
+      type="button"
+      [disabled]="!formPerimetria.valid"
+      (click)="editar()"
+      ion-fab color="primary">
+      <ion-icon name="checkmark"></ion-icon>
     </button>
   </ion-fab>
 </ion-content>

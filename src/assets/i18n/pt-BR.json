@@ -195,7 +195,7 @@
             "BUSCA" : "Digite um nome"
         },
         "DADOS" : {
-            "TITLE" : "Meus Dados",
+            "TITLE" : "Dados cadastrais",
             "LOGIN" : "Login:",
             "NASCIMENTO" : "Nascimento:",
             "GENERO" : "Gênero:",

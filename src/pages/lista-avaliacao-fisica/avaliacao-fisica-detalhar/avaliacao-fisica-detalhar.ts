@@ -8,6 +8,7 @@ import { AvaliacaoFisicaAnamnesePage } from '../avaliacao-fisica-anamnese/avalia
 import { AvaliacaoFisicaPerimetriaPage } from '../avaliacao-fisica-perimetria/avaliacao-fisica-perimetria';
 import { AvaliacaoFisicaDobrasCutaneasPage } from '../avaliacao-fisica-dobras-cutaneas/avaliacao-fisica-dobras-cutaneas';
 import { AvaliacaoFisicaImcPage } from '../avaliacao-fisica-imc/avaliacao-fisica-imc';
+import { SessionServiceProvider } from '../../../providers/services/login-service/session-service';
 
 /**
  * Generated class for the AvaliacaoFisicaDetalharPage page.
@@ -25,11 +26,14 @@ export class AvaliacaoFisicaDetalharPage {
 
   avaliacaoFisica: AvaliacaoFisica;
 
+  isReadOnly: boolean = false;
+
   constructor(
     public navCtrl: NavController, 
     public navParams: NavParams,
     public toast: ToastDefautController,
-    private avaliacaoFisicaService: AvaliacaoFisicaServiceProvider
+    private avaliacaoFisicaService: AvaliacaoFisicaServiceProvider,
+    private sessionService: SessionServiceProvider,
   ) {
     this.avaliacaoFisica = this.navParams.get('avaliacaoFisica');
 
@@ -37,6 +41,9 @@ export class AvaliacaoFisicaDetalharPage {
       this.toast.create('Ocorreu um erro ao detalhar sua avaliação física').present();
       this.navCtrl.setRoot(ListaAvaliacaoFisicaPage.name);
     }
+
+    this.isReadOnly = !this.sessionService.getIsAdministradorOrPersonal();
+
   }
 
   ionViewDidLoad() {
@@ -60,7 +67,8 @@ export class AvaliacaoFisicaDetalharPage {
 
     this.navCtrl.push(AvaliacaoFisicaAnamnesePage.name, {
       avaliacaoFisica: avaliacaoFisica,
-      readOnly: true
+      readOnly: this.isReadOnly,
+      edicao: true
     });
 
   }
@@ -73,7 +81,8 @@ export class AvaliacaoFisicaDetalharPage {
 
     this.navCtrl.push(AvaliacaoFisicaPerimetriaPage.name, {
       avaliacaoFisica: avaliacaoFisica,
-      readOnly: true
+      readOnly: this.isReadOnly,
+      edicao: true
     });
 
   }
@@ -86,7 +95,8 @@ export class AvaliacaoFisicaDetalharPage {
 
     this.navCtrl.push(AvaliacaoFisicaDobrasCutaneasPage.name, {
       avaliacaoFisica: avaliacaoFisica,
-      readOnly: true
+      readOnly: this.isReadOnly,
+      edicao: true
     });
 
   }
@@ -99,7 +109,8 @@ export class AvaliacaoFisicaDetalharPage {
 
     this.navCtrl.push(AvaliacaoFisicaImcPage.name,{
       avaliacaoFisica: avaliacaoFisica,
-      readOnly: true
+      readOnly: this.isReadOnly,
+      edicao: true
     })
 
   }

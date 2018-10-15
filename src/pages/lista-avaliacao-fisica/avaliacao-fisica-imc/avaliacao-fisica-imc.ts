@@ -32,7 +32,8 @@ export class AvaliacaoFisicaImcPage {
   public textoResultado: string = "";
   public corResultado: string;
 
-  public readOnly: boolean = false;
+  readOnly: boolean = false;
+  edicao:boolean = false;
 
   constructor(
     public navCtrl: NavController,
@@ -46,11 +47,16 @@ export class AvaliacaoFisicaImcPage {
     this.imc = {};
 
     this.avaliacaoAvaiacaoFisica = this.navParams.get('avaliacaoFisica');
-    this.readOnly = this.navParams.get('readOnly');
+    this.readOnly = navParams.get('readOnly');
+    this.edicao = this.navParams.get('edicao');
 
     if(this.readOnly == null){
       this.readOnly = false;
+      this.edicao = false;
     }
+
+    console.log('read '+ this.readOnly);
+    console.log('edicao '+ this.edicao);
 
     if(
         this.avaliacaoAvaiacaoFisica == null 
@@ -177,6 +183,22 @@ export class AvaliacaoFisicaImcPage {
       console.log(error);
       this.toast.create(error.error).present();
     });
+
+  }
+
+  editar(){
+    
+    this.avaliacaoAvaiacaoFisica.avaliacaoAntropometrica.indiceMassaCorporal = this.imc;
+
+    this.avaliacaoFisicaService
+      .salvarAvaliacaoFisica(this.avaliacaoAvaiacaoFisica)
+      .subscribe((avaliacao: AvaliacaoFisica) =>{
+        this.toast.create('Avaliacao física atualizada com sucesso!').present();
+        this.navCtrl.pop();
+        }, (error) =>{
+          this.toast.create('Erro ao salvar: '+ error.error).present();
+        }
+      );
 
   }
 

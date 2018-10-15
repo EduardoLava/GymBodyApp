@@ -5,6 +5,7 @@ import { AvaliacaoFisica, DobrasCutaneas } from '../../../model/entities';
 import { ToastDefautController } from '../../../utils/toast-default-contoller';
 import { AvaliacaoFisicaImcPage } from '../avaliacao-fisica-imc/avaliacao-fisica-imc';
 import { ListaAvaliacaoFisicaPage } from '../lista-avaliacao-fisica';
+import { AvaliacaoFisicaServiceProvider } from '../../../providers/services/avaliacao-fisica-service/avaliacao-fisica-service';
 
 /**
  * Generated class for the AvaliacaoFisicaDobrasCutaneasPage page.
@@ -29,18 +30,22 @@ export class AvaliacaoFisicaDobrasCutaneasPage {
   private dobrasCutaneas: DobrasCutaneas;
 
   readOnly: boolean = false;
+  edicao:boolean = false;
 
   constructor(
     public navCtrl: NavController, 
     public navParams: NavParams,
     public toast: ToastDefautController,
-    public formBuilder: FormBuilder
+    public formBuilder: FormBuilder,
+    private avaliacaoFisicaService: AvaliacaoFisicaServiceProvider,
   ) {
     this.avaliacaoFisica = this.navParams.get('avaliacaoFisica');
-    this.readOnly = this.navParams.get('readOnly');
+    this.readOnly = navParams.get('readOnly');
+    this.edicao = this.navParams.get('edicao');
 
     if(this.readOnly == null){
       this.readOnly = false;
+      this.edicao = false;
     }
 
     if(
@@ -124,12 +129,25 @@ export class AvaliacaoFisicaDobrasCutaneasPage {
    * Avança etapa
    */
   proximaEtapa(){
-    console.log('dobras proximo, ir pra imc');
     this.avaliacaoFisica.avaliacaoAntropometrica.dobrasCutaneas = this.dobrasCutaneas;
     console.log(this.formDobras);
     this.navCtrl.push(AvaliacaoFisicaImcPage.name, {
       avaliacaoFisica: this.avaliacaoFisica
     });
+  }
+
+  editar(){
+    
+    this.avaliacaoFisicaService
+      .salvarAvaliacaoFisica(this.avaliacaoFisica)
+      .subscribe((avaliacao: AvaliacaoFisica) =>{
+        this.toast.create('Avaliacao física atualizada com sucesso!').present();
+        this.navCtrl.pop();
+        }, (error) =>{
+          this.toast.create('Erro ao salvar: '+ error.error).present();
+        }
+      );
+
   }
 
 

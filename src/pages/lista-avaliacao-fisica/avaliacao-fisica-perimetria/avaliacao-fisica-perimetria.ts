@@ -5,6 +5,7 @@ import { ToastDefautController } from '../../../utils/toast-default-contoller';
 import { HomePage } from '../../home/home';
 import { FormGroup, FormBuilder, Validators } from '@angular/forms';
 import { AvaliacaoFisicaDobrasCutaneasPage } from '../avaliacao-fisica-dobras-cutaneas/avaliacao-fisica-dobras-cutaneas';
+import { AvaliacaoFisicaServiceProvider } from '../../../providers/services/avaliacao-fisica-service/avaliacao-fisica-service';
 
 /**
  * Generated class for the AvaliacaoFisicaPerimetriaPage page.
@@ -27,6 +28,7 @@ export class AvaliacaoFisicaPerimetriaPage {
   public formPerimetria: FormGroup;
 
   readOnly: boolean = false;
+  edicao:boolean = false;
 
   /**
    * 
@@ -39,13 +41,16 @@ export class AvaliacaoFisicaPerimetriaPage {
     public navCtrl: NavController, 
     public navParams: NavParams,
     private toast: ToastDefautController,
-    private formBuilder: FormBuilder
+    private formBuilder: FormBuilder,
+    private avaliacaoFisicaService: AvaliacaoFisicaServiceProvider,
   ) {
     this.avaliacaoFisica = navParams.get('avaliacaoFisica');
     this.readOnly = navParams.get('readOnly');
+    this.edicao = this.navParams.get('edicao');
 
     if(this.readOnly == null){
       this.readOnly = false;
+      this.edicao = false;
     }
 
     if(!this.avaliacaoFisica || !this.avaliacaoFisica.perimetria){
@@ -216,6 +221,20 @@ export class AvaliacaoFisicaPerimetriaPage {
     this.navCtrl.push(AvaliacaoFisicaDobrasCutaneasPage.name, {
       avaliacaoFisica: this.avaliacaoFisica
     });
+  }
+
+  editar(){
+    
+    this.avaliacaoFisicaService
+      .salvarAvaliacaoFisica(this.avaliacaoFisica)
+      .subscribe((avaliacao: AvaliacaoFisica) =>{
+        this.toast.create('Avaliacao física atualizada com sucesso!').present();
+        this.navCtrl.pop();
+        }, (error) =>{
+          this.toast.create('Erro ao salvar: '+ error.error).present();
+        }
+      );
+
   }
 
 }
