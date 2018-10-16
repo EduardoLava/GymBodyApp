@@ -237,6 +237,7 @@ export class Treino {
     id?: number;
     created?: string;
     updated?: string;
+    treinoDatas?: TreinoData[];
 
 }
 

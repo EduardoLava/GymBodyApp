@@ -8,6 +8,7 @@ import { TreinoData, Pessoa } from '../../model/entities';
 import { TreinoPage } from './treino/treino';
 import { DatePipe } from '@angular/common';
 import { ToastDefautController } from '../../utils/toast-default-contoller';
+import { TreinoServiceProvider } from '../../providers/services/treino-service/treino-service';
 
 /**
  * Generated class for the ListaTreinoPage page.
@@ -34,7 +35,7 @@ export class ListaTreinoPage implements NavLifecycles {
   constructor(
     public navCtrl: NavController, 
     public navParams: NavParams,
-    private treinoService: TreinoDataServiceProvider,
+    private treinoService: TreinoServiceProvider,
     private alertControler: AlertController,
     private sessionService: SessionServiceProvider,
     private loading: LoadingDefaultController,

@@ -7,6 +7,7 @@ import { SessionServiceProvider } from '../../providers/services/login-service/s
 import { DataUtil } from '../../utils/data-util';
 import { CalendarModalOptions, CalendarModal, CalendarResult } from 'ion2-calendar';
 import { TreinoDetalhesPage } from '../treino-detalhes/treino-detalhes';
+import { TreinoServiceProvider } from '../../providers/services/treino-service/treino-service';
 
 @Component({
   selector: 'page-home',
@@ -25,7 +26,7 @@ export class HomePage {
     public navParamns: NavParams, 
     public sessionService: SessionServiceProvider,
     private toast: ToastDefautController,
-    private treinoDataService: TreinoDataServiceProvider,
+    private treinoService: TreinoServiceProvider,
     private dataUtil: DataUtil,
     private alert: AlertController,
     private modalCntr: ModalController,
@@ -81,7 +82,7 @@ export class HomePage {
       return;
     }
 
-    this.treinoDataService.listarTreinosByFiltersHistorico(
+    this.treinoService.listarTreinosByFiltersHistorico(
       dataInicio, 
       dataTermino, 
       this.pessoaFiltrada.id

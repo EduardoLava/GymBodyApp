@@ -23,32 +23,32 @@ export class TreinoDataServiceProvider {
    * 
    * @param idAluno 
    */
-  listarTreinosByAluno(idAluno: number): Observable<TreinoData[]> {
+  // listarTreinosByAluno(idAluno: number): Observable<TreinoData[]> {
 
-    let dataInicio = new Date();
+  //   let dataInicio = new Date();
 
-    let dataTermino = new Date();
-    dataTermino = this.dataUtil.addDays(dataTermino,90);
-    console.log('listarTreinos');
-    let url = '/api/treino-datas/data-inicio/'+
-    this.datePipe.transform(dataInicio, "yyyy-MM-dd")+
-    '/data-termino/'+
-    this.datePipe.transform(dataTermino, "yyyy-MM-dd")+
-    '/aluno/'+
-    idAluno+
-    '/somente-completos/'+false+'/';
+  //   let dataTermino = new Date();
+  //   dataTermino = this.dataUtil.addDays(dataTermino,90);
+  //   console.log('listarTreinos');
+  //   let url = '/api/treino-datas/data-inicio/'+
+  //   this.datePipe.transform(dataInicio, "yyyy-MM-dd")+
+  //   '/data-termino/'+
+  //   this.datePipe.transform(dataTermino, "yyyy-MM-dd")+
+  //   '/aluno/'+
+  //   idAluno+
+  //   '/somente-completos/'+false+'/';
 
-    // let url = '/api/treino-datas/data-inicio/'+this.datePipe.transform(dataInicio, "yyyy-MM-dd")+'/aluno/'+idAluno;
+  //   // let url = '/api/treino-datas/data-inicio/'+this.datePipe.transform(dataInicio, "yyyy-MM-dd")+'/aluno/'+idAluno;
 
-    return this.http.get(url);
-    //   .map((pageTrainosDatas: Page<TreinoData>)=>{
-    //       console.log(pageTrainosDatas);
-    //       let treinoData = deserializeArray(TreinoData, JSON.stringify(classToPlain(pageTrainosDatas.content)));
-    //       console.log(treinoData);
-    //       return treinoData;
-    // }) as Observable<TreinoData[]>;
+  //   return this.http.get(url);
+  //   //   .map((pageTrainosDatas: Page<TreinoData>)=>{
+  //   //       console.log(pageTrainosDatas);
+  //   //       let treinoData = deserializeArray(TreinoData, JSON.stringify(classToPlain(pageTrainosDatas.content)));
+  //   //       console.log(treinoData);
+  //   //       return treinoData;
+  //   // }) as Observable<TreinoData[]>;
     
-  }
+  // }
 
   /**
    * Lista os treinos de acordo com os filtros
@@ -88,36 +88,36 @@ export class TreinoDataServiceProvider {
     
   }
 
-  /**
-   * Busca os treinos para o histórico, 
-   * 
-   * @param dataInicio 
-   * @param dataTermino 
-   * @param idAluno 
-   */
-  listarTreinosByFiltersHistorico(
-    dataInicio: Date, 
-    dataTermino: Date, 
-    idAluno: number,
-  ): Observable<TreinoData[]> {
+  // /**
+  //  * Busca os treinos para o histórico, 
+  //  * 
+  //  * @param dataInicio 
+  //  * @param dataTermino 
+  //  * @param idAluno 
+  //  */
+  // listarTreinosByFiltersHistorico(
+  //   dataInicio: Date, 
+  //   dataTermino: Date, 
+  //   idAluno: number,
+  // ): Observable<TreinoData[]> {
 
-    let url = '/api/treino-datas/data-inicio/'+
-    this.datePipe.transform(dataInicio, "yyyy-MM-dd")+
-    '/data-termino/'+
-    this.datePipe.transform(dataTermino, "yyyy-MM-dd")+
-    '/aluno/'+
-    idAluno+'/';
+  //   let url = '/api/treino-datas/data-inicio/'+
+  //   this.datePipe.transform(dataInicio, "yyyy-MM-dd")+
+  //   '/data-termino/'+
+  //   this.datePipe.transform(dataTermino, "yyyy-MM-dd")+
+  //   '/aluno/'+
+  //   idAluno+'/';
 
-    // let url = '/api/treino-datas/data-inicio/'+this.datePipe.transform(dataInicio, "yyyy-MM-dd")+'/aluno/'+idAluno;
+  //   // let url = '/api/treino-datas/data-inicio/'+this.datePipe.transform(dataInicio, "yyyy-MM-dd")+'/aluno/'+idAluno;
 
-    return this.http.get<Page<TreinoData>>(url)
-      .map((pageTrainosDatas: Page<TreinoData>)=>{
-        return pageTrainosDatas.content.map((td: TreinoData) =>{
-          return Object.assign(td);
-        });
-    }) as Observable<TreinoData[]>;
+  //   return this.http.get<Page<TreinoData>>(url)
+  //     .map((pageTrainosDatas: Page<TreinoData>)=>{
+  //       return pageTrainosDatas.content.map((td: TreinoData) =>{
+  //         return Object.assign(td);
+  //       });
+  //   }) as Observable<TreinoData[]>;
     
-  }
+  // }
 
   salvarTreinoData(treinoDataRealizado: TreinoData): Observable<TreinoData> {
 
