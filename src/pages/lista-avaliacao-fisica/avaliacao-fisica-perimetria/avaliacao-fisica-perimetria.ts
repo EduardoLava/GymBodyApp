@@ -224,7 +224,7 @@ export class AvaliacaoFisicaPerimetriaPage {
   }
 
   editar(){
-    
+    this.avaliacaoFisica.pessoa.avaliacoesFisicas = null;
     this.avaliacaoFisicaService
       .salvarAvaliacaoFisica(this.avaliacaoFisica)
       .subscribe((avaliacao: AvaliacaoFisica) =>{

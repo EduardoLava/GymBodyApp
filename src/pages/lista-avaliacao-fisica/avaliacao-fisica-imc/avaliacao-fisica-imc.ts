@@ -54,10 +54,6 @@ export class AvaliacaoFisicaImcPage {
       this.readOnly = false;
       this.edicao = false;
     }
-
-    console.log('read '+ this.readOnly);
-    console.log('edicao '+ this.edicao);
-
     if(
         this.avaliacaoAvaiacaoFisica == null 
         || this.avaliacaoAvaiacaoFisica.avaliacaoAntropometrica == null
@@ -167,10 +163,9 @@ export class AvaliacaoFisicaImcPage {
 
   salvar(){
     this.avaliacaoAvaiacaoFisica.avaliacaoAntropometrica.indiceMassaCorporal = this.imc;
+    this.avaliacaoAvaiacaoFisica.pessoa.avaliacoesFisicas = null;
 
-    console.log(typeof this.avaliacaoAvaiacaoFisica.avaliacaoAntropometrica);
     this.loading.create('Salavando avaliação física').present();
-    console.log('save');
     this.avaliacaoFisicaService.salvarAvaliacaoFisica(this.avaliacaoAvaiacaoFisica)
     .finally(()=>{
       this.loading.loader.dismiss();

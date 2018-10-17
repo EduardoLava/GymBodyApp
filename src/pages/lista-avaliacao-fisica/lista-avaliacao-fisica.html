@@ -27,23 +27,25 @@
 <!-- https://github.com/HsuanXyz/ion2-calendar -->
 <ion-content no-padding>
   <ion-card>
-    <ion-card-content *ngIf="avaliacoesFisicas == null || avaliacoesFisicas.length == 0">
+    <ion-card-content *ngIf="pessoas == null || pessoas.length == 0">
       {{"LISTAGEM.AVALIACAO.FISICA.EMPTY" | translate}}
       </ion-card-content>
   </ion-card>
-  <ion-list *ngIf="avaliacoesFisicas">
-    <button 
-      class="item-lista" 
-      ion-item (click)="detalharAvaliacaoFisica(avaliacaoFisica)" 
-      *ngFor="let avaliacaoFisica of avaliacoesFisicas;">
-      <h2>
-        {{avaliacaoFisica?.pessoa?.nome}}
-      </h2>
-      <p>
-        {{"LISTAGEM.AVALIACAO.FISICA.ITEM.START" | translate}} 
-        {{ avaliacaoFisica?.data | date: 'dd/MM/yyyy'}}
-      </p>
-    </button>
+  <ion-list *ngIf="pessoas">
+    <div *ngFor="let pessoa of pessoas; ">
+      <button 
+        class="item-lista" 
+        ion-item (click)="detalharAvaliacaoFisica(avaliacaoFisica, pessoa)" 
+        *ngFor="let avaliacaoFisica of pessoa.avaliacoesFisicas;">
+        <h2>
+          {{pessoa?.nome}}
+        </h2>
+        <p>
+          {{"LISTAGEM.AVALIACAO.FISICA.ITEM.START" | translate}} 
+          {{ avaliacaoFisica?.data | date: 'dd/MM/yyyy'}}
+        </p>
+      </button>
+    </div>
   </ion-list>
   <ion-fab bottom right *ngIf="isPersonal">
     <button ion-fab color="primary">

@@ -1,5 +1,5 @@
 import { Component, ViewChild } from '@angular/core';
-import { IonicPage, NavController, NavParams, ModalController, AlertController } from 'ionic-angular';
+import { IonicPage, NavController, NavParams, ModalController, AlertController, Navbar } from 'ionic-angular';
 import { TimerComponent } from '../../../components/timer/timer';
 import { PauseModalPage } from '../treino/pause-modal/pause-modal';
 import { TreinoData, TreinoExercicio, Page, ExercicioRealizado } from '../../../model/entities';
@@ -26,6 +26,9 @@ import { DatePipe } from '@angular/common';
   templateUrl: 'treino.html',
 })
 export class TreinoPage implements NavLifecycles{
+
+  @ViewChild(Navbar) navBar: Navbar;
+
 // realizacao de treino
 
   @ViewChild('timerPrincipal')
@@ -77,7 +80,7 @@ export class TreinoPage implements NavLifecycles{
     this.treinoData = navParams.get('treinoData');
     // console.log(this.treinoData);
     if(this.treinoData == null){
-      this.navCtrl.pop();
+      this.navCtrl.setRoot(ListaTreinoPage.name)
       return;
     }
 
@@ -95,6 +98,24 @@ export class TreinoPage implements NavLifecycles{
    * 
    */
   ionViewDidLoad(){
+
+    this.navBar.backButtonClick = (e:UIEvent)=>{
+
+      this.alertController.create({
+        title: 'Sair do treino',
+        subTitle: 'Se você voltar perderá todo seu progresso neste treino.\nDeseja continuar?',
+         buttons: [
+          {
+            text: 'Não',
+          },
+          {
+           text: 'Sim',
+           handler: ()=> {this.navCtrl.pop()}
+          }
+        ]
+      }).present();
+
+     }
 
     this.carregaExercicios();
 
@@ -269,7 +290,7 @@ export class TreinoPage implements NavLifecycles{
    * marca todos os exercícios do treino como completo e manda salvar no servidor
    */
   finalizar(){
-    console.log('entrou no finalizar');
+    
     this.alertController.create({
       title: 'Finalizar treino',
       subTitle: 'Deseja finalizar o treino?',
@@ -305,6 +326,9 @@ export class TreinoPage implements NavLifecycles{
     this.treinoData.tempoGasto = this.timerUtil.convertUTCDateToLocalDate(this.treinoData.tempoGasto);
 
     this.treinoData.horaTermino = new Date();
+
+    this.treinoData.treino.treinoDatas = null;
+
     this.treinoDataService.salvarTreinoData(treinoData).subscribe(
       (treinoData: TreinoData) =>{
 

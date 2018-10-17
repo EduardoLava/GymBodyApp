@@ -103,7 +103,7 @@ export class TreinoServiceProvider {
         });
       }
 
-      return this.ordenaPorData(treinosData);
+      return this.ordenaPorDataDesc(treinosData);
 
     });
     
@@ -113,14 +113,33 @@ export class TreinoServiceProvider {
     if(treinosData){
 
       treinosData = treinosData.sort( (treinoData1, treinoData2): number => {
-        console.log(treinoData1);
-        console.log(treinoData2);
+        // console.log(treinoData1);
+        // console.log(treinoData2);
 
         let data1: Date = new Date(treinoData1.data);
         let data2: Date = new Date(treinoData2.data);
 
         if(data1 < data2) return -1;
         if(data1 > data2) return 1;
+        return 0;
+      });
+
+      return treinosData;
+    }
+  }
+
+  ordenaPorDataDesc(treinosData: TreinoData[]){
+    if(treinosData){
+
+      treinosData = treinosData.sort( (treinoData1, treinoData2): number => {
+        // console.log(treinoData1);
+        // console.log(treinoData2);
+
+        let data1: Date = new Date(treinoData1.data);
+        let data2: Date = new Date(treinoData2.data);
+
+        if(data1 < data2) return 1;
+        if(data1 > data2) return -1;
         return 0;
       });
 

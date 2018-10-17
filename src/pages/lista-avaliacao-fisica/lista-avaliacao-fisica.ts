@@ -3,7 +3,7 @@ import { IonicPage, NavController, NavParams, ModalController } from 'ionic-angu
 
 import { AvaliacaoFisicaSelecionarPessoaPage } from './avaliacao-fisica-selecionar-pessoa/avaliacao-fisica-selecionar-pessoa';
 import { AvaliacaoFisicaServiceProvider } from '../../providers/services/avaliacao-fisica-service/avaliacao-fisica-service';
-import { TipoProtocolo, Page, AvaliacaoFisica } from '../../model/entities';
+import { TipoProtocolo, Page, AvaliacaoFisica, Pessoa } from '../../model/entities';
 import {  CalendarModalOptions, CalendarModal, CalendarResult } from 'ion2-calendar'
 import { ToastDefautController } from '../../utils/toast-default-contoller';
 import { DataUtil } from '../../utils/data-util';
@@ -27,7 +27,7 @@ export class ListaAvaliacaoFisicaPage {
 
   // protocolos: string[];
   // avaiações físicas listadas na tela
-  avaliacoesFisicas: AvaliacaoFisica[];
+  pessoas: Pessoa[];
 
   isPersonal: boolean = false;
 
@@ -55,8 +55,9 @@ export class ListaAvaliacaoFisicaPage {
   ionViewDidLoad() {
     
     let dataInicio: Date = this.dataUtil.addDays(new Date(), -30);
+    let dataFim: Date = this.dataUtil.addDays(new Date(), 3);
 
-    this.listByDateInterval(null, dataInicio, new Date());
+    this.listByDateInterval(null, dataInicio, dataFim);
   }
 
   /**
@@ -88,6 +89,7 @@ export class ListaAvaliacaoFisicaPage {
       closeLabel: null,
       defaultScrollTo: new Date(),
       from: new Date('2018-02-01'),
+      to: this.dataUtil.addDays(new Date(), 2),
       showYearPicker: true
     };
 
@@ -121,7 +123,7 @@ export class ListaAvaliacaoFisicaPage {
    */
   listByDateInterval(filter: string, dataInicio: Date, dataFim: Date){
 
-    this.avaliacoesFisicas = null;
+    this.pessoas = null;
     this.dataInicio = dataInicio;
     this.dataFim = dataFim;
 
@@ -129,25 +131,32 @@ export class ListaAvaliacaoFisicaPage {
 
     this.avaliacaoFisicaService.listAvaliacaoFisicaByFilters(filter, null, dataInicio, dataFim)
     .finally(()=> this.loading.loader.dismiss())
-    .subscribe( (avaliacoesFisicas: Page<AvaliacaoFisica>) =>{
-      if(avaliacoesFisicas){
-        this.avaliacoesFisicas = avaliacoesFisicas.content;
-      } 
-
-    }, (error)=>{
-      this.toast.create(error.message).present();
+    .subscribe( (pessoas: Page<Pessoa>)=>{
+      this.pessoas = pessoas.content;
     });
+
+    // .subscribe( (pessoas: Page<Pessoa> ) =>{
+    //   if(pessoas){
+    //     this.pessoas = pessoas.content;
+    //   } 
+    // }, (error)=>{
+    //   this.toast.create(error.message).present();
+    // });
   }
 
-  detalharAvaliacaoFisica(avaliacaoFisica: AvaliacaoFisica){
+ 
+
+  detalharAvaliacaoFisica(avaliacaoFisica: AvaliacaoFisica, pessoa: Pessoa){
 
     if(avaliacaoFisica == null){
       this.toast.create('Ocorreu um erro ao detalhar esta avalaicão física').present();
       return;
     }
 
+    avaliacaoFisica.pessoa = pessoa;
+
     this.navCtrl.push(AvaliacaoFisicaDetalharPage.name, {
-      avaliacaoFisica : avaliacaoFisica
+      avaliacaoFisica : avaliacaoFisica,
     });
 
   }

@@ -1,6 +1,6 @@
 import { Injectable } from '@angular/core';
 import { HttpServiceProvider } from '../http-service/http-service';
-import { AvaliacaoFisica, AvaliacaoAntropometrica, TipoProtocolo } from '../../../model/entities';
+import { AvaliacaoFisica, AvaliacaoAntropometrica, TipoProtocolo, Pessoa, Page } from '../../../model/entities';
 import { Observable } from 'rxjs';
 import { DatePipe } from '@angular/common';
 import { SessionServiceProvider } from '../login-service/session-service';
@@ -64,7 +64,7 @@ export class AvaliacaoFisicaServiceProvider {
     return this.http.get(idPessoa+"/pessoa-id");
   }
 
-  listAvaliacaoFisicaByFilters(filters: string, idPessoa: number, dataInicio: Date, dataFim: Date){
+  listAvaliacaoFisicaByFilters(filters: string, idPessoa: number, dataInicio: Date, dataFim: Date): Observable<Page<Pessoa>> {
 
 
     if(!this.sessionService.getIsAdministradorOrPersonal()){
@@ -95,19 +95,14 @@ export class AvaliacaoFisicaServiceProvider {
       dataFimFormatada  = '/fim/'+dataFimFormatada+'/'
     }
 
-    return this.http.get(
-      '/api/avaliacao-fisica/by-filters'+
+    return this.http.get<Page<Pessoa>>(
+      '/api/pessoas/avaliacao-fisica/by-filters'+
       filters+
       (idPessoa != null ? '/pessoa-id/'+idPessoa: '')+
       dataInicioFormatada+
       dataFimFormatada
-      // '/inicio/'+
-      // this.datePipe.transform(dataInicio, "yyyy-MM-dd")+
-      // '/fim/'+
-      // this.datePipe.transform(dataFim, "yyyy-MM-dd")+
-      // '/'
-    )
-    // return this.http.get('/api/avaliacao-fisica/'+filters+'/by-filters'+dataInicioFormatada+dataFimFormatada);
+    ) as Observable<Page<Pessoa>>;
+
   }
 
   /**

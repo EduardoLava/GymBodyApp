@@ -29,7 +29,7 @@ export class MyApp {
     { titulo: 'MENU.HISTORICO', componente: HomePage, icone: 'ai-history' },
     { titulo: 'MENU.TREINOS', componente: ListaTreinoPage.name, icone: 'ai-fitness' },
     { titulo: 'MENU.CONTA', componente: MinhaContaPage.name, icone: 'person' },
-    { titulo: 'MENU.ALUNOS', componente: MeusAlunosPage.name, icone: 'people' },
+    // { titulo: 'MENU.ALUNOS', componente: MeusAlunosPage.name, icone: 'people' },
     // { titulo: 'MENU.AGENDA', componente: ListaTreinoPage.name, icone: 'calendar' },
     { titulo: 'MENU.AVALIACAO.FISICA', componente: ListaAvaliacaoFisicaPage.name, icone: 'pulse' },
     // { titulo: 'MENU.NOTIFICACOES', componente: ListaTreinoPage.name, icone: 'notifications' }
@@ -106,6 +106,10 @@ export class MyApp {
 
   get pessoalogada(){
     return this.sessionService.pessoalogada;
+  }
+
+  get isAdministradorOrPersonal(){
+    return this.sessionService.getIsAdministradorOrPersonal();
   }
 
 }

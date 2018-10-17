@@ -21,6 +21,12 @@
                         <ion-icon color='primary' [name]="pagina.icone" item-left ></ion-icon>
                         {{ pagina.titulo | translate }}
                 </button>
+                <button class="item-menu" ion-item menuClose
+                    *ngIf="isAdministradorOrPersonal"
+                    (click)="irParaPagina('MeusAlunosPage')">
+                        <ion-icon color='primary' name="people" item-left ></ion-icon>
+                        {{ 'MENU.ALUNOS'| translate }}
+                </button>
                 <button class="item-menu-sair" menuClose ion-item (click)="logout()">
                     <ion-icon color='danger' name="exit" item-left></ion-icon>
                     {{"APP.SAIR" | translate}}

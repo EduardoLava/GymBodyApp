@@ -229,6 +229,7 @@
         "DETALHES" :{
             "TITLE" : "Exercícios do treino",
             "DATA" : "Data: ",
+            "TEMPO.GASTO" : "Tempo gasto: {{tempo}}",
             "EXERCICIOS.EXECUTADOS.EMPTY" : "Nenhum exercício foi realizado nesta data"
         }
     }

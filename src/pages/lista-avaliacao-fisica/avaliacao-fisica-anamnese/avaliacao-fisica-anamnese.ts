@@ -118,6 +118,9 @@ export class AvaliacaoFisicaAnamnesePage {
   editar(){
     
     this.avaliacaoFisica.resposta = this.resposta;
+    this.avaliacaoFisica.pessoa.avaliacoesFisicas = null;
+
+    console.log(this.avaliacaoFisica);
 
     this.avaliacaoFisicaService
       .salvarAvaliacaoFisica(this.avaliacaoFisica)

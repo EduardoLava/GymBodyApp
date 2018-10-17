@@ -37,7 +37,7 @@ export class LoginServiceProvider {
         if (token && !this.jwthelper.isTokenExpired(token)) {
           // chama um metodo qualquer para que o jwtfilter verifique o token
           this.http.get('/api/valida-login')
-          .subscribe(() => {
+          .map(() => {
             this.sessionManagment.carregaPessoaLogada();
             this.sessionManagment.setTokenTokenAtivo(token);
             this.sessionManagment.authUser.next(token),

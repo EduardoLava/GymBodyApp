@@ -114,7 +114,8 @@ export class Pessoa {
     senhaAntiga?: string;
     id?: number;
     created?: string;
-    updated?: string
+    updated?: string;
+    avaliacoesFisicas?: AvaliacaoFisica[];
 }
 
 
@@ -228,8 +229,6 @@ export class Treino {
     nome?: string;
     dataInicio?: Date;
     dataFim?: Date;
-    horaPrevistaInicio?: Date;
-    horaPrevistaTermino?: Date;
     treinoExercicios?: TreinoExercicio[];
     aluno?: Pessoa;
     personal?: Pessoa;

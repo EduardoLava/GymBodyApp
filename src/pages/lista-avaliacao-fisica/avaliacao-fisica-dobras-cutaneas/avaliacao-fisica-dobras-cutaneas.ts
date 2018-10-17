@@ -138,6 +138,8 @@ export class AvaliacaoFisicaDobrasCutaneasPage {
 
   editar(){
     
+    this.avaliacaoFisica.pessoa.avaliacoesFisicas = null;
+
     this.avaliacaoFisicaService
       .salvarAvaliacaoFisica(this.avaliacaoFisica)
       .subscribe((avaliacao: AvaliacaoFisica) =>{
