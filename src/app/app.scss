@@ -127,11 +127,16 @@ $text-color: map-get($colors , primary);
 
 .imagem{
     margin: 0 auto;
-    width: 200px;
-    height: 180px;
+    width: 180px;
+    height: 160px;
     border: 4px;
     border-color: #CCC;
     border-style: dashed;
+}
+
+.icone-menu {
+    width: 32px;
+    height: 32px;
 }
 
 // estiliza tags

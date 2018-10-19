@@ -18,17 +18,17 @@
                 <button class="item-menu" ion-item menuClose
                     *ngFor="let pagina of paginas"
                     (click)="irParaPagina(pagina.componente)">
-                        <ion-icon color='primary' [name]="pagina.icone" item-left ></ion-icon>
+                        <ion-icon color='primary' class="icone-menu" [name]="pagina.icone" item-start ></ion-icon>
                         {{ pagina.titulo | translate }}
                 </button>
                 <button class="item-menu" ion-item menuClose
                     *ngIf="isAdministradorOrPersonal"
                     (click)="irParaPagina('MeusAlunosPage')">
-                        <ion-icon color='primary' name="people" item-left ></ion-icon>
+                        <ion-icon  class="icone-menu" color='primary' name="people" item-start></ion-icon>
                         {{ 'MENU.ALUNOS'| translate }}
                 </button>
-                <button class="item-menu-sair" menuClose ion-item (click)="logout()">
-                    <ion-icon color='danger' name="exit" item-left></ion-icon>
+                <button   class="item-menu-sair" menuClose ion-item (click)="logout()">
+                    <ion-icon class="icone-menu" color='danger' name="exit" item-start></ion-icon>
                     {{"APP.SAIR" | translate}}
                 </button>
             </ion-list>

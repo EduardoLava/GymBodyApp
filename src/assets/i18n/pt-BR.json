@@ -3,18 +3,15 @@
         "NAME": "Gym Body App",
         "SAIR" : "Sair",
         "BEM" : {
-            "VINDO" : "Seja bem vindo",
-            "VINDA" : "Seja bem vinda"
+            "VINDO" : "Seja bem-vindo",
+            "VINDA" : "Seja bem-vinda"
         }
-    },
-    "AGENDA" : {
-        "TITLE" : "Agenda"
     },
     "ALTERAR.DADOS": {
         "TITLE": "Editar Dados",
         "NOME": "Nome:",
         "NASCIMENTO": "Nascimento:",
-        "GENERO": "Genero:",
+        "GENERO": "Gênero:",
         "LOGIN": "Login:"
     },
     "ALTERAR.SENHA": {
@@ -27,16 +24,16 @@
         "TITLE" : "Anamnese",
         "PERGUNTA1" : "Objetivos com relação a atividade física?",
         "PERGUNTA1.PLACEHOLDER" : "(Obrigatório)",
-        "PERGUNTA2" : "Pratica atividade atualmente?",
-        "PERGUNTA2.PLACEHOLDER" : "(Obritatório)",
-        "PERGUNTA3" : "Utiliza algum tipo de medicamento?",
+        "PERGUNTA2" : "Prática atividade atualmente?",
+        "PERGUNTA2.PLACEHOLDER" : "(Obrigatório)",
+        "PERGUNTA3" : "Utiliza algum tipo de medicamento? Observações.",
         "PERGUNTA3.PLACEHOLDER" : "(Obrigatório)",
         "PERGUNTA4" : "Já passou por alguma cirurgia?",
         "PERGUNTA4.PLACEHOLDER" : "(Obrigatório)",
-        "PERGUNTA5" : "Doenças na família?",
-        "PERGUNTA5.PLACEHOLDER" : "(Obritatório)",
+        "PERGUNTA5" : "Doenças na família? Observações.",
+        "PERGUNTA5.PLACEHOLDER" : "(Obrigatório)",
         "PERGUNTA6" : "Observações",
-        "PERGUNTA6.PLACEHOLDER" : "(Obritatório)"
+        "PERGUNTA6.PLACEHOLDER" : "(Obrigatório)"
     },
     "PERIMETRIA" : {
         "TITLE": "Cadastro de perimetria",
@@ -133,7 +130,7 @@
         "TITLE" : "Histórico de treinos",
         "DATA" : "Data: ",
         "SERIES" : "Séries: {{quantidade}}",
-        "REPETICOES.LABEL" :"Repeticoes: {{value}}",
+        "REPETICOES.LABEL" :"Repetições: {{value}}",
         "CARGA" : "Carga: {{value}} Kg",  
         "TEMPO.LABEL" :"Tempo: {{value}} min",
         "TIPO" : "Tipo exercício: ", 
@@ -155,7 +152,7 @@
     "LISTAGEM.TREINOS" : {
         "TITLE": "Meus Treinos",
         "SERIE": "Séries",
-        "TREINO" : "Nome treino",
+        "TREINO" : "Nome do treino",
         "HOJE": "Hoje",
         "DATA": "Data",
         "PROXIMOS": "Próximos",
@@ -185,9 +182,7 @@
         "TREINOS" : "Meus treinos",
         "CONTA" : "Minha conta",
         "ALUNOS" : "Meus alunos",
-        "AGENDA" : "Agenda",
-        "AVALIACAO.FISICA" : "Avaliação física",
-        "NOTIFICACOES" : "Notificações"
+        "AVALIACAO.FISICA" : "Avaliação física"
     },
     "MEUS" : {
         "ALUNOS" : {
