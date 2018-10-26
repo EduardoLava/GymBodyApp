@@ -14,7 +14,7 @@
       <p class="nome-pessoa">
           {{ "TREINO.DETALHES.DATA" | translate }}{{ treinoData?.data | date: 'dd/MM/yyyy'}}
       </p>
-      <p color="secondary" translate [translateParams]="{tempo: treinoData?.tempoGasto | date: 'HH:mm:ss'}">
+      <p color="secondary" *ngIf="treinoData?.tempoGasto" translate [translateParams]="{tempo: treinoData?.tempoGasto | date: 'HH:mm:ss'}">
           TREINO.DETALHES.TEMPO.GASTO
       </p>
     </ion-card-header>
